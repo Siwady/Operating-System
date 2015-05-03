@@ -1,0 +1,7 @@
+void main()
+{
+	putInMemory(0xB000, 0x8000, 'A');
+	putInMemory(0xB000, 0x8001, 0x7);	
+}
+
+
