@@ -29,7 +29,7 @@ void main()
 			if(!(j>3 && j<156 && i>0 &&i<24))
 			{
 				putInMemory(Base2, Base+(j)+(i*80*2), '*');
-				putInMemory(Base2, Base+1+(j)+(i*80*2), 0x5);
+				putInMemory(Base2, Base+1+(j)+(i*80*2), 0x2);
 			}
 			
 		}
