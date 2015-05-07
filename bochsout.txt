@@ -29,14 +29,14 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: no
 00000000000i[     ]   VGA extension support: vbe 
-00000000000i[MEM0 ] allocated memory at 0xb41c5008. after alignment, vector=0xb41c6000
+00000000000i[MEM0 ] allocated memory at 0xb416b008. after alignment, vector=0xb416c000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
 00000000000i[MEM0 ] rom at 0xc0000/40448 ('/usr/share/bochs/VGABIOS-lgpl-latest')
 00000000000e[DEV  ] Bochs is not compiled with PCI support
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Mon May  4 10:46:27 2015 (time0=1430757987)
+00000000000i[CMOS ] Setting initial clock to: Thu May  7 12:44:06 2015 (time0=1431024246)
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[DMA  ] channel 2 used by Floppy Drive
 00000000000i[FDD  ] fd0: 'floppya.img' ro=0, h=2,t=80,spt=18
@@ -95,38 +95,38 @@
 00000000000i[     ] reset of 'serial' plugin device by virtual method
 00000000000i[     ] reset of 'parallel' plugin device by virtual method
 00000003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
-00000325049i[KBD  ] reset-disable command received
-00000454809i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
-00000454880i[VGA  ] VBE known Display Interface b0c0
-00000454912i[VGA  ] VBE known Display Interface b0c5
-00000457837i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
-00000770526i[BIOS ] Starting rombios32
-00000771023i[BIOS ] Shutdown flag 0
-00000771704i[BIOS ] ram_size=0x02000000
-00000772182i[BIOS ] ram_end=32MB
-00000872142i[BIOS ] Found 1 cpu(s)
-00000891129i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
-00000903806i[BIOS ] bios_table_cur_addr: 0x000fb928
-00031217239i[BIOS ] Booting from 0000:7c00
-00088500000p[SDL  ] >>PANIC<< User requested shutdown.
-00088500000i[CPU0 ] CPU is in real mode (active)
-00088500000i[CPU0 ] CS.d_b = 16 bit
-00088500000i[CPU0 ] SS.d_b = 16 bit
-00088500000i[CPU0 ] | EAX=00000010  EBX=0000ebea  ECX=0000000f  EDX=00000000
-00088500000i[CPU0 ] | ESP=0000fffa  EBP=0000fff0  ESI=000e32f9  EDI=0000ffac
-00088500000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
-00088500000i[CPU0 ] | SEG selector     base    limit G D
-00088500000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00088500000i[CPU0 ] |  CS:f000( 0004| 0|  0) 000f0000 0000ffff 0 0
-00088500000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00088500000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00088500000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00088500000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00088500000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00088500000i[CPU0 ] | EIP=0000ff53 (0000ffad)
-00088500000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
-00088500000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00088500000i[CPU0 ] 0x0000ffad>> add byte ptr ds:[bx+si], al : 0000
-00088500000i[CMOS ] Last time is 1430757995 (Mon May  4 10:46:35 2015)
-00088500000i[     ] restoring default signal behavior
-00088500000i[CTRL ] quit_sim called with exit code 1
+00000565057i[KBD  ] reset-disable command received
+00000694817i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+00000694888i[VGA  ] VBE known Display Interface b0c0
+00000694920i[VGA  ] VBE known Display Interface b0c5
+00000697845i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+00001010534i[BIOS ] Starting rombios32
+00001011031i[BIOS ] Shutdown flag 0
+00001011712i[BIOS ] ram_size=0x02000000
+00001012190i[BIOS ] ram_end=32MB
+00001112138i[BIOS ] Found 1 cpu(s)
+00001131125i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+00001143802i[BIOS ] bios_table_cur_addr: 0x000fb928
+00031766485i[BIOS ] Booting from 0000:7c00
+00071740000p[SDL  ] >>PANIC<< User requested shutdown.
+00071740000i[CPU0 ] CPU is in real mode (active)
+00071740000i[CPU0 ] CS.d_b = 16 bit
+00071740000i[CPU0 ] SS.d_b = 16 bit
+00071740000i[CPU0 ] | EAX=00000010  EBX=00000222  ECX=0000000f  EDX=00000000
+00071740000i[CPU0 ] | ESP=00000000  EBP=0000fff0  ESI=000e32f9  EDI=0000ffac
+00071740000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
+00071740000i[CPU0 ] | SEG selector     base    limit G D
+00071740000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+00071740000i[CPU0 ] |  CS:1000( 0004| 0|  0) 00010000 0000ffff 0 0
+00071740000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00071740000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00071740000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00071740000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00071740000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00071740000i[CPU0 ] | EIP=0000ffad (0000ffad)
+00071740000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+00071740000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+00071740000i[CPU0 ] 0x0000ffad>> (invalid)  : FF7A96
+00071740000i[CMOS ] Last time is 1431024253 (Thu May  7 12:44:13 2015)
+00071740000i[     ] restoring default signal behavior
+00071740000i[CTRL ] quit_sim called with exit code 1
