@@ -2,15 +2,21 @@
 #define Base 0x8000
 
 void Clr();
+void printString(char* Word);
 
 void main()
 {
-	//Clear Console
-	Clr();
-	printChar('H');
-	printChar('O');
-	printChar('L');
-	printChar('A');
+	
+	char* cha;
+	int i=0;
+	
+	
+	for(i=0;i<5;i++)
+	{
+		cha[i]=readChar();
+		printChar(cha[i]);
+	}
+
 }
 
 void Clr()
@@ -24,5 +30,17 @@ void Clr()
 			putInMemory(Base2, Base+(j)+(i*80*2), 0x0);
 			putInMemory(Base2, Base+1+(j)+(i*80*2), 0x5);
 		}
+	}
+}
+
+void printString(char* Word)
+{
+	int i=0;
+	for(i=0;i<80;i++)
+	{
+		if(Word[i]=='\0')
+			i=80;
+		else
+			printChar(Word[i]);
 	}
 }

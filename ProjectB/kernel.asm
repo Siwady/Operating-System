@@ -6,6 +6,7 @@
 	.global _putInMemory
 	.global _makeInterrupt21
 	.global _printChar
+	.global _readChar
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -29,6 +30,14 @@ _printChar:
 	mov al, [bp+4]
 	mov ah, #0x0e
 	int #0x10
+	pop bp
+	ret
+	
+;char readChar()
+_readChar:
+	push bp
+	mov ah, #0
+	int #0x16
 	pop bp
 	ret
 	
