@@ -1,7 +1,7 @@
 all: floppya.img
 
 run: all
-	- bochs -f opsys.bxrc -q
+	- bochs -f opsys.bxrc 
 
 kernel.bin: start.o kernel.o kernel_asm.o
 	ld86 -o $@ -d $^
