@@ -7,6 +7,7 @@
 	.global _makeInterrupt21
 	.global _printChar
 	.global _readChar
+	.global _printCharC
 	.global _moveCursor
 	.global _changePage
 	.global _readSector
@@ -18,6 +19,8 @@
 	.global _execute_readSector
 	.global _end
 	.global _loadProgram
+	.global _changeBackgroundColor
+	.global _Clr
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -40,6 +43,7 @@ _printChar:
 	mov bp,sp
 	mov al, [bp+4]
 	mov ah, #0x0e
+	mov bl,#0xA
 	int #0x10
 	pop bp
 	ret
@@ -52,6 +56,31 @@ _readChar:
 	pop bp
 	ret
 
+
+;printCharC(char cha)
+_printCharC:
+	push bp
+	mov bp,sp
+	mov ah,#9 
+	mov al,[bp+4]   ;Char
+	mov bh,#0        ;Page
+	mov bl,#0xA    ;Color   (87 is blinking)
+	mov cx,#1 
+	int #0x10  
+;---------------------------------------------------------
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	add dl,#1
+	mov ah,#0x2
+	int #0x10
+	pop bp
+	ret
+	
+	
 ;void moveCursor(int column,int row,int page)
 _moveCursor:
 	push bp
@@ -147,7 +176,7 @@ _interrupt21ServiceRoutine:
 	je _execute_readString
 	cmp ax,#2
 	je _execute_readSector
-;	iret
+
 
 
 _execute_printString:
@@ -197,3 +226,38 @@ _loadProgram:
 	
 	; Switch to program
 	jmp #0x2000:#0
+	
+;changeBackgroundColor(int color);
+_changeBackgroundColor:
+	push bp
+	mov bp,sp
+	mov bh, #0x00
+	mov ah, #0x0B
+	mov bl,[bp+4]   ;color
+	int #0x10
+	pop bp
+	ret
+
+;putPixel(int color, int page,int x, int y)
+_Clr:
+	mov ah,#6    ;THIS WILL CLEAR SCREEN
+        mov al,#0
+        mov bh,#7
+        mov cx,#0
+        mov dl,#79
+        mov dh,#24
+        int  #0x10
+     
+        mov ah,#2       ;THIS WILL CONTROL CURSOR LOCATION
+        mov bh,#0
+        mov dh,#0
+        mov dl,#0
+        int #0x10
+
+	ret
+	
+
+	
+
+
+
