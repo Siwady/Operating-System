@@ -2,32 +2,48 @@
 #define Base 0x8000
 
 void Clr();
-void printString(char* Word);
-char * readString();
+void printString(char Word[]);
+void readString(char cha[]);
 void pressReturn();
 void PrintBorder();
+void delay(int delay);
 
 void main()
 {
 	char buffer[512];
-	char* word;
+	char word[80];
 	changePage(2);
 	
 	moveCursor(0,2,2);
 	readSector(buffer, 30);
 	printString(buffer);
 
-		
-	
-	
 	moveCursor(5,10,2);
 	printString("Write a message: ");
-	word=readString();
+	readString(word);
 	moveCursor(5,11,2);
 	printString("Your message was: ");
 	printString(word);
 
+	delay(20000);
+
+	changePage(3);
+	makeInterrupt21();
+	loadProgram();
+
+	
+
 }
+
+void delay(int delay)
+{
+	int i;
+	for(i=0;i<delay;i++)
+	{
+		
+	}
+}
+
 
 void Clr()
 {
@@ -43,7 +59,7 @@ void Clr()
 	}
 }
 
-void printString(char* Word)
+void printString(char Word[])
 {
 	int i=0;
 	for(i=0;i<80;i++)
@@ -55,9 +71,8 @@ void printString(char* Word)
 	}
 }
 
-char* readString()
+void readString(char cha[])
 {
-	char* cha;
 	int cont=0;
 	char character;		
 	
@@ -83,8 +98,7 @@ char* readString()
 	
 	for(cont=cont+1;cont<80;cont++)
 		cha[cont]=0x0;
-	
-	return cha;			
+				
 }
 
 void pressReturn()

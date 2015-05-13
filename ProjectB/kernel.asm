@@ -10,6 +10,14 @@
 	.global _moveCursor
 	.global _changePage
 	.global _readSector
+	.extern _printString
+	.extern _readString
+	.global _interrupt21ServiceRoutine
+	.global _execute_readString
+	.global _execute_printString
+	.global _execute_readSector
+	.global _end
+	.global _loadProgram
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -133,14 +141,59 @@ _makeInterrupt21:
 ;it will call your function:
 ;void handleInterrupt21 (int AX, int BX, int CX, int DX)
 _interrupt21ServiceRoutine:
-;	push dx
-;	push cx
-;	push bx
-;	push ax
-;	call _handleInterrupt21
-;	pop ax
-;	pop bx
-;	pop cx
-;	pop dx
-
+	cmp ax,#0
+	je _execute_printString
+	cmp ax,#1
+	je _execute_readString
+	cmp ax,#2
+	je _execute_readSector
 ;	iret
+
+
+_execute_printString:
+	push bx
+	call _printString 
+	add sp,#2
+	jmp _end
+
+
+_execute_readString:
+	push bx
+	call _readString 
+	add sp,#2
+	jmp _end
+	
+
+_execute_readSector:
+	push cx
+	push bx
+	call _readSector
+	add sp,#4
+	jmp _end
+	
+	
+	
+_end:
+	iret
+	
+
+_loadProgram:
+	mov ax, #0x2000
+	mov ds, ax
+	mov ss, ax
+	mov es, ax
+	;let's have the stack start at 0x2000:fff0
+	mov ax, #0xfff0
+	mov sp, ax
+	mov bp, ax   ; Read the program from the floppy
+	mov cl, #12  ;cl holds sector number
+	mov dh, #0  ;dh holds head number - 0
+	mov ch, #0   ;ch holds track number - 0
+	mov ah, #2  ;absolute disk read
+	mov al, #1   ;read 1 sector
+	mov dl, #0   ;read from floppy disk A
+	mov bx, #0  ;read into offset 0 (in the segment)
+	int #0x13      ;call BIOS disk read function
+	
+	; Switch to program
+	jmp #0x2000:#0
