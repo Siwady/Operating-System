@@ -5,13 +5,28 @@ void Clr();
 void printString(char* Word);
 char * readString();
 void pressReturn();
+void PrintBorder();
 
 void main()
 {
-	
+	char buffer[512];
 	char* word;
+	changePage(2);
+	
+	moveCursor(0,2,2);
+	readSector(buffer, 30);
+	printString(buffer);
+
+		
+	
+	
+	moveCursor(5,10,2);
+	printString("Write a message: ");
 	word=readString();
+	moveCursor(5,11,2);
+	printString("Your message was: ");
 	printString(word);
+
 }
 
 void Clr()
@@ -20,7 +35,7 @@ void Clr()
 
 	for(i=0;i<17;i++)
 	{
-		for(j=0;j<159;j++)
+		for(j=0;j<160;j++)
 		{
 			putInMemory(Base2, Base+(j)+(i*160), 0x0);
 			putInMemory(Base2, Base+1+(j)+(i*160), 0x0);
@@ -33,7 +48,10 @@ void printString(char* Word)
 	int i=0;
 	for(i=0;i<80;i++)
 	{	
-		printChar(Word[i]);
+		if(Word[i]!='\0')
+			printChar(Word[i]);
+		else
+			i=80;
 	}
 }
 
@@ -53,6 +71,7 @@ char* readString()
 			printChar(0x0);
 			printChar(character);
 			cont=cont-1;
+			cha[cont]=0x0;
 		}else if(cont<=80 && character!=0x8 && character!=0xd)
 		{
 			cha[cont]=character;
@@ -75,7 +94,24 @@ void pressReturn()
 	for(i=0;i<80;i++)
 	{
 		printChar(0x8);	
-	}
+	} 
+}
+
+void PrintBorder()
+{
+	int i,j;
+	
+	for(i=0;i<30;i++)
+	{
+		for(j=0;j<160;j++)
+		{
+			if(!(j>3 && j<156 && i>0 && i<24))
+			{
+				putInMemory(Base2, Base+(j)+(i*80*2), '*');
+				putInMemory(Base2, Base+1+(j)+(i*80*2), 0x42);
+			}
+		}
+	}	
 }
 
 
