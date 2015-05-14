@@ -13,7 +13,7 @@ void main()
 	syscall_printStringColor("Reading sector 30 from floppy...",0x8);
 	syscall_readSector(buffer, 30);
 	syscall_moveCursor(2,15,0);
-	syscall_printString(buffer);
+	syscall_printStringColor(buffer,0x9);
 
 }
 

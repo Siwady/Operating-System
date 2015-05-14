@@ -36,7 +36,7 @@
 00000000000i[MEM0 ] rom at 0xc0000/40448 ('/usr/share/bochs/VGABIOS-lgpl-latest')
 00000000000e[DEV  ] Bochs is not compiled with PCI support
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Thu May 14 07:21:45 2015 (time0=1431609705)
+00000000000i[CMOS ] Setting initial clock to: Thu May 14 07:54:16 2015 (time0=1431611656)
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[DMA  ] channel 2 used by Floppy Drive
 00000000000i[FDD  ] fd0: 'floppya.img' ro=0, h=2,t=80,spt=18
@@ -95,38 +95,38 @@
 00000000000i[     ] reset of 'serial' plugin device by virtual method
 00000000000i[     ] reset of 'parallel' plugin device by virtual method
 00000003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
-00000320056i[KBD  ] reset-disable command received
-00000449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
-00000449887i[VGA  ] VBE known Display Interface b0c0
-00000449919i[VGA  ] VBE known Display Interface b0c5
-00000452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
-00000765533i[BIOS ] Starting rombios32
-00000766030i[BIOS ] Shutdown flag 0
-00000766711i[BIOS ] ram_size=0x02000000
-00000767189i[BIOS ] ram_end=32MB
-00000867185i[BIOS ] Found 1 cpu(s)
-00000886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
-00000898849i[BIOS ] bios_table_cur_addr: 0x000fb928
-00031217232i[BIOS ] Booting from 0000:7c00
-00613920000p[SDL  ] >>PANIC<< User requested shutdown.
-00613920000i[CPU0 ] CPU is in real mode (active)
-00613920000i[CPU0 ] CS.d_b = 16 bit
-00613920000i[CPU0 ] SS.d_b = 16 bit
-00613920000i[CPU0 ] | EAX=00000051  EBX=0000fdc8  ECX=00000607  EDX=00001000
-00613920000i[CPU0 ] | ESP=0000fff0  EBP=0000fff0  ESI=000e0084  EDI=0000ffac
-00613920000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
-00613920000i[CPU0 ] | SEG selector     base    limit G D
-00613920000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00613920000i[CPU0 ] |  CS:2000( 0004| 0|  0) 00020000 0000ffff 0 0
-00613920000i[CPU0 ] |  DS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-00613920000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-00613920000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-00613920000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00613920000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00613920000i[CPU0 ] | EIP=00000003 (00000003)
-00613920000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
-00613920000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00613920000i[CPU0 ] 0x00000003>> jmp .-2 (0x00020003) : EBFE
-00613920000i[CMOS ] Last time is 1431609766 (Thu May 14 07:22:46 2015)
-00613920000i[     ] restoring default signal behavior
-00613920000i[CTRL ] quit_sim called with exit code 1
+00000325049i[KBD  ] reset-disable command received
+00000454809i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+00000454880i[VGA  ] VBE known Display Interface b0c0
+00000454912i[VGA  ] VBE known Display Interface b0c5
+00000457837i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+00000770526i[BIOS ] Starting rombios32
+00000771023i[BIOS ] Shutdown flag 0
+00000771704i[BIOS ] ram_size=0x02000000
+00000772182i[BIOS ] ram_end=32MB
+00000872142i[BIOS ] Found 1 cpu(s)
+00000891129i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+00000903806i[BIOS ] bios_table_cur_addr: 0x000fb928
+00031217239i[BIOS ] Booting from 0000:7c00
+02542650000p[SDL  ] >>PANIC<< User requested shutdown.
+02542650000i[CPU0 ] CPU is in real mode (active)
+02542650000i[CPU0 ] CS.d_b = 16 bit
+02542650000i[CPU0 ] SS.d_b = 16 bit
+02542650000i[CPU0 ] | EAX=00000051  EBX=0000fdc6  ECX=00000607  EDX=00000f30
+02542650000i[CPU0 ] | ESP=0000fff0  EBP=0000fff0  ESI=000e0084  EDI=0000ffac
+02542650000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
+02542650000i[CPU0 ] | SEG selector     base    limit G D
+02542650000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+02542650000i[CPU0 ] |  CS:2000( 0004| 0|  0) 00020000 0000ffff 0 0
+02542650000i[CPU0 ] |  DS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+02542650000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+02542650000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+02542650000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+02542650000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+02542650000i[CPU0 ] | EIP=00000003 (00000003)
+02542650000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+02542650000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+02542650000i[CPU0 ] 0x00000003>> jmp .-2 (0x00020003) : EBFE
+02542650000i[CMOS ] Last time is 1431611910 (Thu May 14 07:58:30 2015)
+02542650000i[     ] restoring default signal behavior
+02542650000i[CTRL ] quit_sim called with exit code 1

@@ -19,11 +19,10 @@ void main()
 	changeBackgroundColor(15);
 	PrintBorder();	
 	
-	moveCursor(15,2,0);
-	readSector(buffer, 30);
-	printString(buffer);
+	moveCursor(30,2,0);
+	printStringColor("Welcome to my OS",0x8);
 
-	moveCursor(2,10,0);
+	moveCursor(2,8,0);
 	printStringColor("Write a message: ",0x8);
 	readStringColor(word,0x6);
 	
@@ -31,6 +30,13 @@ void main()
 	printStringColor("Your message was: ",0x8);
 	printStringColor(word,0x6);
 	
+	pressReturn();
+	pressReturn();
+	printStringColor("Reading sector 30 from floppy...",0x8);
+	pressReturn();
+	readSector(buffer, 30);
+	printStringColor(buffer,0x9);	
+
 	moveCursor(27,20,0);
 	printStringColor("Press any key to continue... ",0x88);
 	readChar();
