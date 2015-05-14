@@ -36,7 +36,7 @@
 00000000000i[MEM0 ] rom at 0xc0000/40448 ('/usr/share/bochs/VGABIOS-lgpl-latest')
 00000000000e[DEV  ] Bochs is not compiled with PCI support
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Thu May 14 07:54:16 2015 (time0=1431611656)
+00000000000i[CMOS ] Setting initial clock to: Thu May 14 14:23:54 2015 (time0=1431635034)
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[DMA  ] channel 2 used by Floppy Drive
 00000000000i[FDD  ] fd0: 'floppya.img' ro=0, h=2,t=80,spt=18
@@ -95,38 +95,1900 @@
 00000000000i[     ] reset of 'serial' plugin device by virtual method
 00000000000i[     ] reset of 'parallel' plugin device by virtual method
 00000003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
-00000325049i[KBD  ] reset-disable command received
-00000454809i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
-00000454880i[VGA  ] VBE known Display Interface b0c0
-00000454912i[VGA  ] VBE known Display Interface b0c5
-00000457837i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
-00000770526i[BIOS ] Starting rombios32
-00000771023i[BIOS ] Shutdown flag 0
-00000771704i[BIOS ] ram_size=0x02000000
-00000772182i[BIOS ] ram_end=32MB
-00000872142i[BIOS ] Found 1 cpu(s)
-00000891129i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
-00000903806i[BIOS ] bios_table_cur_addr: 0x000fb928
-00031217239i[BIOS ] Booting from 0000:7c00
-02542650000p[SDL  ] >>PANIC<< User requested shutdown.
-02542650000i[CPU0 ] CPU is in real mode (active)
-02542650000i[CPU0 ] CS.d_b = 16 bit
-02542650000i[CPU0 ] SS.d_b = 16 bit
-02542650000i[CPU0 ] | EAX=00000051  EBX=0000fdc6  ECX=00000607  EDX=00000f30
-02542650000i[CPU0 ] | ESP=0000fff0  EBP=0000fff0  ESI=000e0084  EDI=0000ffac
-02542650000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
-02542650000i[CPU0 ] | SEG selector     base    limit G D
-02542650000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-02542650000i[CPU0 ] |  CS:2000( 0004| 0|  0) 00020000 0000ffff 0 0
-02542650000i[CPU0 ] |  DS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-02542650000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-02542650000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-02542650000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-02542650000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-02542650000i[CPU0 ] | EIP=00000003 (00000003)
-02542650000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
-02542650000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-02542650000i[CPU0 ] 0x00000003>> jmp .-2 (0x00020003) : EBFE
-02542650000i[CMOS ] Last time is 1431611910 (Thu May 14 07:58:30 2015)
-02542650000i[     ] restoring default signal behavior
-02542650000i[CTRL ] quit_sim called with exit code 1
+00000320056i[KBD  ] reset-disable command received
+00000449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+00000449887i[VGA  ] VBE known Display Interface b0c0
+00000449919i[VGA  ] VBE known Display Interface b0c5
+00000452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+00000765533i[BIOS ] Starting rombios32
+00000766030i[BIOS ] Shutdown flag 0
+00000766711i[BIOS ] ram_size=0x02000000
+00000767189i[BIOS ] ram_end=32MB
+00000867185i[BIOS ] Found 1 cpu(s)
+00000886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+00000898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+00031217232i[BIOS ] Booting from 0000:7c00
+01365900000i[SDL  ] system RESET callback
+01365900000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01365900000i[CPU0 ] cpu hardware reset
+01365900000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01365900000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01365900000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01365900000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01365900000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01365900000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01365900000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01365900000i[     ] reset of 'unmapped' plugin device by virtual method
+01365900000i[     ] reset of 'biosdev' plugin device by virtual method
+01365900000i[     ] reset of 'speaker' plugin device by virtual method
+01365900000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01365900000i[     ] reset of 'ioapic' plugin device by virtual method
+01365900000i[     ] reset of 'keyboard' plugin device by virtual method
+01365900000i[     ] reset of 'harddrv' plugin device by virtual method
+01365900000i[     ] reset of 'serial' plugin device by virtual method
+01365900000i[     ] reset of 'parallel' plugin device by virtual method
+01365903305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01366220071i[KBD  ] reset-disable command received
+01366349793i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01366349864i[VGA  ] VBE known Display Interface b0c0
+01366349896i[VGA  ] VBE known Display Interface b0c5
+01366352821i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01366665510i[BIOS ] Starting rombios32
+01366666007i[BIOS ] Shutdown flag 0
+01366666688i[BIOS ] ram_size=0x02000000
+01366667166i[BIOS ] ram_end=32MB
+01366767042i[BIOS ] Found 1 cpu(s)
+01366786029i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01366798706i[BIOS ] bios_table_cur_addr: 0x000fb928
+01397117239i[BIOS ] Booting from 0000:7c00
+01410000000i[SDL  ] system RESET callback
+01410000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01410000000i[CPU0 ] cpu hardware reset
+01410000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01410000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01410000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01410000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01410000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01410000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01410000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01410000000i[     ] reset of 'unmapped' plugin device by virtual method
+01410000000i[     ] reset of 'biosdev' plugin device by virtual method
+01410000000i[     ] reset of 'speaker' plugin device by virtual method
+01410000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01410000000i[     ] reset of 'ioapic' plugin device by virtual method
+01410000000i[     ] reset of 'keyboard' plugin device by virtual method
+01410000000i[     ] reset of 'harddrv' plugin device by virtual method
+01410000000i[     ] reset of 'serial' plugin device by virtual method
+01410000000i[     ] reset of 'parallel' plugin device by virtual method
+01410003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01410320056i[KBD  ] reset-disable command received
+01410449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01410449887i[VGA  ] VBE known Display Interface b0c0
+01410449919i[VGA  ] VBE known Display Interface b0c5
+01410452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01410765533i[BIOS ] Starting rombios32
+01410766030i[BIOS ] Shutdown flag 0
+01410766711i[BIOS ] ram_size=0x02000000
+01410767189i[BIOS ] ram_end=32MB
+01410867185i[BIOS ] Found 1 cpu(s)
+01410886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01410898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01441217232i[BIOS ] Booting from 0000:7c00
+01519150000i[SDL  ] system RESET callback
+01519150000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01519150000i[CPU0 ] cpu hardware reset
+01519150000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01519150000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01519150000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01519150000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01519150000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01519150000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01519150000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01519150000i[     ] reset of 'unmapped' plugin device by virtual method
+01519150000i[     ] reset of 'biosdev' plugin device by virtual method
+01519150000i[     ] reset of 'speaker' plugin device by virtual method
+01519150000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01519150000i[     ] reset of 'ioapic' plugin device by virtual method
+01519150000i[     ] reset of 'keyboard' plugin device by virtual method
+01519150000i[     ] reset of 'harddrv' plugin device by virtual method
+01519150000i[     ] reset of 'serial' plugin device by virtual method
+01519150000i[     ] reset of 'parallel' plugin device by virtual method
+01519153305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01519470056i[KBD  ] reset-disable command received
+01519599816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01519599887i[VGA  ] VBE known Display Interface b0c0
+01519599919i[VGA  ] VBE known Display Interface b0c5
+01519602844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01519915533i[BIOS ] Starting rombios32
+01519916030i[BIOS ] Shutdown flag 0
+01519916711i[BIOS ] ram_size=0x02000000
+01519917189i[BIOS ] ram_end=32MB
+01520017089i[BIOS ] Found 1 cpu(s)
+01520036076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01520048753i[BIOS ] bios_table_cur_addr: 0x000fb928
+01550367236i[BIOS ] Booting from 0000:7c00
+01560000000i[SDL  ] system RESET callback
+01560000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01560000000i[CPU0 ] cpu hardware reset
+01560000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01560000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01560000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01560000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01560000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01560000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01560000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01560000000i[     ] reset of 'unmapped' plugin device by virtual method
+01560000000i[     ] reset of 'biosdev' plugin device by virtual method
+01560000000i[     ] reset of 'speaker' plugin device by virtual method
+01560000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01560000000i[     ] reset of 'ioapic' plugin device by virtual method
+01560000000i[     ] reset of 'keyboard' plugin device by virtual method
+01560000000i[     ] reset of 'harddrv' plugin device by virtual method
+01560000000i[     ] reset of 'serial' plugin device by virtual method
+01560000000i[     ] reset of 'parallel' plugin device by virtual method
+01560003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01560320056i[KBD  ] reset-disable command received
+01560449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01560449887i[VGA  ] VBE known Display Interface b0c0
+01560449919i[VGA  ] VBE known Display Interface b0c5
+01560452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01560765533i[BIOS ] Starting rombios32
+01560766030i[BIOS ] Shutdown flag 0
+01560766711i[BIOS ] ram_size=0x02000000
+01560767189i[BIOS ] ram_end=32MB
+01560867185i[BIOS ] Found 1 cpu(s)
+01560886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01560898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01591217232i[BIOS ] Booting from 0000:7c00
+01596000000i[SDL  ] system RESET callback
+01596000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01596000000i[CPU0 ] cpu hardware reset
+01596000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01596000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01596000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01596000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01596000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01596000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01596000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01596000000i[     ] reset of 'unmapped' plugin device by virtual method
+01596000000i[     ] reset of 'biosdev' plugin device by virtual method
+01596000000i[     ] reset of 'speaker' plugin device by virtual method
+01596000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01596000000i[     ] reset of 'ioapic' plugin device by virtual method
+01596000000i[     ] reset of 'keyboard' plugin device by virtual method
+01596000000i[     ] reset of 'harddrv' plugin device by virtual method
+01596000000i[     ] reset of 'serial' plugin device by virtual method
+01596000000i[     ] reset of 'parallel' plugin device by virtual method
+01596003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01596320056i[KBD  ] reset-disable command received
+01596449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01596449887i[VGA  ] VBE known Display Interface b0c0
+01596449919i[VGA  ] VBE known Display Interface b0c5
+01596452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01596765533i[BIOS ] Starting rombios32
+01596766030i[BIOS ] Shutdown flag 0
+01596766711i[BIOS ] ram_size=0x02000000
+01596767189i[BIOS ] ram_end=32MB
+01596867185i[BIOS ] Found 1 cpu(s)
+01596886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01596898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01627217232i[BIOS ] Booting from 0000:7c00
+01632520000i[SDL  ] system RESET callback
+01632520000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01632520000i[CPU0 ] cpu hardware reset
+01632520000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01632520000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01632520000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01632520000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01632520000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01632520000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01632520000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01632520000i[     ] reset of 'unmapped' plugin device by virtual method
+01632520000i[     ] reset of 'biosdev' plugin device by virtual method
+01632520000i[     ] reset of 'speaker' plugin device by virtual method
+01632520000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01632520000i[     ] reset of 'ioapic' plugin device by virtual method
+01632520000i[     ] reset of 'keyboard' plugin device by virtual method
+01632520000i[     ] reset of 'harddrv' plugin device by virtual method
+01632520000i[     ] reset of 'serial' plugin device by virtual method
+01632520000i[     ] reset of 'parallel' plugin device by virtual method
+01632523305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01632840056i[KBD  ] reset-disable command received
+01632969816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01632969887i[VGA  ] VBE known Display Interface b0c0
+01632969919i[VGA  ] VBE known Display Interface b0c5
+01632972844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01633285533i[BIOS ] Starting rombios32
+01633286030i[BIOS ] Shutdown flag 0
+01633286711i[BIOS ] ram_size=0x02000000
+01633287189i[BIOS ] ram_end=32MB
+01633387089i[BIOS ] Found 1 cpu(s)
+01633406076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01633418753i[BIOS ] bios_table_cur_addr: 0x000fb928
+01663737236i[BIOS ] Booting from 0000:7c00
+01666670000i[SDL  ] system RESET callback
+01666670000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01666670000i[CPU0 ] cpu hardware reset
+01666670000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01666670000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01666670000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01666670000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01666670000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01666670000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01666670000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01666670000i[     ] reset of 'unmapped' plugin device by virtual method
+01666670000i[     ] reset of 'biosdev' plugin device by virtual method
+01666670000i[     ] reset of 'speaker' plugin device by virtual method
+01666670000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01666670000i[     ] reset of 'ioapic' plugin device by virtual method
+01666670000i[     ] reset of 'keyboard' plugin device by virtual method
+01666670000i[     ] reset of 'harddrv' plugin device by virtual method
+01666670000i[     ] reset of 'serial' plugin device by virtual method
+01666670000i[     ] reset of 'parallel' plugin device by virtual method
+01666673305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01666990056i[KBD  ] reset-disable command received
+01667119816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01667119887i[VGA  ] VBE known Display Interface b0c0
+01667119919i[VGA  ] VBE known Display Interface b0c5
+01667122844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01667435533i[BIOS ] Starting rombios32
+01667436030i[BIOS ] Shutdown flag 0
+01667436711i[BIOS ] ram_size=0x02000000
+01667437189i[BIOS ] ram_end=32MB
+01667537137i[BIOS ] Found 1 cpu(s)
+01667556124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01667568801i[BIOS ] bios_table_cur_addr: 0x000fb928
+01697887234i[BIOS ] Booting from 0000:7c00
+01701000000i[SDL  ] system RESET callback
+01701000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01701000000i[CPU0 ] cpu hardware reset
+01701000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01701000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01701000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01701000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01701000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01701000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01701000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01701000000i[     ] reset of 'unmapped' plugin device by virtual method
+01701000000i[     ] reset of 'biosdev' plugin device by virtual method
+01701000000i[     ] reset of 'speaker' plugin device by virtual method
+01701000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01701000000i[     ] reset of 'ioapic' plugin device by virtual method
+01701000000i[     ] reset of 'keyboard' plugin device by virtual method
+01701000000i[     ] reset of 'harddrv' plugin device by virtual method
+01701000000i[     ] reset of 'serial' plugin device by virtual method
+01701000000i[     ] reset of 'parallel' plugin device by virtual method
+01701003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01701320056i[KBD  ] reset-disable command received
+01701449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01701449887i[VGA  ] VBE known Display Interface b0c0
+01701449919i[VGA  ] VBE known Display Interface b0c5
+01701452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01701765533i[BIOS ] Starting rombios32
+01701766030i[BIOS ] Shutdown flag 0
+01701766711i[BIOS ] ram_size=0x02000000
+01701767189i[BIOS ] ram_end=32MB
+01701867185i[BIOS ] Found 1 cpu(s)
+01701886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01701898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01732217232i[BIOS ] Booting from 0000:7c00
+01735680000i[SDL  ] system RESET callback
+01735680000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01735680000i[CPU0 ] cpu hardware reset
+01735680000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01735680000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01735680000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01735680000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01735680000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01735680000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01735680000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01735680000i[     ] reset of 'unmapped' plugin device by virtual method
+01735680000i[     ] reset of 'biosdev' plugin device by virtual method
+01735680000i[     ] reset of 'speaker' plugin device by virtual method
+01735680000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01735680000i[     ] reset of 'ioapic' plugin device by virtual method
+01735680000i[     ] reset of 'keyboard' plugin device by virtual method
+01735680000i[     ] reset of 'harddrv' plugin device by virtual method
+01735680000i[     ] reset of 'serial' plugin device by virtual method
+01735680000i[     ] reset of 'parallel' plugin device by virtual method
+01735683305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01736000056i[KBD  ] reset-disable command received
+01736129816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01736129887i[VGA  ] VBE known Display Interface b0c0
+01736129919i[VGA  ] VBE known Display Interface b0c5
+01736132844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01736445533i[BIOS ] Starting rombios32
+01736446030i[BIOS ] Shutdown flag 0
+01736446711i[BIOS ] ram_size=0x02000000
+01736447189i[BIOS ] ram_end=32MB
+01736547185i[BIOS ] Found 1 cpu(s)
+01736566172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01736578849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01766897232i[BIOS ] Booting from 0000:7c00
+01771610000i[SDL  ] system RESET callback
+01771610000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01771610000i[CPU0 ] cpu hardware reset
+01771610000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01771610000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01771610000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01771610000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01771610000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01771610000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01771610000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01771610000i[     ] reset of 'unmapped' plugin device by virtual method
+01771610000i[     ] reset of 'biosdev' plugin device by virtual method
+01771610000i[     ] reset of 'speaker' plugin device by virtual method
+01771610000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01771610000i[     ] reset of 'ioapic' plugin device by virtual method
+01771610000i[     ] reset of 'keyboard' plugin device by virtual method
+01771610000i[     ] reset of 'harddrv' plugin device by virtual method
+01771610000i[     ] reset of 'serial' plugin device by virtual method
+01771610000i[     ] reset of 'parallel' plugin device by virtual method
+01771613305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01771930056i[KBD  ] reset-disable command received
+01772059816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01772059887i[VGA  ] VBE known Display Interface b0c0
+01772059919i[VGA  ] VBE known Display Interface b0c5
+01772062844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01772375533i[BIOS ] Starting rombios32
+01772376030i[BIOS ] Shutdown flag 0
+01772376711i[BIOS ] ram_size=0x02000000
+01772377189i[BIOS ] ram_end=32MB
+01772477137i[BIOS ] Found 1 cpu(s)
+01772496124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01772508801i[BIOS ] bios_table_cur_addr: 0x000fb928
+01802827234i[BIOS ] Booting from 0000:7c00
+01806560000i[SDL  ] system RESET callback
+01806560000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01806560000i[CPU0 ] cpu hardware reset
+01806560000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01806560000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01806560000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01806560000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01806560000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01806560000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01806560000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01806560000i[     ] reset of 'unmapped' plugin device by virtual method
+01806560000i[     ] reset of 'biosdev' plugin device by virtual method
+01806560000i[     ] reset of 'speaker' plugin device by virtual method
+01806560000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01806560000i[     ] reset of 'ioapic' plugin device by virtual method
+01806560000i[     ] reset of 'keyboard' plugin device by virtual method
+01806560000i[     ] reset of 'harddrv' plugin device by virtual method
+01806560000i[     ] reset of 'serial' plugin device by virtual method
+01806560000i[     ] reset of 'parallel' plugin device by virtual method
+01806563305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01806880056i[KBD  ] reset-disable command received
+01807009816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01807009887i[VGA  ] VBE known Display Interface b0c0
+01807009919i[VGA  ] VBE known Display Interface b0c5
+01807012844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01807325533i[BIOS ] Starting rombios32
+01807326030i[BIOS ] Shutdown flag 0
+01807326711i[BIOS ] ram_size=0x02000000
+01807327189i[BIOS ] ram_end=32MB
+01807427137i[BIOS ] Found 1 cpu(s)
+01807446124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01807458801i[BIOS ] bios_table_cur_addr: 0x000fb928
+01837777234i[BIOS ] Booting from 0000:7c00
+01850350000i[SDL  ] system RESET callback
+01850350000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01850350000i[CPU0 ] cpu hardware reset
+01850350000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01850350000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01850350000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01850350000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01850350000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01850350000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01850350000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01850350000i[     ] reset of 'unmapped' plugin device by virtual method
+01850350000i[     ] reset of 'biosdev' plugin device by virtual method
+01850350000i[     ] reset of 'speaker' plugin device by virtual method
+01850350000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01850350000i[     ] reset of 'ioapic' plugin device by virtual method
+01850350000i[     ] reset of 'keyboard' plugin device by virtual method
+01850350000i[     ] reset of 'harddrv' plugin device by virtual method
+01850350000i[     ] reset of 'serial' plugin device by virtual method
+01850350000i[     ] reset of 'parallel' plugin device by virtual method
+01850353305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01850670056i[KBD  ] reset-disable command received
+01850799816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01850799887i[VGA  ] VBE known Display Interface b0c0
+01850799919i[VGA  ] VBE known Display Interface b0c5
+01850802844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01851115533i[BIOS ] Starting rombios32
+01851116030i[BIOS ] Shutdown flag 0
+01851116711i[BIOS ] ram_size=0x02000000
+01851117189i[BIOS ] ram_end=32MB
+01851217089i[BIOS ] Found 1 cpu(s)
+01851236076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01851248753i[BIOS ] bios_table_cur_addr: 0x000fb928
+01881567236i[BIOS ] Booting from 0000:7c00
+01926120000i[SDL  ] system RESET callback
+01926120000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01926120000i[CPU0 ] cpu hardware reset
+01926120000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01926120000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01926120000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01926120000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01926120000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01926120000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01926120000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01926120000i[     ] reset of 'unmapped' plugin device by virtual method
+01926120000i[     ] reset of 'biosdev' plugin device by virtual method
+01926120000i[     ] reset of 'speaker' plugin device by virtual method
+01926120000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01926120000i[     ] reset of 'ioapic' plugin device by virtual method
+01926120000i[     ] reset of 'keyboard' plugin device by virtual method
+01926120000i[     ] reset of 'harddrv' plugin device by virtual method
+01926120000i[     ] reset of 'serial' plugin device by virtual method
+01926120000i[     ] reset of 'parallel' plugin device by virtual method
+01926123305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01926440056i[KBD  ] reset-disable command received
+01926569816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01926569887i[VGA  ] VBE known Display Interface b0c0
+01926569919i[VGA  ] VBE known Display Interface b0c5
+01926572844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01926885533i[BIOS ] Starting rombios32
+01926886030i[BIOS ] Shutdown flag 0
+01926886711i[BIOS ] ram_size=0x02000000
+01926887189i[BIOS ] ram_end=32MB
+01926987185i[BIOS ] Found 1 cpu(s)
+01927006172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01927018849i[BIOS ] bios_table_cur_addr: 0x000fb928
+01957337232i[BIOS ] Booting from 0000:7c00
+01960450000i[SDL  ] system RESET callback
+01960450000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01960450000i[CPU0 ] cpu hardware reset
+01960450000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01960450000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01960450000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01960450000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01960450000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01960450000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01960450000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01960450000i[     ] reset of 'unmapped' plugin device by virtual method
+01960450000i[     ] reset of 'biosdev' plugin device by virtual method
+01960450000i[     ] reset of 'speaker' plugin device by virtual method
+01960450000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01960450000i[     ] reset of 'ioapic' plugin device by virtual method
+01960450000i[     ] reset of 'keyboard' plugin device by virtual method
+01960450000i[     ] reset of 'harddrv' plugin device by virtual method
+01960450000i[     ] reset of 'serial' plugin device by virtual method
+01960450000i[     ] reset of 'parallel' plugin device by virtual method
+01960453305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01960770056i[KBD  ] reset-disable command received
+01960899816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01960899887i[VGA  ] VBE known Display Interface b0c0
+01960899919i[VGA  ] VBE known Display Interface b0c5
+01960902844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01961215533i[BIOS ] Starting rombios32
+01961216030i[BIOS ] Shutdown flag 0
+01961216711i[BIOS ] ram_size=0x02000000
+01961217189i[BIOS ] ram_end=32MB
+01961317089i[BIOS ] Found 1 cpu(s)
+01961336076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01961348753i[BIOS ] bios_table_cur_addr: 0x000fb928
+01991667236i[BIOS ] Booting from 0000:7c00
+01994120000i[SDL  ] system RESET callback
+01994120000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+01994120000i[CPU0 ] cpu hardware reset
+01994120000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+01994120000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+01994120000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+01994120000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+01994120000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+01994120000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+01994120000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+01994120000i[     ] reset of 'unmapped' plugin device by virtual method
+01994120000i[     ] reset of 'biosdev' plugin device by virtual method
+01994120000i[     ] reset of 'speaker' plugin device by virtual method
+01994120000i[     ] reset of 'extfpuirq' plugin device by virtual method
+01994120000i[     ] reset of 'ioapic' plugin device by virtual method
+01994120000i[     ] reset of 'keyboard' plugin device by virtual method
+01994120000i[     ] reset of 'harddrv' plugin device by virtual method
+01994120000i[     ] reset of 'serial' plugin device by virtual method
+01994120000i[     ] reset of 'parallel' plugin device by virtual method
+01994123305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+01994440056i[KBD  ] reset-disable command received
+01994569816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+01994569887i[VGA  ] VBE known Display Interface b0c0
+01994569919i[VGA  ] VBE known Display Interface b0c5
+01994572844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+01994885533i[BIOS ] Starting rombios32
+01994886030i[BIOS ] Shutdown flag 0
+01994886711i[BIOS ] ram_size=0x02000000
+01994887189i[BIOS ] ram_end=32MB
+01994987137i[BIOS ] Found 1 cpu(s)
+01995006124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+01995018801i[BIOS ] bios_table_cur_addr: 0x000fb928
+02025337234i[BIOS ] Booting from 0000:7c00
+02031430000i[SDL  ] system RESET callback
+02031430000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02031430000i[CPU0 ] cpu hardware reset
+02031430000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02031430000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02031430000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02031430000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02031430000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02031430000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02031430000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02031430000i[     ] reset of 'unmapped' plugin device by virtual method
+02031430000i[     ] reset of 'biosdev' plugin device by virtual method
+02031430000i[     ] reset of 'speaker' plugin device by virtual method
+02031430000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02031430000i[     ] reset of 'ioapic' plugin device by virtual method
+02031430000i[     ] reset of 'keyboard' plugin device by virtual method
+02031430000i[     ] reset of 'harddrv' plugin device by virtual method
+02031430000i[     ] reset of 'serial' plugin device by virtual method
+02031430000i[     ] reset of 'parallel' plugin device by virtual method
+02031433305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02031750056i[KBD  ] reset-disable command received
+02031879816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02031879887i[VGA  ] VBE known Display Interface b0c0
+02031879919i[VGA  ] VBE known Display Interface b0c5
+02031882844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02032195533i[BIOS ] Starting rombios32
+02032196030i[BIOS ] Shutdown flag 0
+02032196711i[BIOS ] ram_size=0x02000000
+02032197189i[BIOS ] ram_end=32MB
+02032297089i[BIOS ] Found 1 cpu(s)
+02032316076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02032328753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02062647236i[BIOS ] Booting from 0000:7c00
+02099380000i[SDL  ] system RESET callback
+02099380000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02099380000i[CPU0 ] cpu hardware reset
+02099380000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02099380000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02099380000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02099380000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02099380000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02099380000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02099380000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02099380000i[     ] reset of 'unmapped' plugin device by virtual method
+02099380000i[     ] reset of 'biosdev' plugin device by virtual method
+02099380000i[     ] reset of 'speaker' plugin device by virtual method
+02099380000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02099380000i[     ] reset of 'ioapic' plugin device by virtual method
+02099380000i[     ] reset of 'keyboard' plugin device by virtual method
+02099380000i[     ] reset of 'harddrv' plugin device by virtual method
+02099380000i[     ] reset of 'serial' plugin device by virtual method
+02099380000i[     ] reset of 'parallel' plugin device by virtual method
+02099383305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02099700056i[KBD  ] reset-disable command received
+02099829816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02099829887i[VGA  ] VBE known Display Interface b0c0
+02099829919i[VGA  ] VBE known Display Interface b0c5
+02099832844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02100145533i[BIOS ] Starting rombios32
+02100146030i[BIOS ] Shutdown flag 0
+02100146711i[BIOS ] ram_size=0x02000000
+02100147189i[BIOS ] ram_end=32MB
+02100247089i[BIOS ] Found 1 cpu(s)
+02100266076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02100278753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02130597236i[BIOS ] Booting from 0000:7c00
+02212900000i[SDL  ] system RESET callback
+02212900000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02212900000i[CPU0 ] cpu hardware reset
+02212900000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02212900000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02212900000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02212900000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02212900000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02212900000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02212900000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02212900000i[     ] reset of 'unmapped' plugin device by virtual method
+02212900000i[     ] reset of 'biosdev' plugin device by virtual method
+02212900000i[     ] reset of 'speaker' plugin device by virtual method
+02212900000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02212900000i[     ] reset of 'ioapic' plugin device by virtual method
+02212900000i[     ] reset of 'keyboard' plugin device by virtual method
+02212900000i[     ] reset of 'harddrv' plugin device by virtual method
+02212900000i[     ] reset of 'serial' plugin device by virtual method
+02212900000i[     ] reset of 'parallel' plugin device by virtual method
+02212903305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02213220056i[KBD  ] reset-disable command received
+02213349816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02213349887i[VGA  ] VBE known Display Interface b0c0
+02213349919i[VGA  ] VBE known Display Interface b0c5
+02213352844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02213665533i[BIOS ] Starting rombios32
+02213666030i[BIOS ] Shutdown flag 0
+02213666711i[BIOS ] ram_size=0x02000000
+02213667189i[BIOS ] ram_end=32MB
+02213767089i[BIOS ] Found 1 cpu(s)
+02213786076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02213798753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02244117236i[BIOS ] Booting from 0000:7c00
+02248020000i[SDL  ] system RESET callback
+02248020000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02248020000i[CPU0 ] cpu hardware reset
+02248020000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02248020000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02248020000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02248020000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02248020000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02248020000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02248020000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02248020000i[     ] reset of 'unmapped' plugin device by virtual method
+02248020000i[     ] reset of 'biosdev' plugin device by virtual method
+02248020000i[     ] reset of 'speaker' plugin device by virtual method
+02248020000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02248020000i[     ] reset of 'ioapic' plugin device by virtual method
+02248020000i[     ] reset of 'keyboard' plugin device by virtual method
+02248020000i[     ] reset of 'harddrv' plugin device by virtual method
+02248020000i[     ] reset of 'serial' plugin device by virtual method
+02248020000i[     ] reset of 'parallel' plugin device by virtual method
+02248023305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02248340056i[KBD  ] reset-disable command received
+02248469816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02248469887i[VGA  ] VBE known Display Interface b0c0
+02248469919i[VGA  ] VBE known Display Interface b0c5
+02248472844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02248785533i[BIOS ] Starting rombios32
+02248786030i[BIOS ] Shutdown flag 0
+02248786711i[BIOS ] ram_size=0x02000000
+02248787189i[BIOS ] ram_end=32MB
+02248887185i[BIOS ] Found 1 cpu(s)
+02248906172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02248918849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02279237232i[BIOS ] Booting from 0000:7c00
+02284060000i[SDL  ] system RESET callback
+02284060000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02284060000i[CPU0 ] cpu hardware reset
+02284060000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02284060000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02284060000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02284060000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02284060000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02284060000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02284060000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02284060000i[     ] reset of 'unmapped' plugin device by virtual method
+02284060000i[     ] reset of 'biosdev' plugin device by virtual method
+02284060000i[     ] reset of 'speaker' plugin device by virtual method
+02284060000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02284060000i[     ] reset of 'ioapic' plugin device by virtual method
+02284060000i[     ] reset of 'keyboard' plugin device by virtual method
+02284060000i[     ] reset of 'harddrv' plugin device by virtual method
+02284060000i[     ] reset of 'serial' plugin device by virtual method
+02284060000i[     ] reset of 'parallel' plugin device by virtual method
+02284063305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02284380056i[KBD  ] reset-disable command received
+02284509816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02284509887i[VGA  ] VBE known Display Interface b0c0
+02284509919i[VGA  ] VBE known Display Interface b0c5
+02284512844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02284825533i[BIOS ] Starting rombios32
+02284826030i[BIOS ] Shutdown flag 0
+02284826711i[BIOS ] ram_size=0x02000000
+02284827189i[BIOS ] ram_end=32MB
+02284927089i[BIOS ] Found 1 cpu(s)
+02284946076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02284958753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02315277236i[BIOS ] Booting from 0000:7c00
+02318650000i[SDL  ] system RESET callback
+02318650000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02318650000i[CPU0 ] cpu hardware reset
+02318650000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02318650000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02318650000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02318650000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02318650000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02318650000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02318650000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02318650000i[     ] reset of 'unmapped' plugin device by virtual method
+02318650000i[     ] reset of 'biosdev' plugin device by virtual method
+02318650000i[     ] reset of 'speaker' plugin device by virtual method
+02318650000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02318650000i[     ] reset of 'ioapic' plugin device by virtual method
+02318650000i[     ] reset of 'keyboard' plugin device by virtual method
+02318650000i[     ] reset of 'harddrv' plugin device by virtual method
+02318650000i[     ] reset of 'serial' plugin device by virtual method
+02318650000i[     ] reset of 'parallel' plugin device by virtual method
+02318653305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02318970056i[KBD  ] reset-disable command received
+02319099816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02319099887i[VGA  ] VBE known Display Interface b0c0
+02319099919i[VGA  ] VBE known Display Interface b0c5
+02319102844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02319415533i[BIOS ] Starting rombios32
+02319416030i[BIOS ] Shutdown flag 0
+02319416711i[BIOS ] ram_size=0x02000000
+02319417189i[BIOS ] ram_end=32MB
+02319517089i[BIOS ] Found 1 cpu(s)
+02319536076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02319548753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02349867236i[BIOS ] Booting from 0000:7c00
+02353340000i[SDL  ] system RESET callback
+02353340000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02353340000i[CPU0 ] cpu hardware reset
+02353340000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02353340000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02353340000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02353340000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02353340000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02353340000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02353340000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02353340000i[     ] reset of 'unmapped' plugin device by virtual method
+02353340000i[     ] reset of 'biosdev' plugin device by virtual method
+02353340000i[     ] reset of 'speaker' plugin device by virtual method
+02353340000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02353340000i[     ] reset of 'ioapic' plugin device by virtual method
+02353340000i[     ] reset of 'keyboard' plugin device by virtual method
+02353340000i[     ] reset of 'harddrv' plugin device by virtual method
+02353340000i[     ] reset of 'serial' plugin device by virtual method
+02353340000i[     ] reset of 'parallel' plugin device by virtual method
+02353343305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02353660056i[KBD  ] reset-disable command received
+02353789816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02353789887i[VGA  ] VBE known Display Interface b0c0
+02353789919i[VGA  ] VBE known Display Interface b0c5
+02353792844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02354105533i[BIOS ] Starting rombios32
+02354106030i[BIOS ] Shutdown flag 0
+02354106711i[BIOS ] ram_size=0x02000000
+02354107189i[BIOS ] ram_end=32MB
+02354207137i[BIOS ] Found 1 cpu(s)
+02354226124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02354238801i[BIOS ] bios_table_cur_addr: 0x000fb928
+02384557234i[BIOS ] Booting from 0000:7c00
+02389210000i[SDL  ] system RESET callback
+02389210000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02389210000i[CPU0 ] cpu hardware reset
+02389210000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02389210000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02389210000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02389210000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02389210000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02389210000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02389210000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02389210000i[     ] reset of 'unmapped' plugin device by virtual method
+02389210000i[     ] reset of 'biosdev' plugin device by virtual method
+02389210000i[     ] reset of 'speaker' plugin device by virtual method
+02389210000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02389210000i[     ] reset of 'ioapic' plugin device by virtual method
+02389210000i[     ] reset of 'keyboard' plugin device by virtual method
+02389210000i[     ] reset of 'harddrv' plugin device by virtual method
+02389210000i[     ] reset of 'serial' plugin device by virtual method
+02389210000i[     ] reset of 'parallel' plugin device by virtual method
+02389213305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02389530056i[KBD  ] reset-disable command received
+02389659816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02389659887i[VGA  ] VBE known Display Interface b0c0
+02389659919i[VGA  ] VBE known Display Interface b0c5
+02389662844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02389975533i[BIOS ] Starting rombios32
+02389976030i[BIOS ] Shutdown flag 0
+02389976711i[BIOS ] ram_size=0x02000000
+02389977189i[BIOS ] ram_end=32MB
+02390077089i[BIOS ] Found 1 cpu(s)
+02390096076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02390108753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02420427236i[BIOS ] Booting from 0000:7c00
+02424160000i[SDL  ] system RESET callback
+02424160000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02424160000i[CPU0 ] cpu hardware reset
+02424160000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02424160000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02424160000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02424160000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02424160000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02424160000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02424160000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02424160000i[     ] reset of 'unmapped' plugin device by virtual method
+02424160000i[     ] reset of 'biosdev' plugin device by virtual method
+02424160000i[     ] reset of 'speaker' plugin device by virtual method
+02424160000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02424160000i[     ] reset of 'ioapic' plugin device by virtual method
+02424160000i[     ] reset of 'keyboard' plugin device by virtual method
+02424160000i[     ] reset of 'harddrv' plugin device by virtual method
+02424160000i[     ] reset of 'serial' plugin device by virtual method
+02424160000i[     ] reset of 'parallel' plugin device by virtual method
+02424163305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02424480056i[KBD  ] reset-disable command received
+02424609816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02424609887i[VGA  ] VBE known Display Interface b0c0
+02424609919i[VGA  ] VBE known Display Interface b0c5
+02424612844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02424925533i[BIOS ] Starting rombios32
+02424926030i[BIOS ] Shutdown flag 0
+02424926711i[BIOS ] ram_size=0x02000000
+02424927189i[BIOS ] ram_end=32MB
+02425027089i[BIOS ] Found 1 cpu(s)
+02425046076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02425058753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02455377236i[BIOS ] Booting from 0000:7c00
+02459670000i[SDL  ] system RESET callback
+02459670000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02459670000i[CPU0 ] cpu hardware reset
+02459670000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02459670000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02459670000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02459670000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02459670000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02459670000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02459670000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02459670000i[     ] reset of 'unmapped' plugin device by virtual method
+02459670000i[     ] reset of 'biosdev' plugin device by virtual method
+02459670000i[     ] reset of 'speaker' plugin device by virtual method
+02459670000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02459670000i[     ] reset of 'ioapic' plugin device by virtual method
+02459670000i[     ] reset of 'keyboard' plugin device by virtual method
+02459670000i[     ] reset of 'harddrv' plugin device by virtual method
+02459670000i[     ] reset of 'serial' plugin device by virtual method
+02459670000i[     ] reset of 'parallel' plugin device by virtual method
+02459673305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02459990056i[KBD  ] reset-disable command received
+02460119816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02460119887i[VGA  ] VBE known Display Interface b0c0
+02460119919i[VGA  ] VBE known Display Interface b0c5
+02460122844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02460435533i[BIOS ] Starting rombios32
+02460436030i[BIOS ] Shutdown flag 0
+02460436711i[BIOS ] ram_size=0x02000000
+02460437189i[BIOS ] ram_end=32MB
+02460537185i[BIOS ] Found 1 cpu(s)
+02460556172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02460568849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02490887232i[BIOS ] Booting from 0000:7c00
+02495950000i[SDL  ] system RESET callback
+02495950000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02495950000i[CPU0 ] cpu hardware reset
+02495950000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02495950000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02495950000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02495950000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02495950000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02495950000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02495950000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02495950000i[     ] reset of 'unmapped' plugin device by virtual method
+02495950000i[     ] reset of 'biosdev' plugin device by virtual method
+02495950000i[     ] reset of 'speaker' plugin device by virtual method
+02495950000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02495950000i[     ] reset of 'ioapic' plugin device by virtual method
+02495950000i[     ] reset of 'keyboard' plugin device by virtual method
+02495950000i[     ] reset of 'harddrv' plugin device by virtual method
+02495950000i[     ] reset of 'serial' plugin device by virtual method
+02495950000i[     ] reset of 'parallel' plugin device by virtual method
+02495953305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02496270056i[KBD  ] reset-disable command received
+02496399816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02496399887i[VGA  ] VBE known Display Interface b0c0
+02496399919i[VGA  ] VBE known Display Interface b0c5
+02496402844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02496715533i[BIOS ] Starting rombios32
+02496716030i[BIOS ] Shutdown flag 0
+02496716711i[BIOS ] ram_size=0x02000000
+02496717189i[BIOS ] ram_end=32MB
+02496817089i[BIOS ] Found 1 cpu(s)
+02496836076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02496848753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02527167236i[BIOS ] Booting from 0000:7c00
+02608540000i[SDL  ] system RESET callback
+02608540000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02608540000i[CPU0 ] cpu hardware reset
+02608540000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02608540000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02608540000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02608540000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02608540000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02608540000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02608540000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02608540000i[     ] reset of 'unmapped' plugin device by virtual method
+02608540000i[     ] reset of 'biosdev' plugin device by virtual method
+02608540000i[     ] reset of 'speaker' plugin device by virtual method
+02608540000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02608540000i[     ] reset of 'ioapic' plugin device by virtual method
+02608540000i[     ] reset of 'keyboard' plugin device by virtual method
+02608540000i[     ] reset of 'harddrv' plugin device by virtual method
+02608540000i[     ] reset of 'serial' plugin device by virtual method
+02608540000i[     ] reset of 'parallel' plugin device by virtual method
+02608543305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02608860056i[KBD  ] reset-disable command received
+02608989816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02608989887i[VGA  ] VBE known Display Interface b0c0
+02608989919i[VGA  ] VBE known Display Interface b0c5
+02608992844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02609305533i[BIOS ] Starting rombios32
+02609306030i[BIOS ] Shutdown flag 0
+02609306711i[BIOS ] ram_size=0x02000000
+02609307189i[BIOS ] ram_end=32MB
+02609407089i[BIOS ] Found 1 cpu(s)
+02609426076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02609438753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02639757236i[BIOS ] Booting from 0000:7c00
+02643290000i[SDL  ] system RESET callback
+02643290000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02643290000i[CPU0 ] cpu hardware reset
+02643290000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02643290000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02643290000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02643290000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02643290000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02643290000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02643290000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02643290000i[     ] reset of 'unmapped' plugin device by virtual method
+02643290000i[     ] reset of 'biosdev' plugin device by virtual method
+02643290000i[     ] reset of 'speaker' plugin device by virtual method
+02643290000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02643290000i[     ] reset of 'ioapic' plugin device by virtual method
+02643290000i[     ] reset of 'keyboard' plugin device by virtual method
+02643290000i[     ] reset of 'harddrv' plugin device by virtual method
+02643290000i[     ] reset of 'serial' plugin device by virtual method
+02643290000i[     ] reset of 'parallel' plugin device by virtual method
+02643293305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02643610056i[KBD  ] reset-disable command received
+02643739816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02643739887i[VGA  ] VBE known Display Interface b0c0
+02643739919i[VGA  ] VBE known Display Interface b0c5
+02643742844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02644055533i[BIOS ] Starting rombios32
+02644056030i[BIOS ] Shutdown flag 0
+02644056711i[BIOS ] ram_size=0x02000000
+02644057189i[BIOS ] ram_end=32MB
+02644157137i[BIOS ] Found 1 cpu(s)
+02644176124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02644188801i[BIOS ] bios_table_cur_addr: 0x000fb928
+02674507234i[BIOS ] Booting from 0000:7c00
+02678490000i[SDL  ] system RESET callback
+02678490000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02678490000i[CPU0 ] cpu hardware reset
+02678490000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02678490000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02678490000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02678490000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02678490000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02678490000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02678490000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02678490000i[     ] reset of 'unmapped' plugin device by virtual method
+02678490000i[     ] reset of 'biosdev' plugin device by virtual method
+02678490000i[     ] reset of 'speaker' plugin device by virtual method
+02678490000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02678490000i[     ] reset of 'ioapic' plugin device by virtual method
+02678490000i[     ] reset of 'keyboard' plugin device by virtual method
+02678490000i[     ] reset of 'harddrv' plugin device by virtual method
+02678490000i[     ] reset of 'serial' plugin device by virtual method
+02678490000i[     ] reset of 'parallel' plugin device by virtual method
+02678493305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02678810056i[KBD  ] reset-disable command received
+02678939816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02678939887i[VGA  ] VBE known Display Interface b0c0
+02678939919i[VGA  ] VBE known Display Interface b0c5
+02678942844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02679255533i[BIOS ] Starting rombios32
+02679256030i[BIOS ] Shutdown flag 0
+02679256711i[BIOS ] ram_size=0x02000000
+02679257189i[BIOS ] ram_end=32MB
+02679357185i[BIOS ] Found 1 cpu(s)
+02679376172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02679388849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02709707232i[BIOS ] Booting from 0000:7c00
+02714260000i[SDL  ] system RESET callback
+02714260000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02714260000i[CPU0 ] cpu hardware reset
+02714260000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02714260000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02714260000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02714260000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02714260000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02714260000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02714260000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02714260000i[     ] reset of 'unmapped' plugin device by virtual method
+02714260000i[     ] reset of 'biosdev' plugin device by virtual method
+02714260000i[     ] reset of 'speaker' plugin device by virtual method
+02714260000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02714260000i[     ] reset of 'ioapic' plugin device by virtual method
+02714260000i[     ] reset of 'keyboard' plugin device by virtual method
+02714260000i[     ] reset of 'harddrv' plugin device by virtual method
+02714260000i[     ] reset of 'serial' plugin device by virtual method
+02714260000i[     ] reset of 'parallel' plugin device by virtual method
+02714263305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02714580056i[KBD  ] reset-disable command received
+02714709816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02714709887i[VGA  ] VBE known Display Interface b0c0
+02714709919i[VGA  ] VBE known Display Interface b0c5
+02714712844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02715025533i[BIOS ] Starting rombios32
+02715026030i[BIOS ] Shutdown flag 0
+02715026711i[BIOS ] ram_size=0x02000000
+02715027189i[BIOS ] ram_end=32MB
+02715127089i[BIOS ] Found 1 cpu(s)
+02715146076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02715158753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02745477236i[BIOS ] Booting from 0000:7c00
+02749130000i[SDL  ] system RESET callback
+02749130000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02749130000i[CPU0 ] cpu hardware reset
+02749130000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02749130000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02749130000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02749130000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02749130000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02749130000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02749130000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02749130000i[     ] reset of 'unmapped' plugin device by virtual method
+02749130000i[     ] reset of 'biosdev' plugin device by virtual method
+02749130000i[     ] reset of 'speaker' plugin device by virtual method
+02749130000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02749130000i[     ] reset of 'ioapic' plugin device by virtual method
+02749130000i[     ] reset of 'keyboard' plugin device by virtual method
+02749130000i[     ] reset of 'harddrv' plugin device by virtual method
+02749130000i[     ] reset of 'serial' plugin device by virtual method
+02749130000i[     ] reset of 'parallel' plugin device by virtual method
+02749133305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02749450056i[KBD  ] reset-disable command received
+02749579816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02749579887i[VGA  ] VBE known Display Interface b0c0
+02749579919i[VGA  ] VBE known Display Interface b0c5
+02749582844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02749895533i[BIOS ] Starting rombios32
+02749896030i[BIOS ] Shutdown flag 0
+02749896711i[BIOS ] ram_size=0x02000000
+02749897189i[BIOS ] ram_end=32MB
+02749997137i[BIOS ] Found 1 cpu(s)
+02750016124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02750028801i[BIOS ] bios_table_cur_addr: 0x000fb928
+02780347234i[BIOS ] Booting from 0000:7c00
+02784000000i[SDL  ] system RESET callback
+02784000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02784000000i[CPU0 ] cpu hardware reset
+02784000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02784000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02784000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02784000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02784000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02784000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02784000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02784000000i[     ] reset of 'unmapped' plugin device by virtual method
+02784000000i[     ] reset of 'biosdev' plugin device by virtual method
+02784000000i[     ] reset of 'speaker' plugin device by virtual method
+02784000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02784000000i[     ] reset of 'ioapic' plugin device by virtual method
+02784000000i[     ] reset of 'keyboard' plugin device by virtual method
+02784000000i[     ] reset of 'harddrv' plugin device by virtual method
+02784000000i[     ] reset of 'serial' plugin device by virtual method
+02784000000i[     ] reset of 'parallel' plugin device by virtual method
+02784003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02784320056i[KBD  ] reset-disable command received
+02784449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02784449887i[VGA  ] VBE known Display Interface b0c0
+02784449919i[VGA  ] VBE known Display Interface b0c5
+02784452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02784765533i[BIOS ] Starting rombios32
+02784766030i[BIOS ] Shutdown flag 0
+02784766711i[BIOS ] ram_size=0x02000000
+02784767189i[BIOS ] ram_end=32MB
+02784867185i[BIOS ] Found 1 cpu(s)
+02784886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02784898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02815217232i[BIOS ] Booting from 0000:7c00
+02820300000i[SDL  ] system RESET callback
+02820300000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02820300000i[CPU0 ] cpu hardware reset
+02820300000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02820300000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02820300000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02820300000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02820300000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02820300000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02820300000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02820300000i[     ] reset of 'unmapped' plugin device by virtual method
+02820300000i[     ] reset of 'biosdev' plugin device by virtual method
+02820300000i[     ] reset of 'speaker' plugin device by virtual method
+02820300000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02820300000i[     ] reset of 'ioapic' plugin device by virtual method
+02820300000i[     ] reset of 'keyboard' plugin device by virtual method
+02820300000i[     ] reset of 'harddrv' plugin device by virtual method
+02820300000i[     ] reset of 'serial' plugin device by virtual method
+02820300000i[     ] reset of 'parallel' plugin device by virtual method
+02820303305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02820620056i[KBD  ] reset-disable command received
+02820749816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02820749887i[VGA  ] VBE known Display Interface b0c0
+02820749919i[VGA  ] VBE known Display Interface b0c5
+02820752844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02821065533i[BIOS ] Starting rombios32
+02821066030i[BIOS ] Shutdown flag 0
+02821066711i[BIOS ] ram_size=0x02000000
+02821067189i[BIOS ] ram_end=32MB
+02821167185i[BIOS ] Found 1 cpu(s)
+02821186172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02821198849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02851517232i[BIOS ] Booting from 0000:7c00
+02855880000i[SDL  ] system RESET callback
+02855880000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02855880000i[CPU0 ] cpu hardware reset
+02855880000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02855880000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02855880000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02855880000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02855880000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02855880000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02855880000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02855880000i[     ] reset of 'unmapped' plugin device by virtual method
+02855880000i[     ] reset of 'biosdev' plugin device by virtual method
+02855880000i[     ] reset of 'speaker' plugin device by virtual method
+02855880000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02855880000i[     ] reset of 'ioapic' plugin device by virtual method
+02855880000i[     ] reset of 'keyboard' plugin device by virtual method
+02855880000i[     ] reset of 'harddrv' plugin device by virtual method
+02855880000i[     ] reset of 'serial' plugin device by virtual method
+02855880000i[     ] reset of 'parallel' plugin device by virtual method
+02855883305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02856200056i[KBD  ] reset-disable command received
+02856329816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02856329887i[VGA  ] VBE known Display Interface b0c0
+02856329919i[VGA  ] VBE known Display Interface b0c5
+02856332844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02856645533i[BIOS ] Starting rombios32
+02856646030i[BIOS ] Shutdown flag 0
+02856646711i[BIOS ] ram_size=0x02000000
+02856647189i[BIOS ] ram_end=32MB
+02856747185i[BIOS ] Found 1 cpu(s)
+02856766172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02856778849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02887097232i[BIOS ] Booting from 0000:7c00
+02892880000i[SDL  ] system RESET callback
+02892880000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02892880000i[CPU0 ] cpu hardware reset
+02892880000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02892880000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02892880000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02892880000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02892880000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02892880000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02892880000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02892880000i[     ] reset of 'unmapped' plugin device by virtual method
+02892880000i[     ] reset of 'biosdev' plugin device by virtual method
+02892880000i[     ] reset of 'speaker' plugin device by virtual method
+02892880000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02892880000i[     ] reset of 'ioapic' plugin device by virtual method
+02892880000i[     ] reset of 'keyboard' plugin device by virtual method
+02892880000i[     ] reset of 'harddrv' plugin device by virtual method
+02892880000i[     ] reset of 'serial' plugin device by virtual method
+02892880000i[     ] reset of 'parallel' plugin device by virtual method
+02892883305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02893200056i[KBD  ] reset-disable command received
+02893329816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02893329887i[VGA  ] VBE known Display Interface b0c0
+02893329919i[VGA  ] VBE known Display Interface b0c5
+02893332844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02893645533i[BIOS ] Starting rombios32
+02893646030i[BIOS ] Shutdown flag 0
+02893646711i[BIOS ] ram_size=0x02000000
+02893647189i[BIOS ] ram_end=32MB
+02893747089i[BIOS ] Found 1 cpu(s)
+02893766076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02893778753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02924097236i[BIOS ] Booting from 0000:7c00
+02928570000i[SDL  ] system RESET callback
+02928570000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02928570000i[CPU0 ] cpu hardware reset
+02928570000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02928570000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02928570000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02928570000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02928570000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02928570000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02928570000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02928570000i[     ] reset of 'unmapped' plugin device by virtual method
+02928570000i[     ] reset of 'biosdev' plugin device by virtual method
+02928570000i[     ] reset of 'speaker' plugin device by virtual method
+02928570000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02928570000i[     ] reset of 'ioapic' plugin device by virtual method
+02928570000i[     ] reset of 'keyboard' plugin device by virtual method
+02928570000i[     ] reset of 'harddrv' plugin device by virtual method
+02928570000i[     ] reset of 'serial' plugin device by virtual method
+02928570000i[     ] reset of 'parallel' plugin device by virtual method
+02928573305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02928890056i[KBD  ] reset-disable command received
+02929019816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02929019887i[VGA  ] VBE known Display Interface b0c0
+02929019919i[VGA  ] VBE known Display Interface b0c5
+02929022844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02929335533i[BIOS ] Starting rombios32
+02929336030i[BIOS ] Shutdown flag 0
+02929336711i[BIOS ] ram_size=0x02000000
+02929337189i[BIOS ] ram_end=32MB
+02929437185i[BIOS ] Found 1 cpu(s)
+02929456172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02929468849i[BIOS ] bios_table_cur_addr: 0x000fb928
+02959787232i[BIOS ] Booting from 0000:7c00
+02965720000i[SDL  ] system RESET callback
+02965720000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+02965720000i[CPU0 ] cpu hardware reset
+02965720000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+02965720000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+02965720000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+02965720000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+02965720000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+02965720000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+02965720000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+02965720000i[     ] reset of 'unmapped' plugin device by virtual method
+02965720000i[     ] reset of 'biosdev' plugin device by virtual method
+02965720000i[     ] reset of 'speaker' plugin device by virtual method
+02965720000i[     ] reset of 'extfpuirq' plugin device by virtual method
+02965720000i[     ] reset of 'ioapic' plugin device by virtual method
+02965720000i[     ] reset of 'keyboard' plugin device by virtual method
+02965720000i[     ] reset of 'harddrv' plugin device by virtual method
+02965720000i[     ] reset of 'serial' plugin device by virtual method
+02965720000i[     ] reset of 'parallel' plugin device by virtual method
+02965723305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+02966040056i[KBD  ] reset-disable command received
+02966169816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+02966169887i[VGA  ] VBE known Display Interface b0c0
+02966169919i[VGA  ] VBE known Display Interface b0c5
+02966172844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+02966485533i[BIOS ] Starting rombios32
+02966486030i[BIOS ] Shutdown flag 0
+02966486711i[BIOS ] ram_size=0x02000000
+02966487189i[BIOS ] ram_end=32MB
+02966587089i[BIOS ] Found 1 cpu(s)
+02966606076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+02966618753i[BIOS ] bios_table_cur_addr: 0x000fb928
+02996937236i[BIOS ] Booting from 0000:7c00
+03016200000i[SDL  ] system RESET callback
+03016200000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03016200000i[CPU0 ] cpu hardware reset
+03016200000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03016200000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03016200000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03016200000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03016200000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03016200000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03016200000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03016200000i[     ] reset of 'unmapped' plugin device by virtual method
+03016200000i[     ] reset of 'biosdev' plugin device by virtual method
+03016200000i[     ] reset of 'speaker' plugin device by virtual method
+03016200000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03016200000i[     ] reset of 'ioapic' plugin device by virtual method
+03016200000i[     ] reset of 'keyboard' plugin device by virtual method
+03016200000i[     ] reset of 'harddrv' plugin device by virtual method
+03016200000i[     ] reset of 'serial' plugin device by virtual method
+03016200000i[     ] reset of 'parallel' plugin device by virtual method
+03016203305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03016520056i[KBD  ] reset-disable command received
+03016649816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03016649887i[VGA  ] VBE known Display Interface b0c0
+03016649919i[VGA  ] VBE known Display Interface b0c5
+03016652844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03016965533i[BIOS ] Starting rombios32
+03016966030i[BIOS ] Shutdown flag 0
+03016966711i[BIOS ] ram_size=0x02000000
+03016967189i[BIOS ] ram_end=32MB
+03017067185i[BIOS ] Found 1 cpu(s)
+03017086172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03017098849i[BIOS ] bios_table_cur_addr: 0x000fb928
+03047417232i[BIOS ] Booting from 0000:7c00
+03050120000i[SDL  ] system RESET callback
+03050120000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03050120000i[CPU0 ] cpu hardware reset
+03050120000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03050120000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03050120000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03050120000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03050120000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03050120000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03050120000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03050120000i[     ] reset of 'unmapped' plugin device by virtual method
+03050120000i[     ] reset of 'biosdev' plugin device by virtual method
+03050120000i[     ] reset of 'speaker' plugin device by virtual method
+03050120000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03050120000i[     ] reset of 'ioapic' plugin device by virtual method
+03050120000i[     ] reset of 'keyboard' plugin device by virtual method
+03050120000i[     ] reset of 'harddrv' plugin device by virtual method
+03050120000i[     ] reset of 'serial' plugin device by virtual method
+03050120000i[     ] reset of 'parallel' plugin device by virtual method
+03050123305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03050440056i[KBD  ] reset-disable command received
+03050569816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03050569887i[VGA  ] VBE known Display Interface b0c0
+03050569919i[VGA  ] VBE known Display Interface b0c5
+03050572844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03050885533i[BIOS ] Starting rombios32
+03050886030i[BIOS ] Shutdown flag 0
+03050886711i[BIOS ] ram_size=0x02000000
+03050887189i[BIOS ] ram_end=32MB
+03050987137i[BIOS ] Found 1 cpu(s)
+03051006124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03051018801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03081337234i[BIOS ] Booting from 0000:7c00
+03085570000i[SDL  ] system RESET callback
+03085570000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03085570000i[CPU0 ] cpu hardware reset
+03085570000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03085570000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03085570000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03085570000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03085570000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03085570000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03085570000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03085570000i[     ] reset of 'unmapped' plugin device by virtual method
+03085570000i[     ] reset of 'biosdev' plugin device by virtual method
+03085570000i[     ] reset of 'speaker' plugin device by virtual method
+03085570000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03085570000i[     ] reset of 'ioapic' plugin device by virtual method
+03085570000i[     ] reset of 'keyboard' plugin device by virtual method
+03085570000i[     ] reset of 'harddrv' plugin device by virtual method
+03085570000i[     ] reset of 'serial' plugin device by virtual method
+03085570000i[     ] reset of 'parallel' plugin device by virtual method
+03085573305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03085890056i[KBD  ] reset-disable command received
+03086019816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03086019887i[VGA  ] VBE known Display Interface b0c0
+03086019919i[VGA  ] VBE known Display Interface b0c5
+03086022844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03086335533i[BIOS ] Starting rombios32
+03086336030i[BIOS ] Shutdown flag 0
+03086336711i[BIOS ] ram_size=0x02000000
+03086337189i[BIOS ] ram_end=32MB
+03086437089i[BIOS ] Found 1 cpu(s)
+03086456076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03086468753i[BIOS ] bios_table_cur_addr: 0x000fb928
+03116787236i[BIOS ] Booting from 0000:7c00
+03121670000i[SDL  ] system RESET callback
+03121670000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03121670000i[CPU0 ] cpu hardware reset
+03121670000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03121670000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03121670000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03121670000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03121670000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03121670000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03121670000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03121670000i[     ] reset of 'unmapped' plugin device by virtual method
+03121670000i[     ] reset of 'biosdev' plugin device by virtual method
+03121670000i[     ] reset of 'speaker' plugin device by virtual method
+03121670000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03121670000i[     ] reset of 'ioapic' plugin device by virtual method
+03121670000i[     ] reset of 'keyboard' plugin device by virtual method
+03121670000i[     ] reset of 'harddrv' plugin device by virtual method
+03121670000i[     ] reset of 'serial' plugin device by virtual method
+03121670000i[     ] reset of 'parallel' plugin device by virtual method
+03121673305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03121990056i[KBD  ] reset-disable command received
+03122119816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03122119887i[VGA  ] VBE known Display Interface b0c0
+03122119919i[VGA  ] VBE known Display Interface b0c5
+03122122844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03122435533i[BIOS ] Starting rombios32
+03122436030i[BIOS ] Shutdown flag 0
+03122436711i[BIOS ] ram_size=0x02000000
+03122437189i[BIOS ] ram_end=32MB
+03122537137i[BIOS ] Found 1 cpu(s)
+03122556124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03122568801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03152887234i[BIOS ] Booting from 0000:7c00
+03156320000i[SDL  ] system RESET callback
+03156320000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03156320000i[CPU0 ] cpu hardware reset
+03156320000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03156320000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03156320000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03156320000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03156320000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03156320000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03156320000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03156320000i[     ] reset of 'unmapped' plugin device by virtual method
+03156320000i[     ] reset of 'biosdev' plugin device by virtual method
+03156320000i[     ] reset of 'speaker' plugin device by virtual method
+03156320000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03156320000i[     ] reset of 'ioapic' plugin device by virtual method
+03156320000i[     ] reset of 'keyboard' plugin device by virtual method
+03156320000i[     ] reset of 'harddrv' plugin device by virtual method
+03156320000i[     ] reset of 'serial' plugin device by virtual method
+03156320000i[     ] reset of 'parallel' plugin device by virtual method
+03156323305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03156640056i[KBD  ] reset-disable command received
+03156769816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03156769887i[VGA  ] VBE known Display Interface b0c0
+03156769919i[VGA  ] VBE known Display Interface b0c5
+03156772844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03157085533i[BIOS ] Starting rombios32
+03157086030i[BIOS ] Shutdown flag 0
+03157086711i[BIOS ] ram_size=0x02000000
+03157087189i[BIOS ] ram_end=32MB
+03157187137i[BIOS ] Found 1 cpu(s)
+03157206124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03157218801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03187537234i[BIOS ] Booting from 0000:7c00
+03191720000i[SDL  ] system RESET callback
+03191720000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03191720000i[CPU0 ] cpu hardware reset
+03191720000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03191720000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03191720000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03191720000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03191720000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03191720000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03191720000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03191720000i[     ] reset of 'unmapped' plugin device by virtual method
+03191720000i[     ] reset of 'biosdev' plugin device by virtual method
+03191720000i[     ] reset of 'speaker' plugin device by virtual method
+03191720000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03191720000i[     ] reset of 'ioapic' plugin device by virtual method
+03191720000i[     ] reset of 'keyboard' plugin device by virtual method
+03191720000i[     ] reset of 'harddrv' plugin device by virtual method
+03191720000i[     ] reset of 'serial' plugin device by virtual method
+03191720000i[     ] reset of 'parallel' plugin device by virtual method
+03191723305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03192040056i[KBD  ] reset-disable command received
+03192169816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03192169887i[VGA  ] VBE known Display Interface b0c0
+03192169919i[VGA  ] VBE known Display Interface b0c5
+03192172844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03192485533i[BIOS ] Starting rombios32
+03192486030i[BIOS ] Shutdown flag 0
+03192486711i[BIOS ] ram_size=0x02000000
+03192487189i[BIOS ] ram_end=32MB
+03192587137i[BIOS ] Found 1 cpu(s)
+03192606124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03192618801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03222937234i[BIOS ] Booting from 0000:7c00
+03603000000i[SDL  ] system RESET callback
+03603000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03603000000i[CPU0 ] cpu hardware reset
+03603000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03603000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03603000000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03603000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03603000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03603000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03603000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03603000000i[     ] reset of 'unmapped' plugin device by virtual method
+03603000000i[     ] reset of 'biosdev' plugin device by virtual method
+03603000000i[     ] reset of 'speaker' plugin device by virtual method
+03603000000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03603000000i[     ] reset of 'ioapic' plugin device by virtual method
+03603000000i[     ] reset of 'keyboard' plugin device by virtual method
+03603000000i[     ] reset of 'harddrv' plugin device by virtual method
+03603000000i[     ] reset of 'serial' plugin device by virtual method
+03603000000i[     ] reset of 'parallel' plugin device by virtual method
+03603003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03603320056i[KBD  ] reset-disable command received
+03603449816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03603449887i[VGA  ] VBE known Display Interface b0c0
+03603449919i[VGA  ] VBE known Display Interface b0c5
+03603452844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03603765533i[BIOS ] Starting rombios32
+03603766030i[BIOS ] Shutdown flag 0
+03603766711i[BIOS ] ram_size=0x02000000
+03603767189i[BIOS ] ram_end=32MB
+03603867185i[BIOS ] Found 1 cpu(s)
+03603886172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03603898849i[BIOS ] bios_table_cur_addr: 0x000fb928
+03634217232i[BIOS ] Booting from 0000:7c00
+03638900000i[SDL  ] system RESET callback
+03638900000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03638900000i[CPU0 ] cpu hardware reset
+03638900000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03638900000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03638900000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03638900000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03638900000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03638900000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03638900000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03638900000i[     ] reset of 'unmapped' plugin device by virtual method
+03638900000i[     ] reset of 'biosdev' plugin device by virtual method
+03638900000i[     ] reset of 'speaker' plugin device by virtual method
+03638900000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03638900000i[     ] reset of 'ioapic' plugin device by virtual method
+03638900000i[     ] reset of 'keyboard' plugin device by virtual method
+03638900000i[     ] reset of 'harddrv' plugin device by virtual method
+03638900000i[     ] reset of 'serial' plugin device by virtual method
+03638900000i[     ] reset of 'parallel' plugin device by virtual method
+03638903305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03639220056i[KBD  ] reset-disable command received
+03639349816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03639349887i[VGA  ] VBE known Display Interface b0c0
+03639349919i[VGA  ] VBE known Display Interface b0c5
+03639352844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03639665533i[BIOS ] Starting rombios32
+03639666030i[BIOS ] Shutdown flag 0
+03639666711i[BIOS ] ram_size=0x02000000
+03639667189i[BIOS ] ram_end=32MB
+03639767137i[BIOS ] Found 1 cpu(s)
+03639786124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03639798801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03670117234i[BIOS ] Booting from 0000:7c00
+03673600000i[SDL  ] system RESET callback
+03673600000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03673600000i[CPU0 ] cpu hardware reset
+03673600000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03673600000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03673600000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03673600000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03673600000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03673600000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03673600000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03673600000i[     ] reset of 'unmapped' plugin device by virtual method
+03673600000i[     ] reset of 'biosdev' plugin device by virtual method
+03673600000i[     ] reset of 'speaker' plugin device by virtual method
+03673600000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03673600000i[     ] reset of 'ioapic' plugin device by virtual method
+03673600000i[     ] reset of 'keyboard' plugin device by virtual method
+03673600000i[     ] reset of 'harddrv' plugin device by virtual method
+03673600000i[     ] reset of 'serial' plugin device by virtual method
+03673600000i[     ] reset of 'parallel' plugin device by virtual method
+03673603305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03673920056i[KBD  ] reset-disable command received
+03674049816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03674049887i[VGA  ] VBE known Display Interface b0c0
+03674049919i[VGA  ] VBE known Display Interface b0c5
+03674052844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03674365533i[BIOS ] Starting rombios32
+03674366030i[BIOS ] Shutdown flag 0
+03674366711i[BIOS ] ram_size=0x02000000
+03674367189i[BIOS ] ram_end=32MB
+03674467089i[BIOS ] Found 1 cpu(s)
+03674486076i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03674498753i[BIOS ] bios_table_cur_addr: 0x000fb928
+03704817236i[BIOS ] Booting from 0000:7c00
+03709670000i[SDL  ] system RESET callback
+03709670000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03709670000i[CPU0 ] cpu hardware reset
+03709670000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03709670000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03709670000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03709670000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03709670000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03709670000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03709670000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03709670000i[     ] reset of 'unmapped' plugin device by virtual method
+03709670000i[     ] reset of 'biosdev' plugin device by virtual method
+03709670000i[     ] reset of 'speaker' plugin device by virtual method
+03709670000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03709670000i[     ] reset of 'ioapic' plugin device by virtual method
+03709670000i[     ] reset of 'keyboard' plugin device by virtual method
+03709670000i[     ] reset of 'harddrv' plugin device by virtual method
+03709670000i[     ] reset of 'serial' plugin device by virtual method
+03709670000i[     ] reset of 'parallel' plugin device by virtual method
+03709673305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03709990056i[KBD  ] reset-disable command received
+03710119816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03710119887i[VGA  ] VBE known Display Interface b0c0
+03710119919i[VGA  ] VBE known Display Interface b0c5
+03710122844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03710435533i[BIOS ] Starting rombios32
+03710436030i[BIOS ] Shutdown flag 0
+03710436711i[BIOS ] ram_size=0x02000000
+03710437189i[BIOS ] ram_end=32MB
+03710537137i[BIOS ] Found 1 cpu(s)
+03710556124i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03710568801i[BIOS ] bios_table_cur_addr: 0x000fb928
+03740887234i[BIOS ] Booting from 0000:7c00
+03746160000i[SDL  ] system RESET callback
+03746160000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+03746160000i[CPU0 ] cpu hardware reset
+03746160000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+03746160000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+03746160000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+03746160000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+03746160000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+03746160000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+03746160000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+03746160000i[     ] reset of 'unmapped' plugin device by virtual method
+03746160000i[     ] reset of 'biosdev' plugin device by virtual method
+03746160000i[     ] reset of 'speaker' plugin device by virtual method
+03746160000i[     ] reset of 'extfpuirq' plugin device by virtual method
+03746160000i[     ] reset of 'ioapic' plugin device by virtual method
+03746160000i[     ] reset of 'keyboard' plugin device by virtual method
+03746160000i[     ] reset of 'harddrv' plugin device by virtual method
+03746160000i[     ] reset of 'serial' plugin device by virtual method
+03746160000i[     ] reset of 'parallel' plugin device by virtual method
+03746163305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+03746480056i[KBD  ] reset-disable command received
+03746609816i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+03746609887i[VGA  ] VBE known Display Interface b0c0
+03746609919i[VGA  ] VBE known Display Interface b0c5
+03746612844i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+03746925533i[BIOS ] Starting rombios32
+03746926030i[BIOS ] Shutdown flag 0
+03746926711i[BIOS ] ram_size=0x02000000
+03746927189i[BIOS ] ram_end=32MB
+03747027185i[BIOS ] Found 1 cpu(s)
+03747046172i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+03747058849i[BIOS ] bios_table_cur_addr: 0x000fb928
+03777377232i[BIOS ] Booting from 0000:7c00
+04942400000i[SDL  ] system RESET callback
+04942400000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
+04942400000i[CPU0 ] cpu hardware reset
+04942400000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+04942400000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
+04942400000i[CPU0 ] CPUID[0x00000001]: 00000f03 00000800 00000000 07cbfbff
+04942400000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x80000000]: 80000004 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000000 00000000
+04942400000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
+04942400000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
+04942400000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+04942400000i[     ] reset of 'unmapped' plugin device by virtual method
+04942400000i[     ] reset of 'biosdev' plugin device by virtual method
+04942400000i[     ] reset of 'speaker' plugin device by virtual method
+04942400000i[     ] reset of 'extfpuirq' plugin device by virtual method
+04942400000i[     ] reset of 'ioapic' plugin device by virtual method
+04942400000i[     ] reset of 'keyboard' plugin device by virtual method
+04942400000i[     ] reset of 'harddrv' plugin device by virtual method
+04942400000i[     ] reset of 'serial' plugin device by virtual method
+04942400000i[     ] reset of 'parallel' plugin device by virtual method
+04942403305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
+04942720071i[KBD  ] reset-disable command received
+04942849793i[VBIOS] VGABios $Id: vgabios.c,v 1.69 2009/04/07 18:18:20 vruppert Exp $
+04942849864i[VGA  ] VBE known Display Interface b0c0
+04942849896i[VGA  ] VBE known Display Interface b0c5
+04942852821i[VBIOS] VBE Bios $Id: vbe.c,v 1.62 2009/01/25 15:46:25 vruppert Exp $
+04943165510i[BIOS ] Starting rombios32
+04943166007i[BIOS ] Shutdown flag 0
+04943166688i[BIOS ] ram_size=0x02000000
+04943167166i[BIOS ] ram_end=32MB
+04943267138i[BIOS ] Found 1 cpu(s)
+04943286125i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
+04943298802i[BIOS ] bios_table_cur_addr: 0x000fb928
+04973617235i[BIOS ] Booting from 0000:7c00
+09251160000p[SDL  ] >>PANIC<< User requested shutdown.
+09251160000i[CPU0 ] CPU is in real mode (active)
+09251160000i[CPU0 ] CS.d_b = 16 bit
+09251160000i[CPU0 ] SS.d_b = 16 bit
+09251160000i[CPU0 ] | EAX=00000051  EBX=0000fdc6  ECX=00000607  EDX=00000f30
+09251160000i[CPU0 ] | ESP=0000fff0  EBP=0000fff0  ESI=000e0084  EDI=0000ffac
+09251160000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
+09251160000i[CPU0 ] | SEG selector     base    limit G D
+09251160000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+09251160000i[CPU0 ] |  CS:2000( 0004| 0|  0) 00020000 0000ffff 0 0
+09251160000i[CPU0 ] |  DS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+09251160000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+09251160000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+09251160000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+09251160000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+09251160000i[CPU0 ] | EIP=00000003 (00000003)
+09251160000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+09251160000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+09251160000i[CPU0 ] 0x00000003>> jmp .-2 (0x00020003) : EBFE
+09251160000i[CMOS ] Last time is 1431635933 (Thu May 14 14:38:53 2015)
+09251160000i[     ] restoring default signal behavior
+09251160000i[CTRL ] quit_sim called with exit code 1
