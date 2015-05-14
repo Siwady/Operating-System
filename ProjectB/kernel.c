@@ -21,18 +21,18 @@ void main()
 	
 	moveCursor(15,2,0);
 	readSector(buffer, 30);
-	printStringColor(buffer,0xB);
+	printString(buffer);
 
 	moveCursor(2,10,0);
-	printStringColor("Write a message: ",0x9);
-	readStringColor(word,0xF);
+	printStringColor("Write a message: ",0x8);
+	readStringColor(word,0x6);
 	
 	pressReturn();
-	printStringColor("Your message was: ",0xE);
-	printStringColor(word,0xD);
+	printStringColor("Your message was: ",0x8);
+	printStringColor(word,0x6);
 	
 	moveCursor(27,20,0);
-	printStringColor("Press any key to continue... ",0x87);
+	printStringColor("Press any key to continue... ",0x88);
 	readChar();
 	
 	Clr();
