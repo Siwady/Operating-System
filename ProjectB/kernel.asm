@@ -12,15 +12,23 @@
 	.global _changePage
 	.global _readSector
 	.extern _printString
+	.extern _printStringColor
 	.extern _readString
+	.extern _readStringColor
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
+	.global _execute_readStringColor
 	.global _execute_printString
+	.global _execute_printStringColor
 	.global _execute_readSector
+	.global _execute_moveCursor
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
+	.global _getCursorColumn
+	.global _moveCursorUp
+	.global _moveCursorDown
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -57,15 +65,15 @@ _readChar:
 	ret
 
 
-;printCharC(char cha)
+;printCharC(char cha, int Color)
 _printCharC:
 	push bp
 	mov bp,sp
 	mov ah,#9 
 	mov al,[bp+4]   ;Char
 	mov bh,#0        ;Page
-	mov bl,#0xA    ;Color   (87 is blinking)
-	mov cx,#1 
+	mov bl,[bp+6]    ;Color   (87 is blinking  ,   0xA  is Green)
+	mov cx,#1
 	int #0x10  
 ;---------------------------------------------------------
 	;get cursor position
@@ -80,6 +88,43 @@ _printCharC:
 	pop bp
 	ret
 	
+
+;getCursorColumn()
+_getCursorColumn:
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+	xor ax,ax
+	mov al,dl
+	ret
+
+;moveCursorUp()
+_moveCursorUp:
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	sub dh,#1
+	mov dl,#78
+	mov ah,#0x2
+	int #0x10
+	ret
+	
+;moveCursorDown()
+_moveCursorDown:
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	add dh,#1
+	mov dl,#2
+	mov ah,#0x2
+	int #0x10
+	ret
 	
 ;void moveCursor(int column,int row,int page)
 _moveCursor:
@@ -176,6 +221,12 @@ _interrupt21ServiceRoutine:
 	je _execute_readString
 	cmp ax,#2
 	je _execute_readSector
+	cmp ax,#3
+	je _execute_readStringColor
+	cmp ax,#4
+	je _execute_printStringColor
+	cmp ax,#5
+	je _execute_moveCursor
 
 
 
@@ -184,12 +235,33 @@ _execute_printString:
 	call _printString 
 	add sp,#2
 	jmp _end
+	
+_execute_moveCursor:
+	push dx
+	push cx
+	push bx
+	call _moveCursor 
+	add sp,#6
+	jmp _end
 
+_execute_printStringColor:
+	push cx
+	push bx
+	call _printStringColor 
+	add sp,#4
+	jmp _end
 
 _execute_readString:
 	push bx
 	call _readString 
 	add sp,#2
+	jmp _end
+	
+_execute_readStringColor:
+	push cx
+	push bx
+	call _readStringColor 
+	add sp,#4
 	jmp _end
 	
 
