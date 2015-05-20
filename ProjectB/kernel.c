@@ -21,41 +21,37 @@ void main()
 {
 	char buffer[512];
 	char word[WORD_SIZE];
-	
-	Clr();	
+	Clr();
 	changeBackgroundColor(15);
-	PrintBorder();	
-	
+	PrintBorder();
+
 	moveCursor(30,2,0);
 	printStringColor("Welcome to my OS",DARK_GRAY);
-
+	
 	moveCursor(2,8,0);
 	printStringColor("Write a message: ",DARK_GRAY);
 	readStringColor(word,BROWN);
-	
 	pressReturn();
+
 	printStringColor("Your message was: ",DARK_GRAY);
 	printStringColor(word,BROWN);
-	
 	pressReturn();
 	pressReturn();
+
 	printStringColor("Reading sector 30 from floppy...",DARK_GRAY);
 	pressReturn();
 	readSector(buffer, 30);
-	printStringColor(buffer,LIGHT_BLUE);	
+	printStringColor(buffer,LIGHT_BLUE);
 
 	moveCursor(27,20,0);
 	printStringColor("Press any key to continue... ",0x88);
 	readChar();
-	
+
 	//Interrupt 21
 	Clr();
 	PrintBorder();
 	makeInterrupt21();
 	loadProgram();
-
-	
-
 }
 
 

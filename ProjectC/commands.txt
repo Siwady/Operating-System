@@ -1,0 +1,9 @@
+Mount:
+
+/home/esiwady/Documents/osproject/OperationSystem/ProjectC/bin/sfs 
+/home/esiwady/Documents/osproject/OperationSystem/ProjectC/floppya.img sfs_root/ -f -s
+
+
+Unmount:
+
+fusermount -u sfs_root
