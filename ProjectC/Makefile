@@ -1,31 +1,45 @@
+all: floppya.img test/syscall-test.bin
 
-CFLAGS = -g -Wall -DFUSE_USE_VERSION=26 `pkg-config fuse --cflags`
-LINKFLAGS = -Wall `pkg-config fuse --libs`
+run: all
+	- bochs -f opsys.bxrc 
 
-all: bin/sfs
+kernel.bin: start.o kernel.o kernel_asm.o 
+	ld86 -o $@ -d $^
 
-clean:
-	rm -rf bin obj
+kernel.o: kernel.c
+	bcc -ansi -c -o $@ $<
 
-bin: 
-	mkdir -p bin
+kernel_asm.o: kernel.asm
+	as86 $< -o $@
 
-bin/sfs: bin obj/sfs.o obj/device.o obj/main.o
-	g++ obj/* -o bin/sfs $(LINKFLAGS)
+start.o: start.asm
+	as86 $< -o $@
 
-obj:
-	mkdir -p obj
 
-obj/main.o: obj main.c sfs.h
-	gcc -g $(CFLAGS) -c main.c -o $@
-
-obj/sfs.o: obj sfs.c sfs.h 
-	g++ -g $(CFLAGS) -c sfs.c -o $@
-
-obj/device.o: obj device.c device.h
-	g++ -g $(CFLAGS) -c device.c -o $@
+bootload.bin: bootload.asm
+	nasm $< -f bin -o $@
 
 floppya.img: bootload.bin kernel.bin
-	dd if=map.img of=floppya.img bs=512 count=1 seek=1 conv=notrunc
-	dd if=dir.img of=floppya.img bs=512 count=1 seek=2 conv=notrunc
+	dd if=bootload.bin of=floppya.img bs=512 count=1 conv=notrunc
+	dd if=kernel.bin of=floppya.img bs=512 seek=3 conv=notrunc
+	dd if=message.txt of=floppya.img bs=512 count=1 seek=30 conv=notrunc
+	dd if=test/syscall-test.bin of=floppya.img bs=512 count=1 seek=11 conv=notrunc
 
+clean :
+	rm -f *.o
+	rm -f *.bin
+	rm -f test/*.o
+	
+	
+
+test/test.o: test/test.c
+	bcc -ansi -c -o $@ $<
+	
+test/os.o: test/os.asm
+	as86 $< -o $@
+	
+test/start.o: test/start.asm
+	as86 $< -o $@
+	
+test/syscall-test.bin: test/start.o  test/test.o test/os.o 
+	ld86 -o $@ -d $^

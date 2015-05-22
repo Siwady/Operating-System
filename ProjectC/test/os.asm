@@ -4,6 +4,7 @@
 .global _syscall_readStringColor
 .global _syscall_readSector
 .global _syscall_moveCursor
+.global _syscall_readFile
 
 _syscall_printString:
 	push bp
@@ -54,6 +55,16 @@ _syscall_readSector:
 	pop bp
 	ret
 	
+_syscall_readFile:
+	push bp
+	mov bp,sp
+	mov ax,#6
+	mov bx,[bp+4]
+	mov cx,[bp+6]
+	int #0x21
+	pop bp
+	ret
+
 _syscall_moveCursor:
 	push bp
 	mov bp,sp
@@ -64,4 +75,6 @@ _syscall_moveCursor:
 	int #0x21
 	pop bp
 	ret
+
+	
 	

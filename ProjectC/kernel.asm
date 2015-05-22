@@ -1,14 +1,40 @@
 ;kernel.asm
 ;Michael Black, 2007
+;Edward Siwady,2015
 
 ;kernel.asm contains assembly functions that you can use in your kernel
 
 	.global _putInMemory
-	.global _interrupt
 	.global _makeInterrupt21
-	.global _launchProgram
-	.extern _handleInterrupt21
-	.global _printhex
+	.global _printChar
+	.global _readChar
+	.global _printCharC
+	.global _moveCursor
+	.global _changePage
+	.global _readSector
+	.extern _printString
+	.extern _printStringColor
+	.extern _readString
+	.extern _readStringColor
+	.extern _readFile
+	.global _interrupt21ServiceRoutine
+	.global _execute_readString
+	.global _execute_readStringColor
+	.global _execute_printString
+	.global _execute_printStringColor
+	.global _execute_readSector
+	.global _execute_moveCursor
+	.global _execute_readFile
+	.global _end
+	.global _loadProgram
+	.global _changeBackgroundColor
+	.global _Clr
+	.global _getCursorColumn
+	.global _getCursorRow
+	.global _moveCursorUp
+	.global _moveCursorDown
+	.global _ScrollDown
+;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
 _putInMemory:
@@ -24,28 +50,164 @@ _putInMemory:
 	pop bp
 	ret
 
-;int interrupt (int number, int AX, int BX, int CX, int DX)
-_interrupt:
+;void printChar(char character)
+_printChar:
 	push bp
 	mov bp,sp
-	mov ax,[bp+4]	;get the interrupt number in AL
-	push ds		;use self-modifying code to call the right interrupt
-	mov bx,cs
-	mov ds,bx
-	mov si,#intr
-	mov [si+1],al	;change the 00 below to the contents of AL
-	pop ds
-	mov ax,[bp+6]	;get the other parameters AX, BX, CX, and DX
-	mov bx,[bp+8]
-	mov cx,[bp+10]
-	mov dx,[bp+12]
-
-intr:	int #0x00	;call the interrupt (00 will be changed above)
-
-	mov ah,#0	;we only want AL returned
+	mov al, [bp+4]
+	mov ah, #0x0e
+	mov bl,#0xA
+	int #0x10
+	pop bp
+	ret
+	
+;char readChar()
+_readChar:
+	push bp
+	mov ah, #0
+	int #0x16
 	pop bp
 	ret
 
+
+;printCharC(char cha, int Color)
+_printCharC:
+	push bp
+	mov bp,sp
+	mov ah,#9 
+	mov al,[bp+4]   ;Char
+	mov bh,#0        ;Page
+	mov bl,[bp+6]    ;Color   (87 is blinking  ,   0xA  is Green)
+	mov cx,#1
+	int #0x10  
+;---------------------------------------------------------
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	add dl,#1
+	mov ah,#0x2
+	int #0x10
+	pop bp
+	ret
+	
+
+;getCursorColumn()
+_getCursorColumn:
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+	xor ax,ax
+	mov al,dl
+	ret
+	
+;getCursorRow()
+_getCursorRow:
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+	xor ax,ax
+	mov al,dh
+	ret
+
+
+;moveCursorUp()
+_moveCursorUp:
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	sub dh,#1
+	mov dl,#78
+	mov ah,#0x2
+	int #0x10
+	ret
+	
+;moveCursorDown()
+_moveCursorDown:
+	;get cursor position
+	mov ah,#0x3
+	mov bh,#0  ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	add dh,#1
+	mov dl,#2
+	mov ah,#0x2
+	int #0x10
+	ret
+	
+;void moveCursor(int column,int row,int page)
+_moveCursor:
+	push bp
+	mov bp,sp
+	mov bh,[bp+8]  ;page
+	mov cl,[bp+6]    ;row
+	mov ch,[bp+4]   ;column
+	mov ah,#0x2
+	mov dh,cl
+	mov dl,ch
+	int #0x10
+	pop bp
+	ret
+
+;void changePage(int page)
+_changePage:
+	push bp
+	mov bp,sp
+	mov ah, #0x5
+	mov al,[bp+4]   ;page
+	int #0x10
+	pop bp
+	ret
+	
+;void readSector(char* buffer,int sector)
+_readSector:
+	push bp
+	mov bp,sp
+	
+	sub sp,#6
+	mov bx,[bp+4]   ;buffer
+	mov ax,[bp+6]
+;--------------------------------------------	
+	mov cl,#36
+	div cl
+	xor ah,ah
+	mov [bp-2],ax  ;Track
+	
+;--------------------------------------------	
+	mov ax,[bp+6]
+	mov cl,#18
+	div cl
+	and al,#0x1
+	xor dx,dx
+	mov dl,al
+	mov [bp-4],dx   ;head
+;---------------------------------------------
+	add ah,#1
+	xor dx,dx
+	mov dl,ah
+	mov [bp-6], dx  ;relative sector 
+	
+	mov ah, #0x2 
+	mov al,#0x1      ;number of sectors to read
+
+	mov ch,[bp-2]  ;set Track
+	mov cl, [bp-6]  ;set Relative sector
+	mov dh,[bp-4]  ; set Head
+	mov dl, #0x0    ;device number
+	int #0x13
+	add sp,#6
+	pop bp
+	ret
+	
+	
+	
+	
 ;void makeInterrupt21()
 ;this sets up the interrupt 0x21 vector
 ;when an interrupt 0x21 is called in the future, 
@@ -68,87 +230,136 @@ _makeInterrupt21:
 ;it will call your function:
 ;void handleInterrupt21 (int AX, int BX, int CX, int DX)
 _interrupt21ServiceRoutine:
+	cmp ax,#0
+	je _execute_printString
+	cmp ax,#1
+	je _execute_readString
+	cmp ax,#2
+	je _execute_readSector
+	cmp ax,#3
+	je _execute_readStringColor
+	cmp ax,#4
+	je _execute_printStringColor
+	cmp ax,#5
+	je _execute_moveCursor
+	cmp ax,#6
+	je _execute_readFile
+	
+
+
+_execute_printString:
+	push bx
+	call _printString 
+	add sp,#2
+	jmp _end
+	
+_execute_moveCursor:
 	push dx
 	push cx
 	push bx
-	push ax
-	call _handleInterrupt21
-	pop ax
-	pop bx
-	pop cx
-	pop dx
+	call _moveCursor 
+	add sp,#6
+	jmp _end
 
+_execute_printStringColor:
+	push cx
+	push bx
+	call _printStringColor 
+	add sp,#4
+	jmp _end
+
+_execute_readString:
+	push bx
+	call _readString 
+	add sp,#2
+	jmp _end
+	
+_execute_readStringColor:
+	push cx
+	push bx
+	call _readStringColor 
+	add sp,#4
+	jmp _end
+	
+
+_execute_readSector:
+	push cx
+	push bx
+	call _readSector
+	add sp,#4
+	jmp _end
+	
+_execute_readFile:
+	push cx
+	push bx
+	call _readFile
+	add sp,#4
+	jmp _end
+	
+	
+_end:
 	iret
+	
 
-;this is called to start a program that is loaded into memory
-;void launchProgram(int segment)
-_launchProgram:
+_loadProgram:
+	mov ax, #0x2000
+	mov ds, ax
+	mov ss, ax
+	mov es, ax
+	;let's have the stack start at 0x2000:fff0
+	mov ax, #0xfff0
+	mov sp, ax
+	mov bp, ax   ; Read the program from the floppy
+	mov cl, #12  ;cl holds sector number
+	mov dh, #0  ;dh holds head number - 0
+	mov ch, #0   ;ch holds track number - 0
+	mov ah, #2  ;absolute disk read
+	mov al, #1   ;read 1 sector
+	mov dl, #0   ;read from floppy disk A
+	mov bx, #0  ;read into offset 0 (in the segment)
+	int #0x13      ;call BIOS disk read function
+	
+	; Switch to program
+	jmp #0x2000:#0
+	
+;changeBackgroundColor(int color);
+_changeBackgroundColor:
+	push bp
 	mov bp,sp
-	mov bx,[bp+2]	;get the segment into bx
+	mov bh, #0x00
+	mov ah, #0x0B
+	mov bl,[bp+4]   ;color
+	int #0x10
+	pop bp
+	ret
 
-	mov ax,cs	;modify the jmp below to jump to our segment
-	mov ds,ax	;this is self-modifying code
-	mov si,#jump
-	mov [si+3],bx	;change the first 0000 to the segment
+;putPixel(int color, int page,int x, int y)
+_Clr:
+	mov ah,#6    ;THIS WILL CLEAR SCREEN
+        mov al,#0
+        mov bh,#7
+        mov cx,#0
+        mov dl,#79
+        mov dh,#24
+        int  #0x10
+     
+        mov ah,#2       ;THIS WILL CONTROL CURSOR LOCATION
+        mov bh,#0
+        mov dh,#0
+        mov dl,#0
+        int #0x10
 
-	mov ds,bx	;set up the segment registers
-	mov ss,bx
-	mov es,bx
+	ret
+	
+_ScrollDown:
+	mov ah,#6
+        mov al,#0
+        mov bh,#7
+        mov cx,#0
+	mov cl,#2
+        mov dl,#79
+        mov dh,#2
+        int  #0x10
+	ret
 
-	mov sp,#0xfff0	;set up the stack pointer
-	mov bp,#0xfff0
-
-jump:	jmp #0x0000:0x0000	;and start running (the first 0000 is changed above)
-
-;printhex is used for debugging only
-;it prints out the contents of ax in hexadecimal
-_printhex:
-        push bx
-        push ax
-        push ax
-        push ax
-        push ax
-        mov al,ah
-        mov ah,#0xe
-        mov bx,#7
-        shr al,#4
-        and al,#0xf
-        cmp al,#0xa
-        jb ph1
-        add al,#0x7
-ph1:    add al,#0x30
-        int 0x10
-
-        pop ax
-        mov al,ah
-        mov ah,#0xe
-        and al,#0xf
-        cmp al,#0xa
-        jb ph2
-        add al,#0x7
-ph2:    add al,#0x30
-        int 0x10
-
-        pop ax
-        mov ah,#0xe
-        shr al,#4
-        and al,#0xf
-        cmp al,#0xa
-        jb ph3
-        add al,#0x7
-ph3:    add al,#0x30
-        int 0x10
-
-        pop ax
-        mov ah,#0xe
-        and al,#0xf
-        cmp al,#0xa
-        jb ph4
-        add al,#0x7
-ph4:    add al,#0x30
-        int 0x10
-
-        pop ax
-        pop bx
-        ret
 

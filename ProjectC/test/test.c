@@ -1,8 +1,10 @@
 void main()
 {
-	char str[80], buffer[512];
+	char buffer [13312];
+	syscall_readFile("messag",buffer);
+	syscall_printString(buffer);	
 	
-	
+	/*char str[80], buffer[512];
 	syscall_moveCursor(27,2,0);
 	syscall_printStringColor("Welcome to Syscall-Test ",0x8);
 	syscall_moveCursor(2,8,0);
@@ -15,9 +17,6 @@ void main()
 	syscall_printStringColor("Reading sector 30 from floppy...",0x8);
 	syscall_readSector(buffer, 30);
 	syscall_moveCursor(2,15,0);
-	syscall_printStringColor(buffer,0x9);
-
-
-
+	syscall_printStringColor(buffer,0x9);*/
 }
 

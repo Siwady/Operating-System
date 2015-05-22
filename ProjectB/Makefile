@@ -20,7 +20,6 @@ bootload.bin: bootload.asm
 	nasm $< -f bin -o $@
 
 floppya.img: bootload.bin kernel.bin
-	dd if=/dev/zero of=floppya.img bs=512 count=2880
 	dd if=bootload.bin of=floppya.img bs=512 count=1 conv=notrunc
 	dd if=kernel.bin of=floppya.img bs=512 seek=3 conv=notrunc
 	dd if=message.txt of=floppya.img bs=512 count=1 seek=30 conv=notrunc
