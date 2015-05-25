@@ -343,7 +343,7 @@ _Clr:
         mov dh,#24
         int  #0x10
      
-        mov ah,#2       ;THIS WILL CONTROL CURSOR LOCATION
+        mov ah,#2       ;move cursor 
         mov bh,#0
         mov dh,#0
         mov dl,#0

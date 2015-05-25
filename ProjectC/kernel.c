@@ -14,7 +14,7 @@ void pressReturn();
 void PrintBorder();
 void printStringColor(char Word[],int color);
 void readFile(char name[], char buffer[]);
-void fillBuffer(char buf[],int begin);
+
 
 
 enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
@@ -23,15 +23,14 @@ LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
 void main()
 {
 	//char buffer[512];
-	char word[WORD_SIZE];
-	char buffer [13312];
+	//char word[WORD_SIZE];
+	//char buffer [13312];
 	//char Screen[2124];
 			
 	Clr();
 	moveCursor(2,2,0);
-	readFile("ccc.c",buffer);
-	printString(buffer);
-	ScrollDown();
+	
+	
 	/*changeBackgroundColor(15);
 	PrintBorder();
 	
@@ -60,8 +59,8 @@ void main()
 	//Interrupt 21
 	Clr();*/
 	PrintBorder();
-	//makeInterrupt21();
-	//loadProgram();
+	makeInterrupt21();
+	loadProgram();
 }
 
 
@@ -134,7 +133,7 @@ void readStringColor(char cha[],int color)
 {
 	int cont=0;
 	char character;		
-	
+		
 	while(character!=0xd)
 	{
 		character=readChar();
@@ -191,21 +190,25 @@ void PrintBorder()
 }
 
 
-void readFile(char name[], char buffer[])
+void readFile(char* name, char* buffer)
 {
 	char buff[512];
 	char temp[512];
-	int i,j,k;
+	char temp1[2];
+	int i,j,k,c;
 	int exist=0;
 	int cont=0;
 	
-	readSector(buff, 2);
-	//printString(name);
 	
-	for(i=0;i< STORAGE_CAPACITY;i++)
+	readSector(buff, 2);
+	
+	
+	for(i=0;i< 16;i++)
 	{
-		for(j=0;j<FILENAME_SIZE;j++)
+		printString(temp1);
+		for(j=0;j<6;j++)
 		{
+			
 			if(name[j]==buff[(i*32)+j])
 				exist=1;
 			else{
@@ -225,7 +228,11 @@ void readFile(char name[], char buffer[])
 			{
 				readSector(temp,buff[(i*32)+j]);
 				//printString(temp);
-				fillBuffer(&buffer,(cont*512),temp);				
+				//fillBuffer(&buffer,(cont*512),temp);
+				for(c=0;c<512;c++)
+				{
+					buffer[(cont*512)+c]=temp[c];	
+				}				
 				//buffer[cont*512]=temp;
 				cont++;
 			}
@@ -234,14 +241,7 @@ void readFile(char name[], char buffer[])
 	
 }
 
-void fillBuffer(char buf_des[],int begin,char buf_ori[])
-{
-	int i;
-	for(i=0;i<SECTOR_SIZE;i++)
-	{
-		buf_des[begin+i]=buf_ori[i];	
-	}
-}
+
 
 
 
