@@ -6,6 +6,11 @@
 .global _syscall_moveCursor
 .global _syscall_readFile
 .global _syscall_Clr
+.global _syscall_executeProgram
+.global _syscall_nextLine
+.global _syscall_terminate
+.global _syscall_putInMemory
+
 
 _syscall_printString:
 	push bp
@@ -81,6 +86,38 @@ _syscall_Clr:
 	mov ax,#7
 	int #0x21
 	ret
-
 	
+;syscall_executeProgram(char filename[], int segment)
+_syscall_executeProgram:
+	push bp
+	mov bp,sp
+	mov ax,#8
+	mov bx,[bp+4]
+	mov cx,[bp+6]
+	int #0x21
+	pop bp
+	ret
+	
+_syscall_nextLine:
+	mov ax,#9
+	int #0x21
+	ret
+	
+_syscall_terminate:
+	mov ax,#10
+	int #0x21
+	ret
+	
+_syscall_putInMemory:
+	push bp
+	mov bp,sp
+	mov ax,#11
+	mov bx,[bp+4]
+	mov cx,[bp+6]
+	mov dx,[bp+8]
+	int #0x21
+	pop bp
+	ret
+
+
 	

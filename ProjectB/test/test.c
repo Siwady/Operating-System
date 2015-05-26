@@ -17,7 +17,10 @@ void main()
 	syscall_moveCursor(2,15,0);
 	syscall_printStringColor(buffer,0x9);
 
-
+	while(1==1)
+	{
+		
+	}
 
 }
 

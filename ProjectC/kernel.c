@@ -15,7 +15,7 @@ void PrintBorder();
 void printStringColor(char Word[],int color);
 void readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
-
+void terminate();
 
 enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
 LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
@@ -28,7 +28,7 @@ void main()
 	makeInterrupt21();
 	//loadProgram();
 	
-	executeProgram("test",0x2000);
+	executeProgram("shell",0x2000);
 }
 
 
@@ -224,7 +224,19 @@ void executeProgram(char fileName[], int segment)
 	}
 }
 
-
+void terminate()
+{
+	char s[6];
+	s[0]='s';
+	s[1]='h';
+	s[2]='e';
+	s[3]='l';
+	s[4]='l';
+	s[5]='\0';
+	readChar();
+	
+	executeProgram(s,0x2000);
+}
 
 
 

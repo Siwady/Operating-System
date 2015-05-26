@@ -17,6 +17,9 @@
 	.extern _readString
 	.extern _readStringColor
 	.extern _readFile
+	.extern _executeProgram
+	.extern _pressReturn
+	.extern _terminate
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -26,6 +29,10 @@
 	.global _execute_moveCursor
 	.global _execute_readFile
 	.global _execute_Clr
+	.global _execute_executeProgram
+	.global _execute_pressReturn
+	.global _execute_terminate
+	.global _execute_putInMemory
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
@@ -37,6 +44,7 @@
 	.global _ScrollDown
 	.global _putInSegment
 	.global _launchProgram
+	
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -154,7 +162,7 @@ _moveCursorUp:
 ;---------------------------------------------------------	
 	;set cursor position
 	sub dh,#1
-	mov dl,#78
+	mov dl,#79
 	mov ah,#0x2
 	int #0x10
 	ret
@@ -168,7 +176,7 @@ _moveCursorDown:
 ;---------------------------------------------------------	
 	;set cursor position
 	add dh,#1
-	mov dl,#2
+	mov dl,#0
 	mov ah,#0x2
 	int #0x10
 	ret
@@ -278,7 +286,14 @@ _interrupt21ServiceRoutine:
 	je _execute_readFile
 	cmp ax,#7
 	je _execute_Clr
-	
+	cmp ax,#8
+	je _execute_executeProgram
+	cmp ax,#9
+	je _execute_pressReturn
+	cmp ax,#10
+	je _execute_terminate
+	cmp ax,#11
+	je _execute_putInMemory
 
 
 _execute_printString:
@@ -332,6 +347,29 @@ _execute_readFile:
 	
 _execute_Clr:
 	call _Clr
+	jmp _end
+	
+_execute_executeProgram:
+	push cx
+	push bx
+	call _executeProgram
+	add sp,#4
+	jmp _end
+	
+_execute_pressReturn:
+	call _pressReturn
+	jmp _end
+	
+_execute_terminate:
+	call _terminate
+	jmp _end
+	
+_execute_putInMemory:
+	push dx
+	push cx
+	push bx
+	call _putInMemory
+	add sp,#6
 	jmp _end
 	
 _end:

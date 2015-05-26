@@ -18,6 +18,9 @@ void main()
 
 	//print Hello World 
 	PrintMessage(Word,Size);
+
+	while(1==1)
+	{}
 	
 }
 
