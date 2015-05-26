@@ -14,7 +14,7 @@ void pressReturn();
 void PrintBorder();
 void printStringColor(char Word[],int color);
 void readFile(char name[], char buffer[]);
-
+void executeProgram(char fileName[], int segment);
 
 
 enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
@@ -22,45 +22,13 @@ LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
 
 void main()
 {
-	//char buffer[512];
-	//char word[WORD_SIZE];
-	//char buffer [13312];
-	//char Screen[2124];
-			
 	Clr();
 	moveCursor(2,2,0);
-	
-	
-	/*changeBackgroundColor(15);
-	PrintBorder();
-	
-	moveCursor(30,2,0);
-	printStringColor("Welcome to my OS",DARK_GRAY);
-	
-	moveCursor(2,8,0);
-	printStringColor("Write a message: ",DARK_GRAY);
-	readStringColor(word,BROWN);
-	pressReturn();
-
-	printStringColor("Your message was: ",DARK_GRAY);
-	printStringColor(word,BROWN);
-	pressReturn();
-	pressReturn();
-
-	printStringColor("Reading sector 30 from floppy...",DARK_GRAY);
-	pressReturn();
-	readSector(buffer, 30);
-	printStringColor(buffer,LIGHT_BLUE);
-
-	moveCursor(27,20,0);
-	printStringColor("Press any key to continue... ",0x88);
-	readChar();
-
-	//Interrupt 21
-	Clr();*/
 	PrintBorder();
 	makeInterrupt21();
-	loadProgram();
+	//loadProgram();
+	
+	executeProgram("test",0x2000);
 }
 
 
@@ -226,8 +194,9 @@ void readFile(char* name, char* buffer)
 		{
 			if(buff[(i*32)+j]!='\0')
 			{
+				
 				readSector(temp,buff[(i*32)+j]);
-				//printString(temp);
+				printString(name);
 				//fillBuffer(&buffer,(cont*512),temp);
 				for(c=0;c<512;c++)
 				{
@@ -239,6 +208,20 @@ void readFile(char* name, char* buffer)
 		}
 	}
 	
+}
+
+void executeProgram(char fileName[], int segment)
+{
+	char buffer [13312];
+
+	if(segment!=0x1000 && segment!=0x0000) //o  segment<0xA000 && 
+	{
+		readFile(fileName,buffer);
+	
+		putInSegment(buffer,segment,13312);
+	
+		launchProgram(segment);
+	}
 }
 
 

@@ -5,6 +5,7 @@
 .global _syscall_readSector
 .global _syscall_moveCursor
 .global _syscall_readFile
+.global _syscall_Clr
 
 _syscall_printString:
 	push bp
@@ -74,6 +75,11 @@ _syscall_moveCursor:
 	mov dx,[bp+8]
 	int #0x21
 	pop bp
+	ret
+	
+_syscall_Clr:
+	mov ax,#7
+	int #0x21
 	ret
 
 	

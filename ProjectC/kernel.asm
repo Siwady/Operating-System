@@ -25,6 +25,7 @@
 	.global _execute_readSector
 	.global _execute_moveCursor
 	.global _execute_readFile
+	.global _execute_Clr
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
@@ -34,6 +35,8 @@
 	.global _moveCursorUp
 	.global _moveCursorDown
 	.global _ScrollDown
+	.global _putInSegment
+	.global _launchProgram
 ;	.extern _handleInterrupt21
 
 ;void putInMemory (int segment, int address, char character)
@@ -50,6 +53,35 @@ _putInMemory:
 	pop bp
 	ret
 
+;void putInSegment(char buffer[],int segment,int size);
+_putInSegment:
+	push bp
+	mov bp,sp
+	mov si,[bp+4]
+	mov es,[bp+6]
+	mov di, #0
+	mov cx,[bp+8]
+	rep 
+	movsb
+	pop bp
+	ret
+	
+
+; void launchProgram(int segment);
+_launchProgram:
+	mov bp,sp
+	mov bx, [bp+2]
+	
+	mov ds, bx
+	mov ss, bx
+	mov es, bx
+	
+	
+	push bx
+	push #0
+	
+	; Switch to program
+	retf
 ;void printChar(char character)
 _printChar:
 	push bp
@@ -244,6 +276,8 @@ _interrupt21ServiceRoutine:
 	je _execute_moveCursor
 	cmp ax,#6
 	je _execute_readFile
+	cmp ax,#7
+	je _execute_Clr
 	
 
 
@@ -296,6 +330,9 @@ _execute_readFile:
 	add sp,#4
 	jmp _end
 	
+_execute_Clr:
+	call _Clr
+	jmp _end
 	
 _end:
 	iret
@@ -321,6 +358,8 @@ _loadProgram:
 	
 	; Switch to program
 	jmp #0x2000:#0
+	
+
 	
 ;changeBackgroundColor(int color);
 _changeBackgroundColor:

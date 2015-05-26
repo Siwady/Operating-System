@@ -1,4 +1,4 @@
-all: floppya.img test/syscall-test.bin
+all: floppya.img shell/shell.bin
 
 run: all
 	- bochs -f opsys.bxrc 
@@ -23,23 +23,22 @@ floppya.img: bootload.bin kernel.bin
 	dd if=bootload.bin of=floppya.img bs=512 count=1 conv=notrunc
 	dd if=kernel.bin of=floppya.img bs=512 seek=3 conv=notrunc
 	dd if=message.txt of=floppya.img bs=512 count=1 seek=30 conv=notrunc
-	dd if=test/syscall-test.bin of=floppya.img bs=512 count=1 seek=11 conv=notrunc
+	dd if=shell/shell.bin of=floppya.img bs=512 count=1 seek=11 conv=notrunc
 
 clean :
 	rm -f *.o
 	rm -f *.bin
-	rm -f test/*.o
-	
-	
+	rm -f shell/*.o
 
-test/test.o: test/test.c
+shell/shell.o: shell/shell.c
 	bcc -ansi -c -o $@ $<
 	
-test/os.o: test/os.asm
+shell/os.o: shell/os.asm
 	as86 $< -o $@
 	
-test/start.o: test/start.asm
+shell/start.o: shell/start.asm
 	as86 $< -o $@
 	
-test/syscall-test.bin: test/start.o  test/test.o test/os.o 
+shell/shell.bin: shell/start.o  shell/shell.o shell/os.o 
 	ld86 -o $@ -d $^
+	
