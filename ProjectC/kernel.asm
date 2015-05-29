@@ -33,6 +33,7 @@
 	.global _execute_pressReturn
 	.global _execute_terminate
 	.global _execute_putInMemory
+	.global _execute_printCharColor
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
@@ -162,7 +163,7 @@ _moveCursorUp:
 ;---------------------------------------------------------	
 	;set cursor position
 	sub dh,#1
-	mov dl,#79
+	mov dl,#80
 	mov ah,#0x2
 	int #0x10
 	ret
@@ -294,6 +295,8 @@ _interrupt21ServiceRoutine:
 	je _execute_terminate
 	cmp ax,#11
 	je _execute_putInMemory
+	cmp ax,#12
+	je _execute_printCharColor
 
 
 _execute_printString:
@@ -316,6 +319,7 @@ _execute_printStringColor:
 	call _printStringColor 
 	add sp,#4
 	jmp _end
+
 
 _execute_readString:
 	push bx
@@ -370,6 +374,13 @@ _execute_putInMemory:
 	push bx
 	call _putInMemory
 	add sp,#6
+	jmp _end
+
+_execute_printCharColor:
+	push cx
+	push bx
+	call _printCharC
+	add sp,#4
 	jmp _end
 	
 _end:

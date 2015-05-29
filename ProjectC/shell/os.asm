@@ -10,6 +10,7 @@
 .global _syscall_nextLine
 .global _syscall_terminate
 .global _syscall_putInMemory
+.global _syscall_printCharColor
 
 
 _syscall_printString:
@@ -115,6 +116,16 @@ _syscall_putInMemory:
 	mov bx,[bp+4]
 	mov cx,[bp+6]
 	mov dx,[bp+8]
+	int #0x21
+	pop bp
+	ret
+	
+_syscall_printCharColor:
+	push bp
+	mov bp,sp
+	mov ax,#12
+	mov bx,[bp+4]
+	mov cx,[bp+6]
 	int #0x21
 	pop bp
 	ret

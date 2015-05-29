@@ -4,7 +4,7 @@
 #define WORD_SIZE 80
 #define STORAGE_CAPACITY 16
 #define FILENAME_SIZE 6
-#define COLUMN_END 78
+#define COLUMN_END 80
 
 
 void printString(char Word[]);
@@ -194,7 +194,6 @@ void readFile(char* name, char* buffer)
 		{
 			if(buff[(i*32)+j]!='\0')
 			{
-				
 				readSector(temp,buff[(i*32)+j]);
 				printString(name);
 				//fillBuffer(&buffer,(cont*512),temp);
