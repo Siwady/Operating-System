@@ -13,7 +13,7 @@ void readStringColor(char cha[],int color);
 void pressReturn();
 void PrintBorder();
 void printStringColor(char Word[],int color);
-void readFile(char name[], char buffer[]);
+int readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
 void terminate();
 
@@ -158,22 +158,34 @@ void PrintBorder()
 }
 
 
-void readFile(char* name, char* buffer)
+int readFile(char* name, char* buffer)
 {
 	char buff[512];
 	char temp[512];
-	char temp1[2];
+	char error[14];
 	int i,j,k,c;
 	int exist=0;
 	int cont=0;
-	
-	
+	error[0]='F';
+	error[1]='i';
+	error[2]='l';
+	error[3]='e';
+	error[4]=' ';
+	error[5]='N';
+	error[6]='o';
+	error[7]='t';
+	error[8]=' ';
+	error[9]='F';
+	error[10]='o';
+	error[11]='u';
+	error[12]='n';
+	error[13]='d';
+
 	readSector(buff, 2);
 	
 	
 	for(i=0;i< 16;i++)
 	{
-		printString(temp1);
 		for(j=0;j<6;j++)
 		{
 			
@@ -205,7 +217,14 @@ void readFile(char* name, char* buffer)
 				cont++;
 			}
 		}
+		return 1;
+	}else
+	{
+		printStringColor(error,14);
+		pressReturn();
+		return 0;
 	}
+	
 	
 }
 
@@ -215,11 +234,12 @@ void executeProgram(char fileName[], int segment)
 
 	if(segment!=0x1000 && segment!=0x0000) //o  segment<0xA000 && 
 	{
-		readFile(fileName,buffer);
+		if(readFile(fileName,buffer)==1)
+		{
+			putInSegment(buffer,segment,13312);
 	
-		putInSegment(buffer,segment,13312);
-	
-		launchProgram(segment);
+			launchProgram(segment);
+		}
 	}
 }
 
