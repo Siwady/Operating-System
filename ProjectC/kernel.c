@@ -5,7 +5,7 @@
 #define STORAGE_CAPACITY 16
 #define FILENAME_SIZE 6
 #define COLUMN_END 80
-
+#define ROW_END 24
 
 void printString(char Word[]);
 void readString(char cha[]);
@@ -37,6 +37,10 @@ void printString(char Word[])
 	int i=0;
 	while(Word[i]!='\0')
 	{	
+		if(getCursorColumn()>79 && getCursorRow()>23)
+		{
+			printString("\n\r");
+		}
 		if(Word[i]=='\n')
 			pressReturn();
 		else
@@ -51,15 +55,33 @@ void printString(char Word[])
 void printStringColor(char Word[],int color)
 {
 	int i=0;
-	for(i=0;i<WORD_SIZE;i++)
+	while(Word[i]!='\0')
 	{	
-		if(getCursorColumn()==COLUMN_END)
-			moveCursorDown();
-		if(Word[i]!='\0')
-			printCharC(Word[i],color);
+		if(getCursorColumn()>79 && getCursorRow()>23)
+		{
+			nextLine(0);
+		}
+		if(Word[i]=='\n')
+			nextLine(0);
 		else
-			i=WORD_SIZE;
+			printCharC(Word[i],color);
+
+		i++;
+		
 	}
+	/*int i=0;
+	while(Word[i]!='\0')
+	{	
+		if(getCursorColumn()>79 && getCursorRow()>23)
+		{
+			nextLine(0);
+		}
+		
+		if(Word[i]=='\n'){
+			nextLine(0);		
+		}else
+			printCharC(Word[i],color);
+	}*/
 }
 
 
@@ -71,7 +93,10 @@ void readString(char cha[])
 	while(character!=0xd)
 	{
 		character=readChar();
-		
+		if(getCursorColumn()>79 && getCursorRow()>23)
+		{
+			printString("\n\r");
+		}
 		if(character==0x8 && cont>0)
 		{
 			if(getCursorColumn()==2)
@@ -84,7 +109,7 @@ void readString(char cha[])
 		}else if(cont<=WORD_SIZE && character!=0x8 && character!=0xd)
 		{
 			if(getCursorColumn()==COLUMN_END)
-				moveCursorDown();
+				printString("\n\r");
 			cha[cont]=character;
 			printChar(cha[cont]);
 			cont++;
@@ -101,11 +126,19 @@ void readStringColor(char cha[],int color)
 {
 	int cont=0;
 	char character;		
-		
+	char re[2];
+	re[0]='\n';
+	re[1]='\r';
 	while(character!=0xd)
 	{
 		character=readChar();
-		
+
+		/*if((getCursorColumn()>79 && getCursorRow()>23) || (getCursorRow()>23 && character==0xd) )
+		{
+			printString(re);
+			
+		}*/
+
 		if(character==0x8 && cont>0)
 		{
 			if(getCursorColumn()==2)
@@ -121,14 +154,15 @@ void readStringColor(char cha[],int color)
 		}else if(cont<=WORD_SIZE && character!=0x8 && character!=0xd)
 		{
 			if(getCursorColumn()==COLUMN_END)
-				moveCursorDown();
+				printString("\n\r");
 			cha[cont]=character;
 			printCharC(cha[cont],color);
 			cont++;
 		}
 	}
-	pressReturn();
-	
+	//printString(re);
+	nextLine();
+	moveCursor(0,getCursorRow(),0);
 	for(cont=cont+1;cont<WORD_SIZE;cont++)
 		cha[cont]=0x0;
 				
@@ -137,7 +171,7 @@ void readStringColor(char cha[],int color)
 
 void pressReturn()
 {
-	moveCursorDown();	
+	moveCursorDown();
 }
 
 void PrintBorder()
@@ -162,24 +196,9 @@ int readFile(char* name, char* buffer)
 {
 	char buff[512];
 	char temp[512];
-	char error[14];
-	int i,j,k,c;
+	int i,j,k,c,l,x;
 	int exist=0;
 	int cont=0;
-	error[0]='F';
-	error[1]='i';
-	error[2]='l';
-	error[3]='e';
-	error[4]=' ';
-	error[5]='N';
-	error[6]='o';
-	error[7]='t';
-	error[8]=' ';
-	error[9]='F';
-	error[10]='o';
-	error[11]='u';
-	error[12]='n';
-	error[13]='d';
 
 	readSector(buff, 2);
 	
@@ -207,21 +226,19 @@ int readFile(char* name, char* buffer)
 			if(buff[(i*32)+j]!='\0')
 			{
 				readSector(temp,buff[(i*32)+j]);
-				printString(name);
-				//fillBuffer(&buffer,(cont*512),temp);
+				
 				for(c=0;c<512;c++)
 				{
 					buffer[(cont*512)+c]=temp[c];	
 				}				
-				//buffer[cont*512]=temp;
 				cont++;
 			}
 		}
 		return 1;
 	}else
 	{
-		printStringColor(error,14);
-		pressReturn();
+		for(l=0;l<13312;l++)
+			buffer[l]=0x0;
 		return 0;
 	}
 	
@@ -232,7 +249,7 @@ void executeProgram(char fileName[], int segment)
 {
 	char buffer [13312];
 
-	if(segment!=0x1000 && segment!=0x0000) //o  segment<0xA000 && 
+	if(segment!=0x1000 && segment!=0x0000 && segment<0xA000) //o  segment<0xA000 && 
 	{
 		if(readFile(fileName,buffer)==1)
 		{

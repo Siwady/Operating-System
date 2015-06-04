@@ -45,8 +45,32 @@
 	.global _ScrollDown
 	.global _putInSegment
 	.global _launchProgram
+	.global _nextLine
 	
 ;	.extern _handleInterrupt21
+
+
+;void nextLine(int page)
+_nextLine:
+	push bp
+	mov bp,sp
+	mov al, #10
+	mov ah, #0x0e
+	mov bl,#0xA
+	int #0x10
+	
+	mov ah,#0x3
+	mov bh,[bp+4] ;  page
+	int #0x10
+;---------------------------------------------------------	
+	;set cursor position
+	mov dl,#0
+	mov ah,#0x2
+	int #0x10
+	
+	pop bp
+	ret
+
 
 ;void putInMemory (int segment, int address, char character)
 _putInMemory:
@@ -84,7 +108,9 @@ _launchProgram:
 	mov ds, bx
 	mov ss, bx
 	mov es, bx
-	
+	mov ax,#0xfff0
+	mov bp,ax
+	mov sp,ax
 	
 	push bx
 	push #0
@@ -361,7 +387,7 @@ _execute_executeProgram:
 	jmp _end
 	
 _execute_pressReturn:
-	call _pressReturn
+	call _nextLine
 	jmp _end
 	
 _execute_terminate:
