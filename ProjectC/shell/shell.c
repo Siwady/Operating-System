@@ -176,8 +176,8 @@ void PrintCommands()
 	syscall_printStringColor("List of Commands...\0",0xE);
 	syscall_printString("\n\r");
 	
-     	syscall_printStringColor("Command          Description                                                     ",0x70);
-	syscall_printString("\n\r");
+     	syscall_printStringColor("Command          Description                                                  \n",0x70);
+	//syscall_printString("\n\r");
 	syscall_printStringColor("clear        ",0x3); 
 	syscall_printStringColor("|\0",0x1);
 	syscall_printStringColor("clear the shell.",0x7);	
