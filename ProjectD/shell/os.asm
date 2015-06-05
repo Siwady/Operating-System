@@ -11,6 +11,7 @@
 .global _syscall_terminate
 .global _syscall_putInMemory
 .global _syscall_printCharColor
+.global _syscall_writeSector
 
 
 _syscall_printString:
@@ -129,6 +130,17 @@ _syscall_printCharColor:
 	int #0x21
 	pop bp
 	ret
+
+_syscall_writeSector:
+	push bp
+	mov bp,sp
+	mov ax,#13
+	mov bx,[bp+4]
+	mov cx,[bp+6]
+	int #0x21
+	pop bp
+	ret
+
 
 
 	

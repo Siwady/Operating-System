@@ -34,6 +34,7 @@
 	.global _execute_terminate
 	.global _execute_putInMemory
 	.global _execute_printCharColor
+	.global _execute_writeSector
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
@@ -46,6 +47,7 @@
 	.global _putInSegment
 	.global _launchProgram
 	.global _nextLine
+	.global _writeSector
 	
 ;	.extern _handleInterrupt21
 
@@ -272,7 +274,46 @@ _readSector:
 	pop bp
 	ret
 	
+
+;void readSector(char* buffer,int sector)
+_writeSector:
+	push bp
+	mov bp,sp
 	
+	sub sp,#6
+	mov bx,[bp+4]   ;buffer
+	mov ax,[bp+6]
+;--------------------------------------------	
+	mov cl,#36
+	div cl
+	xor ah,ah
+	mov [bp-2],ax  ;Track
+	
+;--------------------------------------------	
+	mov ax,[bp+6]
+	mov cl,#18
+	div cl
+	and al,#0x1
+	xor dx,dx
+	mov dl,al
+	mov [bp-4],dx   ;head
+;---------------------------------------------
+	add ah,#1
+	xor dx,dx
+	mov dl,ah
+	mov [bp-6], dx  ;relative sector 
+	
+	mov ah, #0x3 
+	mov al,#0x1      ;number of sectors to read
+
+	mov ch,[bp-2]  ;set Track
+	mov cl, [bp-6]  ;set Relative sector
+	mov dh,[bp-4]  ; set Head
+	mov dl, #0x0    ;device number
+	int #0x13
+	add sp,#6
+	pop bp
+	ret
 	
 	
 ;void makeInterrupt21()
@@ -323,6 +364,8 @@ _interrupt21ServiceRoutine:
 	je _execute_putInMemory
 	cmp ax,#12
 	je _execute_printCharColor
+	cmp ax,#13
+	je _execute_writeSector
 
 
 _execute_printString:
@@ -406,6 +449,13 @@ _execute_printCharColor:
 	push cx
 	push bx
 	call _printCharC
+	add sp,#4
+	jmp _end
+	
+_execute_writeSector:
+	push cx
+	push bx
+	call _writeSector
 	add sp,#4
 	jmp _end
 	

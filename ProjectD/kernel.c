@@ -16,6 +16,8 @@ void printStringColor(char Word[],int color);
 int readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
 void terminate();
+void deleteFile(char filename[]);
+
 
 enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
 LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
@@ -258,6 +260,11 @@ void executeProgram(char fileName[], int segment)
 			launchProgram(segment);
 		}
 	}
+}
+
+void deleteFile(char filename[])
+{
+	
 }
 
 void terminate()
