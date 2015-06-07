@@ -20,6 +20,7 @@
 	.extern _executeProgram
 	.extern _pressReturn
 	.extern _terminate
+	.extern _deleteFile
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -35,6 +36,7 @@
 	.global _execute_putInMemory
 	.global _execute_printCharColor
 	.global _execute_writeSector
+	.global _execute_deleteFile
 	.global _end
 	.global _loadProgram
 	.global _changeBackgroundColor
@@ -366,6 +368,8 @@ _interrupt21ServiceRoutine:
 	je _execute_printCharColor
 	cmp ax,#13
 	je _execute_writeSector
+	cmp ax,#14
+	je _execute_deleteFile
 
 
 _execute_printString:
@@ -457,6 +461,12 @@ _execute_writeSector:
 	push bx
 	call _writeSector
 	add sp,#4
+	jmp _end
+
+_execute_deleteFile:
+	push bx
+	call _deleteFile 
+	add sp,#2
 	jmp _end
 	
 _end:

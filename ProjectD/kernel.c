@@ -16,8 +16,8 @@ void printStringColor(char Word[],int color);
 int readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
 void terminate();
-void deleteFile(char filename[]);
-
+int deleteFile(char name[]);
+void writeFile(char* name, char* buffer, int size);
 
 enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
 LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
@@ -262,9 +262,51 @@ void executeProgram(char fileName[], int segment)
 	}
 }
 
-void deleteFile(char filename[])
+int deleteFile(char name[])
 {
+	char buff[512];
+	int i,j;
+	int exist=0;
+	for(i=0;i<512;i++)
+		buff[i]=0x0;
+
+	readSector(buff, 2);
+	for(i=0;i< 16;i++)
+	{
+		for(j=0;j<6;j++)
+		{
+			if(name[j]==buff[(i*32)+j]){		
+				exist=1;
+			}
+			else{
+				exist=0;
+				break;
+			}			
+		}
+		if(exist==1){
+			
+			break;
+		}
+	}
 	
+	if(exist==1)
+	{	
+		if(buff[(i*32)]!='\0')
+		{
+			buff[(i*32)]='\0';
+			
+			for(j=6;j<32;j++)
+			{
+				if(buff[(i*32)+j]!='\0')
+				{
+					buff[(i*32)+j]='\0';
+				}
+			}	
+		}
+		writeSector(buff,2);
+		return 1;
+	}
+	return 0;
 }
 
 void terminate()

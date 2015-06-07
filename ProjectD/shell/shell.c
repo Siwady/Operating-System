@@ -21,7 +21,7 @@ void main()
 		syscall_printStringColor("shell ->$ ",0xA);
 		syscall_readStringColor(str,15);
 		if(str[0]!=0xd){
-			token=getToken(str,&file);
+			token=getToken(str,file);
 			executeToken(token,file);
 		}
 	}
@@ -51,6 +51,10 @@ int getToken(char string[], char file[])
 	}else if(string[i]=='l' && string[i+1]=='s' && (string[i+2]==' ' ||string[i+2]=='\0')){
 		i+=2;
 		token=4;
+	}else if(string[i]=='d' && string[i+1]=='e' && string[i+2]=='l' && string[i+3]=='e' && string[i+4]=='t' 
+		&& string[i+5]=='e' && string[i+6]==' '){
+		i+=6;
+		token=5;
 	}else if(string[i]!=0x0)
 		token=-1;
 	
@@ -99,6 +103,15 @@ void executeToken(int token,char file[])
 			break;
 		
 		case 4:	ls(file[0]);
+			syscall_printString("\n\r");
+			break;
+		
+		case 5:	
+			if(syscall_deleteFile(file)==1)
+				syscall_printStringColor("File deleted.",14);
+			else
+				syscall_printStringColor("File not found.",14);
+				
 			syscall_printString("\n\r");
 			break;
 				

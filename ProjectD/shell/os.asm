@@ -12,6 +12,7 @@
 .global _syscall_putInMemory
 .global _syscall_printCharColor
 .global _syscall_writeSector
+.global _syscall_deleteFile
 
 
 _syscall_printString:
@@ -137,6 +138,15 @@ _syscall_writeSector:
 	mov ax,#13
 	mov bx,[bp+4]
 	mov cx,[bp+6]
+	int #0x21
+	pop bp
+	ret
+
+_syscall_deleteFile:
+	push bp
+	mov bp,sp
+	mov ax,#14
+	mov bx,[bp+4]
 	int #0x21
 	pop bp
 	ret
