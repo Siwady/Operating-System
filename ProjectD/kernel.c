@@ -17,16 +17,18 @@ int readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
 void terminate();
 int deleteFile(char name[]);
-void writeFile(char* name, char* buffer, int size);
+int writeFile(char name[], char buffer[], int size);
+int getSectorsCount(int size);
+int getBufferSize(char buffer[]);
 
-enum Color {BLACK,BLUE,GREEN,CYAN,RED,MAGENTA,BROWN,LIGHT_GRAY,DARK_GRAY,LIGHT_BLUE,
-LIGHT_GREEN,LIGHT_CYAN,LIGHT_RED,LIGHT_MAGENTA,YELLOW,WHITE};
 
 void main()
 {
+	
 	Clr();
 	moveCursor(2,2,0);
 	PrintBorder();
+	
 	makeInterrupt21();
 	//loadProgram();
 	
@@ -267,10 +269,16 @@ int deleteFile(char name[])
 	char buff[512];
 	int i,j;
 	int exist=0;
-	for(i=0;i<512;i++)
+	char map[512];
+	int sector;
+	for(i=0;i<512;i++){
 		buff[i]=0x0;
+		map[i]=0x0;	
+	}
 
 	readSector(buff, 2);
+	readSector(map,1);
+	
 	for(i=0;i< 16;i++)
 	{
 		for(j=0;j<6;j++)
@@ -284,7 +292,6 @@ int deleteFile(char name[])
 			}			
 		}
 		if(exist==1){
-			
 			break;
 		}
 	}
@@ -299,14 +306,99 @@ int deleteFile(char name[])
 			{
 				if(buff[(i*32)+j]!='\0')
 				{
+					sector=buff[(i*32)+j];
+					map[sector]=0x0;
 					buff[(i*32)+j]='\0';
 				}
 			}	
 		}
+		writeSector(map,1);
 		writeSector(buff,2);
 		return 1;
 	}
 	return 0;
+}
+int writeFile(char name[], char buffer[], int size)
+{
+	char map[512];
+	char dir[512];
+	char temp[512];
+	int dirIndex,j,sector,k;
+	int mapfree=0;
+	int dirfree=0;
+	
+	readSector(map,1);
+	readSector(dir,2);
+
+	for(dirIndex=0;dirIndex<16;dirIndex++)
+	{
+		if(dir[(dirIndex*32)]=='\0')
+		{
+			dirfree=1;
+			break;
+		}	
+	}
+	if(dirfree==1)
+	{
+		for(j=0;j<6;j++)
+		{
+			dir[(dirIndex*32)+j]=name[j];
+		}
+		
+		for(j=0;j<getSectorsCount(size);j++)
+		{
+			for(sector=0;sector<26;sector++)
+			{
+				if(map[sector]=='\0')
+				{
+					mapfree=1;
+					break;
+				}		
+			}
+			if(mapfree==1 && sector<26)
+			{
+				map[sector]=0xFF;
+				dir[(dirIndex*32)+6+j]=sector;
+				for(k=0;k<512;k++)
+				{
+					temp[k]=buffer[(j*512)+k];          
+				}
+				writeSector(temp,sector);
+			}
+			else 
+				return -1; //not enough space.
+		}
+		writeSector(map,1);
+		writeSector(dir,2);	
+		return 1; //WriteFile Successful
+	
+	}else
+		return 0;  //Dir is full.
+}
+
+int getSectorsCount(int size)
+{
+	int cont=0;
+	int Size=size;
+	while(Size>0)
+	{
+		Size=Size-512;
+		cont++;
+	}
+	return cont;
+}
+
+int getBufferSize(char buffer[])
+{
+	int size=0;
+	int i=0;
+	while(buffer[i]!=0x0)
+	{
+		i++;
+		size++;
+	}
+	
+	return size;
 }
 
 void terminate()

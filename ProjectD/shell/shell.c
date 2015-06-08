@@ -1,14 +1,16 @@
 
-int getToken(char string[], char file[]);
-void executeToken(int token,char file[]);
+int getToken(char string[], char file[],char file2[]);
+void executeToken(int token,char file[],char file2[]);
 void PrintCommands();
 void ls(char character);
+int copyFile(char filename1[],char filename2[]);
 
 void main()
 {
 	int token;
 	char str[80];
 	char file[6];
+	char file2[6];
 	int i;
 	syscall_Clr();
 	PrintCommands();
@@ -21,14 +23,14 @@ void main()
 		syscall_printStringColor("shell ->$ ",0xA);
 		syscall_readStringColor(str,15);
 		if(str[0]!=0xd){
-			token=getToken(str,file);
-			executeToken(token,file);
+			token=getToken(str,file,file2);
+			executeToken(token,file,file2);
 		}
 	}
 }
 
 
-int getToken(char string[], char file[])
+int getToken(char string[], char file[], char file2[])
 {
 	int i=0;
 	int j=0;
@@ -55,6 +57,9 @@ int getToken(char string[], char file[])
 		&& string[i+5]=='e' && string[i+6]==' '){
 		i+=6;
 		token=5;
+	}else if(string[i]=='c' && string[i+1]=='o' && string[i+2]=='p' && string[i+3]=='y' && string[i+4]==' '){
+		i+=4;
+		token=6;
 	}else if(string[i]!=0x0)
 		token=-1;
 	
@@ -65,14 +70,25 @@ int getToken(char string[], char file[])
 	{
 		file[j]=string[i];
 		i++;
-	}		
-		
+	}	
+	
+	while(string[i]==' ')
+		i++;	
+	
+	if(string[i]!=0x0 || string[i]!='\0')
+	{
+		for(j=0;j<6;j++)
+		{
+			file2[j]=string[i];
+			i++;
+		}	
+	}
 	
 	return token;	
 }
 
 
-void executeToken(int token,char file[])
+void executeToken(int token,char file[],char file2[])
 {	
 	char buffer[13312];
 	int i;	
@@ -112,6 +128,12 @@ void executeToken(int token,char file[])
 			else
 				syscall_printStringColor("File not found.",14);
 				
+			syscall_printString("\n\r");
+			break;
+			
+		case 6:	
+			if(copyFile(file,file2)==1)
+				syscall_printStringColor("File copied.",14);
 			syscall_printString("\n\r");
 			break;
 				
@@ -221,5 +243,22 @@ void PrintCommands()
 	syscall_printString("\n\r");
 	syscall_printStringColor("------------------------------------------------------------------------------\n",0x1);
 
+}
+
+int copyFile(char filename1[],char filename2[])
+{
+	char buffer[13312];
+	
+	if(syscall_readFile(filename1,buffer)==1)
+	{
+		if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==1)
+			return 1;
+		else if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==-1)
+			syscall_printStringColor("Not enough space.",14);
+		else if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==0)
+			syscall_printStringColor("Directory is full.",14);
+			
+	}
+	return 0;
 }
 

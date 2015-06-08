@@ -13,6 +13,8 @@
 .global _syscall_printCharColor
 .global _syscall_writeSector
 .global _syscall_deleteFile
+.global _syscall_writeFile
+.global _syscall_getBufferSize
 
 
 _syscall_printString:
@@ -150,7 +152,25 @@ _syscall_deleteFile:
 	int #0x21
 	pop bp
 	ret
-
-
-
 	
+_syscall_writeFile:
+	push bp
+	mov bp,sp
+	mov ax,#15
+	mov bx,[bp+4]
+	mov cx,[bp+6]
+	mov dx,[bp+8]
+	int #0x21
+	pop bp
+	ret
+
+_syscall_getBufferSize:
+	push bp
+	mov bp,sp
+	mov ax,#16
+	mov bx,[bp+4]
+	int #0x21
+	pop bp
+	ret
+
+

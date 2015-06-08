@@ -21,6 +21,8 @@
 	.extern _pressReturn
 	.extern _terminate
 	.extern _deleteFile
+	.extern _writeFile
+	.extern _getBufferSize
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -37,7 +39,8 @@
 	.global _execute_printCharColor
 	.global _execute_writeSector
 	.global _execute_deleteFile
-	.global _end
+	.global _execute_writeFile
+	.global _execute_getBufferSize
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
@@ -340,43 +343,97 @@ _makeInterrupt21:
 ;it will call your function:
 ;void handleInterrupt21 (int AX, int BX, int CX, int DX)
 _interrupt21ServiceRoutine:
-	cmp ax,#0
-	je _execute_printString
-	cmp ax,#1
-	je _execute_readString
-	cmp ax,#2
-	je _execute_readSector
-	cmp ax,#3
-	je _execute_readStringColor
-	cmp ax,#4
-	je _execute_printStringColor
-	cmp ax,#5
-	je _execute_moveCursor
-	cmp ax,#6
-	je _execute_readFile
-	cmp ax,#7
-	je _execute_Clr
-	cmp ax,#8
-	je _execute_executeProgram
-	cmp ax,#9
-	je _execute_pressReturn
-	cmp ax,#10
-	je _execute_terminate
-	cmp ax,#11
-	je _execute_putInMemory
-	cmp ax,#12
-	je _execute_printCharColor
-	cmp ax,#13
-	je _execute_writeSector
-	cmp ax,#14
-	je _execute_deleteFile
 
+	cmp ax,#0
+	jne try_readString
+	mov ax, #_execute_printString
+	jmp ax
+try_readString:
+	cmp ax,#1
+	jne try_readSector
+	mov ax,#_execute_readString
+	jmp ax
+try_readSector:
+	cmp ax,#2
+	jne try_readStringColor
+	mov ax,#_execute_readSector
+	jmp ax
+try_readStringColor:
+	cmp ax,#3
+	jne try_printStringColor
+	mov ax, #_execute_readStringColor
+	jmp ax
+try_printStringColor:
+	cmp ax,#4
+	jne try_moveCursor
+	mov ax,#_execute_printStringColor
+	jmp ax
+try_moveCursor:
+	cmp ax,#5
+	jne try_readFile
+	mov ax,#_execute_moveCursor
+	jmp ax
+try_readFile:	
+	cmp ax,#6
+	jne try_Clr
+	mov ax,#_execute_readFile
+	jmp ax
+try_Clr:
+	cmp ax,#7
+	jne try_executeProgram
+	mov ax,#_execute_Clr
+	jmp ax
+try_executeProgram:
+	cmp ax,#8
+	jne try_pressReturn
+	mov ax,#_execute_executeProgram
+	jmp ax
+try_pressReturn:
+	cmp ax,#9
+	jne try_terminate
+	mov ax,#_execute_pressReturn
+	jmp ax
+try_terminate:
+	cmp ax,#10
+	jne try_putInMemory
+	mov ax,#_execute_terminate
+	jmp ax
+try_putInMemory:
+	cmp ax,#11
+	jne try_printCharColor
+	mov ax,#_execute_putInMemory
+	jmp ax
+try_printCharColor:
+	cmp ax,#12
+	jne try_writeSector
+	mov ax,#_execute_printCharColor
+	jmp ax
+try_writeSector:
+	cmp ax,#13
+	jne try_deleteFile
+	mov ax,#_execute_writeSector
+	jmp ax
+try_deleteFile:
+	cmp ax,#14
+	jne try_writeFile
+	mov ax,#_execute_deleteFile
+	jmp ax
+try_writeFile:
+	cmp ax,#15
+	jne try_getBufferSize
+	mov ax,#_execute_writeFile
+	jmp ax
+try_getBufferSize:
+	cmp ax,#16
+	mov ax, #_execute_getBufferSize
+	jmp ax
+	
 
 _execute_printString:
 	push bx
 	call _printString 
 	add sp,#2
-	jmp _end
+	iret
 	
 _execute_moveCursor:
 	push dx
@@ -384,28 +441,28 @@ _execute_moveCursor:
 	push bx
 	call _moveCursor 
 	add sp,#6
-	jmp _end
+	iret
 
 _execute_printStringColor:
 	push cx
 	push bx
 	call _printStringColor 
 	add sp,#4
-	jmp _end
+	iret
 
 
 _execute_readString:
 	push bx
 	call _readString 
 	add sp,#2
-	jmp _end
+	iret
 	
 _execute_readStringColor:
 	push cx
 	push bx
 	call _readStringColor 
 	add sp,#4
-	jmp _end
+	iret
 	
 
 _execute_readSector:
@@ -413,33 +470,33 @@ _execute_readSector:
 	push bx
 	call _readSector
 	add sp,#4
-	jmp _end
+	iret
 	
 _execute_readFile:
 	push cx
 	push bx
 	call _readFile
 	add sp,#4
-	jmp _end
+	iret
 	
 _execute_Clr:
 	call _Clr
-	jmp _end
+	iret
 	
 _execute_executeProgram:
 	push cx
 	push bx
 	call _executeProgram
 	add sp,#4
-	jmp _end
+	iret
 	
 _execute_pressReturn:
 	call _nextLine
-	jmp _end
+	iret
 	
 _execute_terminate:
 	call _terminate
-	jmp _end
+	iret
 	
 _execute_putInMemory:
 	push dx
@@ -447,32 +504,42 @@ _execute_putInMemory:
 	push bx
 	call _putInMemory
 	add sp,#6
-	jmp _end
+	iret
 
 _execute_printCharColor:
 	push cx
 	push bx
 	call _printCharC
 	add sp,#4
-	jmp _end
+	iret
 	
 _execute_writeSector:
 	push cx
 	push bx
 	call _writeSector
 	add sp,#4
-	jmp _end
+	iret
 
 _execute_deleteFile:
 	push bx
 	call _deleteFile 
 	add sp,#2
-	jmp _end
-	
-_end:
 	iret
 	
-
+_execute_writeFile:
+	push dx
+	push cx
+	push bx
+	call _writeFile
+	add sp,#6
+	iret
+	
+_execute_getBufferSize:
+	push bx
+	call _getBufferSize 
+	add sp,#2
+	iret
+	
 _loadProgram:
 	mov ax, #0x2000
 	mov ds, ax
