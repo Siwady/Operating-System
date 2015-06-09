@@ -23,6 +23,7 @@
 	.extern _deleteFile
 	.extern _writeFile
 	.extern _getBufferSize
+	.extern _printInt
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -41,6 +42,7 @@
 	.global _execute_deleteFile
 	.global _execute_writeFile
 	.global _execute_getBufferSize
+	.global _execute_printInt
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
@@ -425,7 +427,12 @@ try_writeFile:
 	jmp ax
 try_getBufferSize:
 	cmp ax,#16
+	jne try_printInt
 	mov ax, #_execute_getBufferSize
+	jmp ax
+try_printInt:
+	cmp ax,#17
+	mov ax, #_execute_printInt
 	jmp ax
 	
 
@@ -537,6 +544,12 @@ _execute_writeFile:
 _execute_getBufferSize:
 	push bx
 	call _getBufferSize 
+	add sp,#2
+	iret
+	
+_execute_printInt:
+	push bx
+	call _printInt
 	add sp,#2
 	iret
 	

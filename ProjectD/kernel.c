@@ -20,7 +20,7 @@ int deleteFile(char name[]);
 int writeFile(char name[], char buffer[], int size);
 int getSectorsCount(int size);
 int getBufferSize(char buffer[]);
-
+void printInt(int integer);
 
 void main()
 {
@@ -29,6 +29,7 @@ void main()
 	moveCursor(2,2,0);
 	PrintBorder();
 	
+	printInt(450);
 	makeInterrupt21();
 	//loadProgram();
 	
@@ -399,6 +400,22 @@ int getBufferSize(char buffer[])
 	}
 	
 	return size;
+}
+
+void printInt(int integer)
+{
+	int digits=1;
+	while(integer>digits)
+		digits=digits*10;
+		
+	digits=digits/10;
+	while(digits!=1)
+	{
+		printChar((integer/digits)+48);
+		integer=integer-(integer/digits)*digits;
+		digits=digits/10;
+	}
+	printChar((integer/digits)+48);
 }
 
 void terminate()

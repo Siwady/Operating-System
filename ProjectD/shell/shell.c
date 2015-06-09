@@ -143,62 +143,60 @@ void executeToken(int token,char file[],char file2[])
 void ls(char character)
 {
 	char buff[512];
+	char temp[13312];
+	char name[6];
 	char fil[96];
 	int i,j,k,x;
 	int cont=0;
 	int column=0;
-	
+	for(x=0;x<13312;x++)
+		temp[x]=0x0;
 	for(x=0;x<512;x++)
 		buff[x]=0x0;
 	for(x=0;x<96;x++)
 		fil[x]=0x0;
 	syscall_readSector(buff, 2);
-	
+	syscall_printStringColor("  File  ",0x70);
+	syscall_printStringColor("  Size  ",0x40);
 	for(i=0;i< 16;i++)
 	{
 		if(character!=0)
 		{
 			if(buff[(i*32)]==character)
 			{
-				if(column>5)
-				{
-					syscall_printString("\n\r");
-					cont++;
-					column=0;
-				}else{
-					syscall_printString("       ");
-					column++;
-				}
+				
+				syscall_printString("\n\r");
+				cont++;
+				column=0;
 
 				for(j=0;j<6;j++)
 				{
 					if(buff[(i*32)+j]!='\0'){
 						syscall_printCharColor(buff[(i*32)+j],0x3);
-							
+						
 					}	
-					
+					name[j]=buff[(i*32)+j];	
 				}
-				
+				syscall_printStringColor("    ",0x3);
+				syscall_readFile(name,temp);
+				syscall_printInt(syscall_getBufferSize(temp),0x3);
 			}	
 		}else
 		{
 			if(buff[(i*32)]!=0)
 			{
-				if(column>5)
-				{
-					syscall_printString("\n\r");
-					cont++;
-					column=0;
-				}else{
-					syscall_printString("       ");
-					column++;
-				}
+				syscall_printString("\n\r");
+				cont++;
+				column=0;
+				
 				for(j=0;j<6;j++)
 				{	
 					syscall_printCharColor(buff[(i*32)+j],0x3);
+					name[j]=buff[(i*32)+j];	
 				}	
-				
-				
+				syscall_printStringColor("    ",0x3);
+				syscall_readFile(name,temp);
+				syscall_printInt(syscall_getBufferSize(temp),0x3);
 			}
 		}
 	}

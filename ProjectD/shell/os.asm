@@ -15,6 +15,7 @@
 .global _syscall_deleteFile
 .global _syscall_writeFile
 .global _syscall_getBufferSize
+.global _syscall_printInt
 
 
 _syscall_printString:
@@ -168,6 +169,15 @@ _syscall_getBufferSize:
 	push bp
 	mov bp,sp
 	mov ax,#16
+	mov bx,[bp+4]
+	int #0x21
+	pop bp
+	ret
+
+_syscall_printInt:
+	push bp
+	mov bp,sp
+	mov ax,#17
 	mov bx,[bp+4]
 	int #0x21
 	pop bp
