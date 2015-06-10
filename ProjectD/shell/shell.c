@@ -4,6 +4,8 @@ void executeToken(int token,char file[],char file2[]);
 void PrintCommands();
 void ls(char character);
 int copyFile(char filename1[],char filename2[]);
+int createFile(char filename[]);
+int getSectorsNumber(char name[]);
 
 void main()
 {
@@ -60,6 +62,10 @@ int getToken(char string[], char file[], char file2[])
 	}else if(string[i]=='c' && string[i+1]=='o' && string[i+2]=='p' && string[i+3]=='y' && string[i+4]==' '){
 		i+=4;
 		token=6;
+	}else if(string[i]=='c' && string[i+1]=='r' && string[i+2]=='e' && string[i+3]=='a' && string[i+4]=='t' 
+		&& string[i+5]=='e' && string[i+6]==' '){
+		i+=6;
+		token=7;
 	}else if(string[i]!=0x0)
 		token=-1;
 	
@@ -136,6 +142,10 @@ void executeToken(int token,char file[],char file2[])
 				syscall_printStringColor("File copied.",14);
 			syscall_printString("\n\r");
 			break;
+			
+		case 7:	createFile(file);
+			
+			break;
 				
 		
 	}
@@ -156,8 +166,9 @@ void ls(char character)
 	for(x=0;x<96;x++)
 		fil[x]=0x0;
 	syscall_readSector(buff, 2);
-	syscall_printStringColor("  File  ",0x70);
-	syscall_printStringColor("  Size  ",0x40);
+	syscall_printStringColor("   File   ",0x70);
+	syscall_printStringColor("   Size   ",0x40);
+	syscall_printStringColor(" #Sectors ",0x30);
 	for(i=0;i< 16;i++)
 	{
 		if(character!=0)
@@ -177,9 +188,11 @@ void ls(char character)
 					}	
 					name[j]=buff[(i*32)+j];	
 				}
-				syscall_printStringColor("    ",0x3);
+				syscall_printStringColor("      ",0x3);
 				syscall_readFile(name,temp);
-				syscall_printInt(syscall_getBufferSize(temp),0x3);
+				syscall_printInt(getSectorsNumber(name)*512,0x3);
+				syscall_printStringColor("    ",0x3);
+				syscall_printInt(getSectorsNumber(name),0x3);
 			}	
 		}else
 		{
@@ -194,13 +207,14 @@ void ls(char character)
 					syscall_printCharColor(buff[(i*32)+j],0x3);
 					name[j]=buff[(i*32)+j];	
 				}	
-				syscall_printStringColor("    ",0x3);
+				syscall_printStringColor("      ",0x3);
 				syscall_readFile(name,temp);
-				syscall_printInt(syscall_getBufferSize(temp),0x3);
+				syscall_printInt(getSectorsNumber(name)*512,0x3);
+				syscall_printStringColor("    ",0x3);
+				syscall_printInt(getSectorsNumber(name),0x3);
 			}
 		}
 	}
-
 }
 
 void PrintCommands()
@@ -259,4 +273,85 @@ int copyFile(char filename1[],char filename2[])
 	}
 	return 0;
 }
+
+int getSectorsNumber(char name[])
+{
+	char buff[512];
+	int i,j;
+	int exist=0;
+	int sectors=0;
+
+	syscall_readSector(buff, 2);
+	
+	
+	for(i=0;i< 16;i++)
+	{
+		for(j=0;j<6;j++)
+		{
+			
+			if(name[j]==buff[(i*32)+j])
+				exist=1;
+			else{
+				exist=0;
+				break;
+			}			
+		}
+		if(exist==1)
+		{
+			for(j=6;j<32;j++)
+			{
+				if(buff[(i*32)+j]!='\0')
+					sectors++;	
+			}
+			return sectors;
+		}
+	}
+	return 0;
+}
+
+int createFile(char filename[])
+{	
+	char buffer[13312];
+	char Size=0;
+	char ActualSize=0;
+	int write=1;
+	char temp[512];
+	int i,j;
+	for(i=0;i<13312;i++)
+		buffer[i]=0x0;
+	syscall_printStringColor("Start writing your textfile: \n",11);
+	
+	while(write==1)
+	{
+		syscall_readStringColor(temp,15);
+		
+		if(syscall_getBufferSize(temp)==0)
+			write=0;
+		else
+		{
+			temp[syscall_getBufferSize(temp)]='\n';
+			Size=Size+syscall_getBufferSize(temp);
+			for(i=ActualSize;i<Size;i++)
+			{
+				buffer[i]=temp[i-ActualSize];
+			}
+			ActualSize=i;
+		}
+		
+		for(j=0;j<512;j++)
+			temp[j]=0x0;
+	}
+	
+	if(Size>0)
+	{
+		if(syscall_writeFile(filename,buffer,syscall_getBufferSize(buffer))==1)
+			return 1;
+		else if(syscall_writeFile(filename,buffer,syscall_getBufferSize(buffer))==-1)
+			syscall_printStringColor("Not enough space.",14);
+		else if(syscall_writeFile(filename,buffer,syscall_getBufferSize(buffer))==0)
+			syscall_printStringColor("Directory is full.",14);
+	}else
+		syscall_printStringColor("Cannot create an empty file.",14);
+}
+
 

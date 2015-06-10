@@ -8,7 +8,7 @@
 #define ROW_END 24
 
 void printString(char Word[]);
-void readString(char cha[]);
+int readString(char cha[]);
 void readStringColor(char cha[],int color);
 void pressReturn();
 void PrintBorder();
@@ -20,7 +20,8 @@ int deleteFile(char name[]);
 int writeFile(char name[], char buffer[], int size);
 int getSectorsCount(int size);
 int getBufferSize(char buffer[]);
-void printInt(int integer);
+void printInt(int integer,int color);
+char* createTextFile();
 
 void main()
 {
@@ -60,11 +61,14 @@ void printString(char Word[])
 void printStringColor(char Word[],int color)
 {
 	int i=0;
+	int cont=0;
 	while(Word[i]!='\0')
 	{	
-		if(getCursorColumn()>79 && getCursorRow()>23)
+		
+		if(getCursorColumn()>79 && getCursorRow()>23 || cont>78)
 		{
 			nextLine(0);
+			cont=0;
 		}
 		if(Word[i]=='\n')
 			nextLine(0);
@@ -72,6 +76,7 @@ void printStringColor(char Word[],int color)
 			printCharC(Word[i],color);
 
 		i++;
+		cont++;
 		
 	}
 	/*int i=0;
@@ -90,7 +95,7 @@ void printStringColor(char Word[],int color)
 }
 
 
-void readString(char cha[])
+int readString(char cha[])
 {
 	int cont=0;
 	char character;		
@@ -120,17 +125,19 @@ void readString(char cha[])
 			cont++;
 		}
 	}
-	pressReturn();
 	
-	for(cont=cont+1;cont<80;cont++)
-		cha[cont]=0x0;
+	return cont;
+	//pressReturn();
+	
+	/*for(cont=cont+1;cont<80;cont++)
+		cha[cont]=0x0;*/
 				
 }
 
 void readStringColor(char cha[],int color)
 {
 	int cont=0;
-	char character;		
+	char character='\0';		
 	char re[2];
 	re[0]='\n';
 	re[1]='\r';
@@ -402,20 +409,58 @@ int getBufferSize(char buffer[])
 	return size;
 }
 
-void printInt(int integer)
+void printInt(int integer,int color)
 {
 	int digits=1;
-	while(integer>digits)
+	while(integer>=digits)
 		digits=digits*10;
 		
 	digits=digits/10;
 	while(digits!=1)
 	{
-		printChar((integer/digits)+48);
+		printCharC((integer/digits)+48,color);
 		integer=integer-(integer/digits)*digits;
 		digits=digits/10;
 	}
-	printChar((integer/digits)+48);
+	printCharC((integer/digits)+48,color);
+}
+
+char* createTextFile()
+{
+	char buffer[13312];
+	char Size=0;
+	char ActualSize=0;
+	int write=1;
+	char temp[512];
+	int i,j;
+	int cont=0;
+	char character=0x0;
+	
+	while(readString(temp)==0)
+	{
+		character=readChar();
+		if(getCursorColumn()>79 && getCursorRow()>23)
+		{
+			printString("\n\r");
+		}
+		if(character==0x8 && cont>0)
+		{
+			if(getCursorColumn()==2)
+				moveCursorUp();
+			printChar(character);
+			printChar(0x0);				
+			printChar(character);
+			cont=cont-1;
+			//cha[cont]=0x0;
+		}else if(cont<=WORD_SIZE && character!=0x8 && character!=0xd)
+		{
+			if(getCursorColumn()==COLUMN_END)
+				printString("\n\r");
+			
+			//printChar(cha[cont]);
+			cont++;
+		}
+	}
 }
 
 void terminate()

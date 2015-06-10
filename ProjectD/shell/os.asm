@@ -179,6 +179,7 @@ _syscall_printInt:
 	mov bp,sp
 	mov ax,#17
 	mov bx,[bp+4]
+	mov cx,[bp+6]
 	int #0x21
 	pop bp
 	ret

@@ -548,9 +548,10 @@ _execute_getBufferSize:
 	iret
 	
 _execute_printInt:
+	push cx
 	push bx
 	call _printInt
-	add sp,#2
+	add sp,#4
 	iret
 	
 _loadProgram:
