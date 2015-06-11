@@ -36,7 +36,14 @@ int getToken(char string[], char file[], char file2[])
 {
 	int i=0;
 	int j=0;
+	int k;
 	int token=-2;
+	for(k=0;k<6;k++)
+	{
+		file[k]=0x0;
+		file2[k]=0x0;
+	}
+	
 	while(string[i]==' ')
 		i++;
 	
@@ -74,8 +81,13 @@ int getToken(char string[], char file[], char file2[])
 	
 	for(j=0;j<6;j++)
 	{
-		file[j]=string[i];
-		i++;
+		if(string[i]!=' ' && string[i]!='\n' && string[i]!='\0')
+		{
+			file[j]=string[i];
+			i++;
+		}else{
+			j=6;
+		}
 	}	
 	
 	while(string[i]==' ')
@@ -168,7 +180,7 @@ void ls(char character)
 	syscall_readSector(buff, 2);
 	syscall_printStringColor("   File   ",0x70);
 	syscall_printStringColor("   Size   ",0x40);
-	syscall_printStringColor(" #Sectors ",0x30);
+	syscall_printStringColor(" #Sectors ",0x20);
 	for(i=0;i< 16;i++)
 	{
 		if(character!=0)
@@ -183,16 +195,19 @@ void ls(char character)
 				for(j=0;j<6;j++)
 				{
 					if(buff[(i*32)+j]!='\0'){
-						syscall_printCharColor(buff[(i*32)+j],0x3);
+						syscall_printCharColor(buff[(i*32)+j],15);
 						
 					}	
 					name[j]=buff[(i*32)+j];	
 				}
 				syscall_printStringColor("      ",0x3);
 				syscall_readFile(name,temp);
-				syscall_printInt(getSectorsNumber(name)*512,0x3);
-				syscall_printStringColor("    ",0x3);
-				syscall_printInt(getSectorsNumber(name),0x3);
+				syscall_printInt(getSectorsNumber(name)*512,7);
+				if(getSectorsNumber(name)>1)
+					syscall_printStringColor("       ",0x3);
+				else
+					syscall_printStringColor("        ",0x3);
+				syscall_printInt(getSectorsNumber(name),7);
 			}	
 		}else
 		{
@@ -204,14 +219,17 @@ void ls(char character)
 				
 				for(j=0;j<6;j++)
 				{	
-					syscall_printCharColor(buff[(i*32)+j],0x3);
+					syscall_printCharColor(buff[(i*32)+j],15);
 					name[j]=buff[(i*32)+j];	
 				}	
 				syscall_printStringColor("      ",0x3);
 				syscall_readFile(name,temp);
-				syscall_printInt(getSectorsNumber(name)*512,0x3);
-				syscall_printStringColor("    ",0x3);
-				syscall_printInt(getSectorsNumber(name),0x3);
+				syscall_printInt(getSectorsNumber(name)*512,7);
+				if(getSectorsNumber(name)>1)
+					syscall_printStringColor("       ",0x3);
+				else
+					syscall_printStringColor("        ",0x3);
+				syscall_printInt(getSectorsNumber(name),7);
 			}
 		}
 	}
@@ -225,32 +243,50 @@ void PrintCommands()
 	
      	syscall_printStringColor("Command          Description                                                  \n",0x70);
 	//syscall_printString("\n\r");
-	syscall_printStringColor("clear        ",0x3); 
+	syscall_printStringColor("clear         ",0x3); 
 	syscall_printStringColor("|\0",0x1);
 	syscall_printStringColor("clear the shell.",0x7);	
 	
 	syscall_printString("\n\r");
-	syscall_printStringColor("help         ",0x3); 
+	syscall_printStringColor("help          ",0x3); 
 	syscall_printStringColor("|\0",0x1);
 	syscall_printStringColor("show the existing commands.",0x7);	
 	syscall_printString("\n\r");
 
 	syscall_printStringColor("type\0",0x3);     
-	syscall_printStringColor("(file)   \0",0x8);
+	syscall_printStringColor(" (file)   \0",0x8);
 	syscall_printStringColor("|\0",0x1);
 	syscall_printStringColor("print the text of the file.",0x7);
 	syscall_printString("\n\r");
 	
 	syscall_printStringColor("exec\0",0x3);
-	syscall_printStringColor("(file)   \0",0x8);
+	syscall_printStringColor(" (file)   \0",0x8);
 	syscall_printStringColor("|\0",0x1);
 	syscall_printStringColor("execute a program.",0x7);
 	syscall_printString("\n\r");
 
 	syscall_printStringColor("ls\0",0x3);
-	syscall_printStringColor("(character)\0",0x8);
+	syscall_printStringColor(" (character)\0",0x8);
 	syscall_printStringColor("|\0",0x1);
-	syscall_printStringColor("show the list of files that start with (character) or all.",0x7);	
+	syscall_printStringColor("show the list of files that start with (character) or all.",0x7);
+	syscall_printString("\n\r");
+	
+	syscall_printStringColor("delete\0",0x3);
+	syscall_printStringColor(" (file) \0",0x8);
+	syscall_printStringColor("|\0",0x1);
+	syscall_printStringColor("Delete a file.",0x7);	
+	syscall_printString("\n\r");
+	
+	syscall_printStringColor("copy\0",0x3);
+	syscall_printStringColor(" (f1) (f2)\0",0x8);
+	syscall_printStringColor("|\0",0x1);
+	syscall_printStringColor("Copy the first file into another file",0x7);	
+	syscall_printString("\n\r");
+	
+	syscall_printStringColor("create\0",0x3);
+	syscall_printStringColor(" (file) \0",0x8);
+	syscall_printStringColor("|\0",0x1);
+	syscall_printStringColor("Creates a file and its content.",0x7);		
 
 	syscall_printString("\n\r");
 	syscall_printStringColor("------------------------------------------------------------------------------\n",0x1);
@@ -263,14 +299,15 @@ int copyFile(char filename1[],char filename2[])
 	
 	if(syscall_readFile(filename1,buffer)==1)
 	{
-		if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==1)
+		if(syscall_writeFile(filename2,buffer,getSectorsNumber(filename1)*512)==1)
 			return 1;
 		else if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==-1)
 			syscall_printStringColor("Not enough space.",14);
 		else if(syscall_writeFile(filename2,buffer,syscall_getBufferSize(buffer))==0)
 			syscall_printStringColor("Directory is full.",14);
 			
-	}
+	}else
+		syscall_printStringColor("File not found.",14);
 	return 0;
 }
 
@@ -313,10 +350,12 @@ int createFile(char filename[])
 {	
 	char buffer[13312];
 	char Size=0;
-	char ActualSize=0;
 	int write=1;
-	char temp[512];
+	char temp[13312];
 	int i,j;
+	int tempSize=0;
+	
+	
 	for(i=0;i<13312;i++)
 		buffer[i]=0x0;
 	syscall_printStringColor("Start writing your textfile: \n",11);
@@ -327,24 +366,25 @@ int createFile(char filename[])
 		
 		if(syscall_getBufferSize(temp)==0)
 			write=0;
+		
 		else
 		{
 			temp[syscall_getBufferSize(temp)]='\n';
-			Size=Size+syscall_getBufferSize(temp);
-			for(i=ActualSize;i<Size;i++)
+			for(i=0;i<syscall_getBufferSize(temp);i++)
 			{
-				buffer[i]=temp[i-ActualSize];
+				buffer[Size+i]=temp[i];
 			}
-			ActualSize=i;
+			Size+=syscall_getBufferSize(temp);
 		}
 		
-		for(j=0;j<512;j++)
+		for(j=0;j<13312;j++)
 			temp[j]=0x0;
 	}
 	
+
 	if(Size>0)
 	{
-		if(syscall_writeFile(filename,buffer,syscall_getBufferSize(buffer))==1)
+		if(syscall_writeFile(filename,buffer,Size)==1)
 			return 1;
 		else if(syscall_writeFile(filename,buffer,syscall_getBufferSize(buffer))==-1)
 			syscall_printStringColor("Not enough space.",14);

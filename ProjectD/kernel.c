@@ -9,10 +9,10 @@
 
 void printString(char Word[]);
 int readString(char cha[]);
-void readStringColor(char cha[],int color);
+int readStringColor(char cha[],int color);
 void pressReturn();
 void PrintBorder();
-void printStringColor(char Word[],int color);
+int printStringColor(char Word[],int color);
 int readFile(char name[], char buffer[]);
 void executeProgram(char fileName[], int segment);
 void terminate();
@@ -21,16 +21,28 @@ int writeFile(char name[], char buffer[], int size);
 int getSectorsCount(int size);
 int getBufferSize(char buffer[]);
 void printInt(int integer,int color);
-char* createTextFile();
+char* createTextFile(int color);
+
 
 void main()
 {
-	
+
 	Clr();
-	moveCursor(2,2,0);
-	PrintBorder();
+	//moveCursor(2,2,0);
+	//PrintBorder();
 	
-	printInt(450);
+	/*printStringColor("   File   ",0x1F);
+	printStringColor("   Size   ",0x71);
+	printStringColor(" #Sectors ",0x1F);
+	printStringColor("     ",0);
+	
+	
+	printStringColor("   File   ",0x70);
+	printStringColor("   Size   ",0x40);
+	printStringColor(" #Sectors ",11);*/
+	
+	
+	
 	makeInterrupt21();
 	//loadProgram();
 	
@@ -58,14 +70,14 @@ void printString(char Word[])
 	
 }
 
-void printStringColor(char Word[],int color)
+int printStringColor(char Word[],int color)
 {
 	int i=0;
 	int cont=0;
 	while(Word[i]!='\0')
 	{	
 		
-		if(getCursorColumn()>79 && getCursorRow()>23 || cont>78)
+		if(getCursorColumn()>79 && getCursorRow()>23)
 		{
 			nextLine(0);
 			cont=0;
@@ -79,19 +91,8 @@ void printStringColor(char Word[],int color)
 		cont++;
 		
 	}
-	/*int i=0;
-	while(Word[i]!='\0')
-	{	
-		if(getCursorColumn()>79 && getCursorRow()>23)
-		{
-			nextLine(0);
-		}
-		
-		if(Word[i]=='\n'){
-			nextLine(0);		
-		}else
-			printCharC(Word[i],color);
-	}*/
+	
+	return cont;
 }
 
 
@@ -127,14 +128,10 @@ int readString(char cha[])
 	}
 	
 	return cont;
-	//pressReturn();
-	
-	/*for(cont=cont+1;cont<80;cont++)
-		cha[cont]=0x0;*/
 				
 }
 
-void readStringColor(char cha[],int color)
+int readStringColor(char cha[],int color)
 {
 	int cont=0;
 	char character='\0';		
@@ -145,15 +142,14 @@ void readStringColor(char cha[],int color)
 	{
 		character=readChar();
 
-		/*if((getCursorColumn()>79 && getCursorRow()>23) || (getCursorRow()>23 && character==0xd) )
+		if((getCursorColumn()>78 && getCursorRow()>23) || (getCursorRow()>23 && character==0xd))
 		{
-			printString(re);
-			
-		}*/
+			nextLine(0);
+		}
 
 		if(character==0x8 && cont>0)
 		{
-			if(getCursorColumn()==2)
+			if(getCursorColumn()==0)
 				moveCursorUp();
 			printChar(character);
 			printChar(0x0);				
@@ -163,7 +159,7 @@ void readStringColor(char cha[],int color)
 			
 				
 
-		}else if(cont<=WORD_SIZE && character!=0x8 && character!=0xd)
+		}else if(character!=0x8 && character!=0xd)
 		{
 			if(getCursorColumn()==COLUMN_END)
 				printString("\n\r");
@@ -253,7 +249,6 @@ int readFile(char* name, char* buffer)
 			buffer[l]=0x0;
 		return 0;
 	}
-	
 	
 }
 
@@ -425,9 +420,9 @@ void printInt(int integer,int color)
 	printCharC((integer/digits)+48,color);
 }
 
-char* createTextFile()
+char* createTextFile(int color)
 {
-	char buffer[13312];
+	char cha[13312];
 	char Size=0;
 	char ActualSize=0;
 	int write=1;
@@ -435,45 +430,52 @@ char* createTextFile()
 	int i,j;
 	int cont=0;
 	char character=0x0;
+	char anterior='\n';
 	
-	while(readString(temp)==0)
+	character=readChar();
+	while(anterior!=character)
 	{
-		character=readChar();
-		if(getCursorColumn()>79 && getCursorRow()>23)
+		
+		/*if((getCursorColumn()>78 && getCursorRow()>23) || (getCursorRow()>23 && character==0xd) )
 		{
-			printString("\n\r");
-		}
+			printString(re);
+		}*/
+
 		if(character==0x8 && cont>0)
 		{
-			if(getCursorColumn()==2)
+			if(getCursorColumn()==0)
 				moveCursorUp();
 			printChar(character);
 			printChar(0x0);				
 			printChar(character);
 			cont=cont-1;
-			//cha[cont]=0x0;
-		}else if(cont<=WORD_SIZE && character!=0x8 && character!=0xd)
+			cha[cont]=0x0;
+
+		}else if(character!=0x8 && character!=0xd)
 		{
 			if(getCursorColumn()==COLUMN_END)
 				printString("\n\r");
-			
-			//printChar(cha[cont]);
+			cha[cont]=character;
+			printCharC(cha[cont],color);
 			cont++;
+		}else if(character==0xd)
+		{
+			anterior=cha[cont-1];
+			printString("\n\r");
+			cha[cont]='\r';
+			cont++;
+			cha[cont]='\n';
+			
 		}
+		
+		character=readChar();
 	}
 }
 
 void terminate()
 {
-	char s[6];
-	s[0]='s';
-	s[1]='h';
-	s[2]='e';
-	s[3]='l';
-	s[4]='l';
-	s[5]='\0';
+	char s[6]; s[0]='s'; s[1]='h'; s[2]='e'; s[3]='l'; s[4]='l'; s[5]='\0';
 	readChar();
-	
 	executeProgram(s,0x2000);
 }
 
