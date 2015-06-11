@@ -349,9 +349,9 @@ int getSectorsNumber(char name[])
 int createFile(char filename[])
 {	
 	char buffer[13312];
-	char Size=0;
+	int Size=0;
 	int write=1;
-	char temp[13312];
+	char temp[512];
 	int i,j;
 	int tempSize=0;
 	
@@ -370,14 +370,17 @@ int createFile(char filename[])
 		else
 		{
 			temp[syscall_getBufferSize(temp)]='\n';
+			
+			
 			for(i=0;i<syscall_getBufferSize(temp);i++)
 			{
 				buffer[Size+i]=temp[i];
 			}
 			Size+=syscall_getBufferSize(temp);
+			
 		}
 		
-		for(j=0;j<13312;j++)
+		for(j=0;j<512;j++)
 			temp[j]=0x0;
 	}
 	
