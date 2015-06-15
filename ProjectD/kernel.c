@@ -104,9 +104,9 @@ int readString(char cha[])
 	while(character!=0xd)
 	{
 		character=readChar();
-		if(getCursorColumn()>79 && getCursorRow()>23)
+		if(getCursorColumn()>78 && getCursorRow()>23)
 		{
-			printString("\n\r");
+			nextLine(0);
 		}
 		if(character==0x8 && cont>0)
 		{
@@ -161,8 +161,8 @@ int readStringColor(char cha[],int color)
 
 		}else if(character!=0x8 && character!=0xd)
 		{
-			if(getCursorColumn()==COLUMN_END)
-				printString("\n\r");
+			if(getCursorColumn()==79)
+				nextLine(0);
 			cha[cont]=character;
 			printCharC(cha[cont],color);
 			cont++;
