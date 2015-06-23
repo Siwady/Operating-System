@@ -1,0 +1,1 @@
+your readSector function is working correctly.
