@@ -124,11 +124,14 @@ void executeToken(int token,char file[],char file2[])
 			break;
 		
 		case 1: if(syscall_readFile(file,buffer)==1){
-				syscall_printStringColor(buffer,0x7);
-			}else
-				syscall_printStringColor("File not found.",14);
-			syscall_printString("\n\r");
-			break;
+					if(syscall_isTextFile(buffer,13312)==1)
+						syscall_printStringColor(buffer,0x7);
+					else
+						syscall_printStringColor("Only text files are allowed",14);
+				}else
+					syscall_printStringColor("File not found.",14);
+				syscall_printString("\n\r");
+				break;
 		
 		case 2:	syscall_executeProgram(file,0x3000);
 			break;
@@ -178,9 +181,10 @@ void ls(char character)
 	for(x=0;x<96;x++)
 		fil[x]=0x0;
 	syscall_readSector(buff, 2);
-	syscall_printString("   File   ");
-	syscall_printString("   Size   ");
-	syscall_printString(" #Sectors ");
+	syscall_printStringColor("   File   ",70);
+	syscall_printStringColor("   Size   ",40);
+	syscall_printStringColor(" #Sectors ",20);
+	syscall_printStringColor("",0);
 	for(i=0;i< 16;i++)
 	{
 		if(character!=0)

@@ -24,6 +24,8 @@
 	.extern _writeFile
 	.extern _getBufferSize
 	.extern _printInt
+	.extern _isTextFile
+	.extern _handleTimerInterrupt
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -43,6 +45,7 @@
 	.global _execute_writeFile
 	.global _execute_getBufferSize
 	.global _execute_printInt
+	.global _execute_isTextFile
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
@@ -55,6 +58,12 @@
 	.global _launchProgram
 	.global _nextLine
 	.global _writeSector
+	.global _irqInstallHandler
+	.global _setTimerPhase
+	.global _setKernelDataSegment
+	.global _restoreDataSegment
+	.global _makeTimerInterrupt
+	.global _returnFromTimer
 	
 ;	.extern _handleInterrupt21
 
@@ -432,9 +441,15 @@ try_getBufferSize:
 	jmp ax
 try_printInt:
 	cmp ax,#17
+	jne try_isTextFile
 	mov ax, #_execute_printInt
 	jmp ax
+try_isTextFile:
+	cmp ax,#18
+	mov ax,#_execute_isTextFile
+	jmp ax
 	
+
 
 _execute_printString:
 	push bx
@@ -554,6 +569,12 @@ _execute_printInt:
 	add sp,#4
 	iret
 	
+_execute_isTextFile:
+	push bx
+	call _isTextFile 
+	add sp,#2
+	iret
+
 _loadProgram:
 	mov ax, #0x2000
 	mov ds, ax
@@ -617,4 +638,163 @@ _ScrollDown:
         int  #0x10
 	ret
 
+; void irqInstallHandler(int irq_number, void (*fn)())
+; Install an IRQ handler
+_irqInstallHandler:
+	cli 
+	
+	push bp
+	mov bp,sp
+	push si
+	push ds
+	
+	mov dx, [bp+6]   ;function pointer
+	xor ax,ax
+	mov ds,ax             ;Interrupt vextor is at lowest
+	mov si, [bp+4]
+	shl si, #2               ;ax=irq_handler *4
+	
+	mov ax, cs
+	mov [si+2], ax
+	mov [si] , dx
+	
+	pop ds
+	pop si
+	pop bp
+	
+	sti
+	ret
+
+; void setTimerPhase(int hz)
+; Set the timer frequency in Hertz
+_setTimerPhase:
+	push bp
+	mov bp, sp
+	mov dx, #0x0012 ; Default frequency of the timer is 1,193,180 Hz
+	mov ax, #0x34DC
+	mov bx, [bp+4]
+	div bx
+	
+	mov bx, ax            ; Save quotient
+	
+	mov dx, #0x43
+	mov al, #0x36
+	out dx, al
+
+	mov dx,#0x40
+	mov al,bl
+	out dx,al                 ;set low byte of divisor
+	mov al,bh
+	out dx,al			;set high byte of divisor
+	
+	pop bp
+	ret
+
+
+; void setKernelDataSegment()
+; Sets the data segment to the kernel, saving the current ds on the stack
+_setKernelDataSegment:
+	pop bx
+	push ds
+	push bx
+	mov ax, #0x1000
+	mov ds, ax
+	ret
+	
+; void restoreDataSegment()
+; Restores the data segment
+_restoreDataSegment:
+	pop bx
+	pop ds
+	push bx
+	ret
+
+_makeTimerInterrupt:
+        cli
+        mov dx,#timer_ISR ;get address of timerISR in dx
+
+        push ds
+        mov ax,#0       ;interrupts are at lowest memory
+        mov ds,ax
+        mov si,#0x20    ;timer interrupt vector (8 * 4)
+        mov ax,cs       ;have interrupt go to the current segment
+        mov [si+2],ax
+        mov [si],dx     ;address of our vector
+        pop ds
+
+        ;start the timer
+        mov al,#0x36
+        out #0x43,al
+        mov ax,#0xFF
+        out #0x40,al
+        mov ax,#0xFF
+        out #0x40,al
+
+	sti
+        ret
+
+;this routine runs on timer interrupts
+timer_ISR:
+        ;disable interrupts
+        cli
+        ;save all regs for the old process on the old process's stack
+        push bx
+        push cx
+        push dx
+        push si
+        push di
+        push bp
+        push ax
+        push ds
+        push es
+
+        ;reset interrupt controller so it performs more interrupts
+        mov al,#0x20
+        out #0x20,al
+
+        ;get the segment (ss) and the stack pointer (sp) - we need to keep these
+        mov bx,ss
+        mov cx,sp
+
+        ;set all segments to the kernel
+        mov ax,#0x1000
+        mov ds,ax
+        mov es,ax
+        mov ss,ax
+        ;set the kernel's stack
+        mov ax,#0xdff0
+        mov sp,ax
+        mov bp,ax
+
+        ;call handle interrupt with 2 parameters: the segment, the stack pointer.
+	mov ax,#0
+        push cx
+        push bx
+        call _handleTimerInterrupt
+	
+	
+;void returnFromTimer(int segment, int sp)
+;returns from a timer interrupt to a different process
+_returnFromTimer:
+        pop ax
+        ;get the segment and stack pointer
+        pop bx
+        pop cx
+	
+        mov sp,cx      ;set up the stack
+        mov ss,bx      ;set up the stack segment
+
+        pop es
+        pop ds
+        pop ax
+        pop bp
+        pop di
+        pop si
+        pop dx
+        pop cx
+        pop bx
+
+        sti    ;enable interrupts and return
+        iret
+	
 

@@ -16,7 +16,7 @@
 .global _syscall_writeFile
 .global _syscall_getBufferSize
 .global _syscall_printInt
-
+.global _syscall_isTextFile
 
 _syscall_printString:
 	push bp
@@ -180,6 +180,15 @@ _syscall_printInt:
 	mov ax,#17
 	mov bx,[bp+4]
 	mov cx,[bp+6]
+	int #0x21
+	pop bp
+	ret
+
+_syscall_isTextFile:
+	push bp
+	mov bp,sp
+	mov ax,#18
+	mov bx,[bp+4]
 	int #0x21
 	pop bp
 	ret

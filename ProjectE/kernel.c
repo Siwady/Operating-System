@@ -21,33 +21,21 @@ int writeFile(char name[], char buffer[], int size);
 int getSectorsCount(int size);
 int getBufferSize(char buffer[]);
 void printInt(int integer,int color);
-char* createTextFile(int color);|
 int isTextFile(char buffer[],int size);
-
+void handleTimerInterrupt(int segment, int stack);
 
 void main()
 {
-	char b[13312];
-	int i;
 	Clr();
-	
-	for(i=0;i<13312;i++)
-		b[i]=0x0;
 		
 	//moveCursor(2,2,0);
 	//PrintBorder();
-	readFile("shell",b);
 	
-	if(isTextFile(b,13312)==1)
-		printStringColor("textFile",14);
-	else
-		printStringColor("Program",14);
-	
-	readChar();
-	/*makeInterrupt21();
+	makeInterrupt21();
+	makeTimerInterrupt();
 	//loadProgram();
 	
-	executeProgram("shell",0x2000);*/
+	executeProgram("shell",0x2000);
 }
 
 
@@ -421,58 +409,6 @@ void printInt(int integer,int color)
 	printCharC((integer/digits)+48,color);
 }
 
-char* createTextFile(int color)
-{
-	char cha[13312];
-	char Size=0;
-	char ActualSize=0;
-	int write=1;
-	char temp[512];
-	int i,j;
-	int cont=0;
-	char character=0x0;
-	char anterior='\n';
-	
-	character=readChar();
-	while(anterior!=character)
-	{
-		
-		/*if((getCursorColumn()>78 && getCursorRow()>23) || (getCursorRow()>23 && character==0xd) )
-		{
-			printString(re);
-		}*/
-
-		if(character==0x8 && cont>0)
-		{
-			if(getCursorColumn()==0)
-				moveCursorUp();
-			printChar(character);
-			printChar(0x0);				
-			printChar(character);
-			cont=cont-1;
-			cha[cont]=0x0;
-
-		}else if(character!=0x8 && character!=0xd)
-		{
-			if(getCursorColumn()==COLUMN_END)
-				printString("\n\r");
-			cha[cont]=character;
-			printCharC(cha[cont],color);
-			cont++;
-		}else if(character==0xd)
-		{
-			anterior=cha[cont-1];
-			printString("\n\r");
-			cha[cont]='\r';
-			cont++;
-			cha[cont]='\n';
-			
-		}
-		
-		character=readChar();
-	}
-}
-
 int isTextFile(char buffer[],int size)
 {
 	int i,j;
@@ -483,13 +419,20 @@ int isTextFile(char buffer[],int size)
 			for(j=i+1;j<size;j++)
 			{
 				if(buffer[j]!=0x0)
-					return 0;
+					return 0;      // its a program
 			}
 			break;
 		}
 	}
 	
-	return 1;
+	return 1;    //its a textfile
+}
+
+void handleTimerInterrupt(int segment, int stack)
+{
+	printString("Tic");
+	returnFromTimer(segment,stack);
+	restoreDataSegment();
 }
 
 void terminate()
