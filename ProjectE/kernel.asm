@@ -25,7 +25,7 @@
 	.extern _getBufferSize
 	.extern _printInt
 	.extern _isTextFile
-	.extern _handleTimerInterrupt
+	.extern _handleTimer
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -62,9 +62,8 @@
 	.global _setTimerPhase
 	.global _setKernelDataSegment
 	.global _restoreDataSegment
-	.global _makeTimerInterrupt
 	.global _returnFromTimer
-	
+	.global _timer_ISR
 ;	.extern _handleInterrupt21
 
 
@@ -642,16 +641,16 @@ _ScrollDown:
 ; Install an IRQ handler
 _irqInstallHandler:
 	cli 
-	
 	push bp
 	mov bp,sp
+	
 	push si
 	push ds
 	
-	mov dx, [bp+6]   ;function pointer
+	mov dx, #_timer_ISR;function pointer
 	xor ax,ax
 	mov ds,ax             ;Interrupt vextor is at lowest
-	mov si, [bp+4]
+	mov si,#0x8
 	shl si, #2               ;ax=irq_handler *4
 	
 	mov ax, cs
@@ -709,32 +708,9 @@ _restoreDataSegment:
 	push bx
 	ret
 
-_makeTimerInterrupt:
-        cli
-        mov dx,#timer_ISR ;get address of timerISR in dx
-
-        push ds
-        mov ax,#0       ;interrupts are at lowest memory
-        mov ds,ax
-        mov si,#0x20    ;timer interrupt vector (8 * 4)
-        mov ax,cs       ;have interrupt go to the current segment
-        mov [si+2],ax
-        mov [si],dx     ;address of our vector
-        pop ds
-
-        ;start the timer
-        mov al,#0x36
-        out #0x43,al
-        mov ax,#0xFF
-        out #0x40,al
-        mov ax,#0xFF
-        out #0x40,al
-
-	sti
-        ret
 
 ;this routine runs on timer interrupts
-timer_ISR:
+_timer_ISR:
         ;disable interrupts
         cli
         ;save all regs for the old process on the old process's stack
@@ -752,26 +728,23 @@ timer_ISR:
         mov al,#0x20
         out #0x20,al
 
-        ;get the segment (ss) and the stack pointer (sp) - we need to keep these
-        mov bx,ss
-        mov cx,sp
-
         ;set all segments to the kernel
         mov ax,#0x1000
         mov ds,ax
-        mov es,ax
-        mov ss,ax
-        ;set the kernel's stack
-        mov ax,#0xdff0
-        mov sp,ax
-        mov bp,ax
+       
+        call _handleTimer
+	pop es
+        pop ds
+        pop ax
+        pop bp
+        pop di
+        pop si
+        pop dx
+        pop cx
+        pop bx
 
-        ;call handle interrupt with 2 parameters: the segment, the stack pointer.
-	mov ax,#0
-        push cx
-        push bx
-        call _handleTimerInterrupt
-	
+        sti    ;enable interrupts and return
+        iret
 	
 ;void returnFromTimer(int segment, int sp)
 ;returns from a timer interrupt to a different process

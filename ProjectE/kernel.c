@@ -14,7 +14,7 @@ void pressReturn();
 void PrintBorder();
 int printStringColor(char Word[],int color);
 int readFile(char name[], char buffer[]);
-void executeProgram(char fileName[], int segment);
+void executeProgram(char fileName[]);
 void terminate();
 int deleteFile(char name[]);
 int writeFile(char name[], char buffer[], int size);
@@ -22,7 +22,7 @@ int getSectorsCount(int size);
 int getBufferSize(char buffer[]);
 void printInt(int integer,int color);
 int isTextFile(char buffer[],int size);
-void handleTimerInterrupt(int segment, int stack);
+void handleTimer();
 
 void main()
 {
@@ -32,10 +32,10 @@ void main()
 	//PrintBorder();
 	
 	makeInterrupt21();
-	makeTimerInterrupt();
+	irqInstallHandler();
 	//loadProgram();
 	
-	executeProgram("shell",0x2000);
+	executeProgram("shell");
 }
 
 
@@ -241,10 +241,10 @@ int readFile(char* name, char* buffer)
 	
 }
 
-void executeProgram(char fileName[], int segment)
+void executeProgram(char fileName[])
 {
 	char buffer [13312];
-
+	int segment=0x2000;
 	if(segment!=0x1000 && segment!=0x0000 && segment<0xA000) //o  segment<0xA000 && 
 	{
 		if(readFile(fileName,buffer)==1)
@@ -428,11 +428,9 @@ int isTextFile(char buffer[],int size)
 	return 1;    //its a textfile
 }
 
-void handleTimerInterrupt(int segment, int stack)
+void handleTimer()
 {
 	printString("Tic");
-	returnFromTimer(segment,stack);
-	restoreDataSegment();
 }
 
 void terminate()
