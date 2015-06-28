@@ -26,13 +26,14 @@ void Initialize()
 int getFreeSegment()
 {
 	int i;
+	
 	for(i=0; i<8; i++) {
 		if(process_queue[i].status==4) {
 			process_queue[i].status==1;
 			return process_queue[i].segment;
 		}
 	}
-	return ;
+	return -1;
 }
 
 

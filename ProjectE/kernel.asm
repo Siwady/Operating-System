@@ -62,8 +62,8 @@
 	.global _setTimerPhase
 	.global _setKernelDataSegment
 	.global _restoreDataSegment
-	.global _returnFromTimer
-	.global _timer_ISR
+	.global _timerISR
+	
 ;	.extern _handleInterrupt21
 
 
@@ -647,10 +647,10 @@ _irqInstallHandler:
 	push si
 	push ds
 	
-	mov dx, #_timer_ISR;function pointer
+	mov dx, [bp+6];function pointer
 	xor ax,ax
 	mov ds,ax             ;Interrupt vextor is at lowest
-	mov si,#0x8
+	mov si,[bp+4]
 	shl si, #2               ;ax=irq_handler *4
 	
 	mov ax, cs
@@ -710,7 +710,7 @@ _restoreDataSegment:
 
 
 ;this routine runs on timer interrupts
-_timer_ISR:
+_timerISR:
         ;disable interrupts
         cli
         ;save all regs for the old process on the old process's stack
@@ -746,28 +746,6 @@ _timer_ISR:
         sti    ;enable interrupts and return
         iret
 	
-;void returnFromTimer(int segment, int sp)
-;returns from a timer interrupt to a different process
-_returnFromTimer:
-        pop ax
-        ;get the segment and stack pointer
-        pop bx
-        pop cx
-	
-        mov sp,cx      ;set up the stack
-        mov ss,bx      ;set up the stack segment
 
-        pop es
-        pop ds
-        pop ax
-        pop bp
-        pop di
-        pop si
-        pop dx
-        pop cx
-        pop bx
 
-        sti    ;enable interrupts and return
-        iret
-	
 

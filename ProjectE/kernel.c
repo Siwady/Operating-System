@@ -7,6 +7,9 @@
 #define COLUMN_END 80
 #define ROW_END 24
 
+#include "process_control.h"
+extern timerISR;
+
 void printString(char Word[]);
 int readString(char cha[]);
 int readStringColor(char cha[],int color);
@@ -23,19 +26,22 @@ int getBufferSize(char buffer[]);
 void printInt(int integer,int color);
 int isTextFile(char buffer[],int size);
 void handleTimer();
+void initializeProgram(int segment);
+void executeShell(char fileName[]);
+void scheduleProcess();
 
 void main()
 {
 	Clr();
-		
+	Initialize();
 	//moveCursor(2,2,0);
 	//PrintBorder();
 	
 	makeInterrupt21();
-	irqInstallHandler();
-	//loadProgram();
+	irqInstallHandler(0x8,&timerISR);
+	setTimerPhase(100);
 	
-	executeProgram("shell");
+	executeShell("shell");
 }
 
 
@@ -241,20 +247,7 @@ int readFile(char* name, char* buffer)
 	
 }
 
-void executeProgram(char fileName[])
-{
-	char buffer [13312];
-	int segment=0x2000;
-	if(segment!=0x1000 && segment!=0x0000 && segment<0xA000) //o  segment<0xA000 && 
-	{
-		if(readFile(fileName,buffer)==1)
-		{
-			putInSegment(buffer,segment,13312);
-	
-			launchProgram(segment);
-		}
-	}
-}
+
 
 int deleteFile(char name[])
 {
@@ -429,8 +422,72 @@ int isTextFile(char buffer[],int size)
 }
 
 void handleTimer()
+{	
+	int i;
+	for(i=154;i<1110;i+=160)
+	{
+		putInMemory(Base2, Base+i,0);
+		putInMemory(Base2, Base+i+1,0);
+	}
+	putInMemory(Base2, Base+1114, 'T');
+	putInMemory(Base2, Base+1115, 143);
+}
+void initializeProgram(int segment)
 {
-	printString("Tic");
+	struct regs r;
+	r.es=segment;
+	r.ds=segment;
+	r.ax=0;
+	r.bp=0;
+	r.di=0;
+	r.si=0;
+	r.dx=0;
+	r.cx=0;
+	r.bx=0;
+	r.ip=0;
+	r.cs=segment;
+	r.flags=0x0200;
+	
+	putInSegment(&r,0xff00,sizeof(unsigned int)*12);
+}
+
+void executeProgram(char fileName[])
+{
+	char buffer [13312];
+	int segment;
+	if(readFile(fileName,buffer)==1)
+	{
+		setKernelDataSegment();
+		segment=getFreeSegment();
+		restoreDataSegment();
+		if(segment !=-1)
+		{
+			putInSegment(buffer,segment,13312);
+			initializeProgram(segment);
+		}
+	}
+}
+void executeShell(char fileName[])
+{
+	char buffer [13312];
+	int segment;
+	if(readFile(fileName,buffer)==1)
+	{
+		setKernelDataSegment();
+		segment=getFreeSegment();
+		restoreDataSegment();
+		if(segment !=-1)
+		{
+			putInSegment(buffer,segment,13312);
+
+			launchProgram(segment);
+		}
+	}
+}
+
+void scheduleProcess()
+{
+
 }
 
 void terminate()
