@@ -1,9 +1,11 @@
 ;kernel.asm
 ;Michael Black, 2007
 ;Edward Siwady,2015
+.data
+	.extern _currentProcess
 
 ;kernel.asm contains assembly functions that you can use in your kernel
-
+.text
 	.global _putInMemory
 	.global _makeInterrupt21
 	.global _printChar
@@ -29,6 +31,7 @@
 	.extern _handleTimer
 	.extern _Kill
 	.extern _scheduleProcess
+	.extern _ChangeContext
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -66,7 +69,7 @@
 	.global _setKernelDataSegment
 	.global _restoreDataSegment
 	.global _timerISR
-	.global _changeSegment
+	.global _changeContext
 	.global _printhex
 	.global _execute_Kill
 ;	.extern _handleInterrupt21
@@ -521,7 +524,7 @@ _execute_Clr:
 _execute_executeProgram:
 	push cx
 	push bx
-	call _executeShell
+	call _executeProgram
 	add sp,#4
 	iret
 	
@@ -745,6 +748,7 @@ _timerISR:
         push ds
         push es
 
+	mov bx,sp
         ;reset interrupt controller so it performs more interrupts
         mov al,#0x20
         out #0x20,al
@@ -752,8 +756,14 @@ _timerISR:
         ;set all segments to the kernel
         mov ax,#0x1000
         mov ds,ax
-       
+	
+	
+	mov [_currentProcess+4],bx
+	
         call _scheduleProcess
+	
+	mov sp,[_currentProcess+4]
+	mov ss,[_currentProcess+6]
 	
 	pop es
         pop ds
@@ -768,7 +778,7 @@ _timerISR:
         sti    ;enable interrupts and return
         iret
 	
-_changeSegment:
+_changeContext:
 	
 	push bp
 	mov bp,sp
@@ -782,7 +792,7 @@ _changeSegment:
 	
 	mov sp,ax
 
-	ret 
+	
 
 _returnFromTimer:
         ;pop off the local return address - don't need it

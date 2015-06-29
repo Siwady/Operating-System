@@ -57,7 +57,7 @@ int getToken(char string[], char file[], char file2[])
 		i+=4;
 		token=2;
 	}else if(string[i]=='h' && string[i+1]=='e'&& string[i+2]=='l'&& string[i+3]=='p'){
-		i+=4;
+		i+=3;
 		token=3;
 	}else if(string[i]=='l' && string[i+1]=='s' && (string[i+2]==' ' ||string[i+2]=='\0')){
 		i+=2;
@@ -73,6 +73,9 @@ int getToken(char string[], char file[], char file2[])
 		&& string[i+5]=='e' && string[i+6]==' '){
 		i+=6;
 		token=7;
+	}else if(string[i]=='k' && string[i+1]=='i' && string[i+2]=='l' && string[i+3]=='l' && string[i+4]==' '){
+		i+=4;
+		token=8;
 	}else if(string[i]!=0x0)
 		token=-1;
 	
@@ -123,8 +126,12 @@ void executeToken(int token,char file[],char file2[])
 		case 0: syscall_Clr();
 			break;
 		
-		case 1: if(syscall_readFile(file,buffer)==1){
-					if(syscall_isTextFile(buffer,13312)==1)
+		case 1: for(i=0;i<13312;i++)
+				{
+					buffer[i]=0x0;
+				}
+				if(syscall_readFile(file,buffer)==1){
+					if(syscall_isTextFile(buffer,13312)==0)
 						syscall_printStringColor(buffer,0x7);
 					else
 						syscall_printStringColor("Only text files are allowed",14);
@@ -159,9 +166,10 @@ void executeToken(int token,char file[],char file2[])
 			break;
 			
 		case 7:	createFile(file);
-			
 			break;
-				
+			
+		case 8:	syscall_Kill(file[0]);
+			break;
 		
 	}
 }

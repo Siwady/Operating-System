@@ -1,5 +1,6 @@
 #include "process_control.h"
-
+struct PCB process_queue[8];
+struct PCB *currentProcess=0;
 void Initialize()
 {
 	int i;
@@ -33,3 +34,40 @@ void killProcess(int index)
 		process_queue[index-1].status=4;
 	}
 }
+
+struct PCB* getProcess(int index)
+{
+	return &process_queue[index];
+}
+
+void setStatusToReady(int index)
+{
+	process_queue[index].status=1;
+} 
+
+void setStatusToWaiting(int index)
+{
+	process_queue[index].status=2;
+}
+
+void setStatusToRunning(int index)
+{
+	process_queue[index].status=3;
+}
+
+void setStatusToDead(int index)
+{
+	process_queue[index].status=4;
+}  
+
+void setCurrentProcess(struct PCB* p)
+{
+	currentProcess=p;
+}
+
+struct PCB* getCurrentProcess()
+{
+	return currentProcess;
+}
+
+

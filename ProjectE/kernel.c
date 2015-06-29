@@ -30,6 +30,7 @@ void initializeProgram(int segment);
 void executeShell(char fileName[]);
 void scheduleProcess();
 void Kill(int index);
+void ChangeContext(int sp,int ss);
 
 
 void main()
@@ -37,12 +38,13 @@ void main()
 	Clr();
 	
 	Initialize();
-	
 	makeInterrupt21();
+	executeShell("shell");
+	
 	irqInstallHandler(0x8,&timerISR);
 	setTimerPhase(100);
 	
-	executeShell("shell");
+	
 }
 
 
@@ -430,7 +432,7 @@ void handleTimer()
 		putInMemory(Base2, Base+i+1,0);
 	}
 	for(i=1114;i<2394;i+=160){
-		if(process_queue[(i-1114)/160].status!=4){
+		if(getProcess((i-1114)/160)->status!=4){
 			putInMemory(Base2, Base+i, 'T');
 			putInMemory(Base2, Base+i+1, 143);
 		}else
@@ -474,12 +476,10 @@ void executeProgram(char fileName[])
 		{
 			putInSegment(buffer,segment,13312);
 			initializeProgram(segment);
-			printString("Entre");
 		}
 		restoreDataSegment();
 	}
-	currentProcess->segment=segment;
-	currentProcess->sp=0xff00;
+	
 }
 void executeShell(char fileName[])
 {
@@ -498,19 +498,26 @@ void executeShell(char fileName[])
 			launchProgram(segment);
 		}
 	}
+	
 }
 
 void scheduleProcess()
 {
     //  Ready=1 , Waiting=2  , running=3, dead=4
-	int i;
+	int i,j;
+	int currentP=0;
+	int nextCurrentP=0;
+	char c='a';
+	
+	setKernelDataSegment();
+	
 	for(i=154;i<1110;i+=160)
 	{
 		putInMemory(Base2, Base+i,0);
 		putInMemory(Base2, Base+i+1,0);
 	}
 	for(i=1114;i<2394;i+=160){
-		if(process_queue[(i-1114)/160].status!=4){
+		if(getProcess((i-1114)/160)->status==1){
 			putInMemory(Base2, Base+i, 'T');
 			putInMemory(Base2, Base+i+1, 143);
 		}else
@@ -519,9 +526,32 @@ void scheduleProcess()
 			putInMemory(Base2, Base+i+1, 15);
 		}
 	}
-	setKernelDataSegment();
-	//changeSegment(currentProcess->segment,currentProcess->sp);
+//-----------------------------------------------------------------------------------------------	
+	
+	
+	currentP=(getCurrentProcess()->segment-0x2000)/0x1000;
+	nextCurrentP=currentP+1;
+	
+	for(j=0;j<7;j++)
+	{
+		
+		if(getProcess(nextCurrentP)->status==2)
+		{
+			setStatusToWaiting(currentP);
+			setStatusToReady(nextCurrentP);
+			
+			setCurrentProcess(getProcess(currentP));
+			
+		}
+		nextCurrentP++;
+	}
+	
 	restoreDataSegment();
+}
+
+void ChangeContext(int sp,int ss)
+{
+	changeContext(ss,sp);
 }
 
 void terminate()
@@ -529,14 +559,16 @@ void terminate()
 	/*char s[6]; s[0]='s'; s[1]='h'; s[2]='e'; s[3]='l'; s[4]='l'; s[5]='\0';
 	readChar();
 	executeProgram(s,0x2000);*/
-	currentProcess->status=4;
+	struct PCB* c=getCurrentProcess();
+	c->status=4;
+	setCurrentProcess(c);
 	while(1==1);
 }
 
 void Kill(int index)
 {
 	setKernelDataSegment();
-	killProcess(index);
+	killProcess(index-48);
 	restoreDataSegment();		
 }
 

@@ -23,10 +23,16 @@ struct regs {
 	unsigned int flags;
 };
 
-struct PCB process_queue[8];
-struct PCB *currentProcess;
+
 void Initialize();
 int getFreeSegment();
 void killProcess(int index);
+struct PCB* getProcess(int index);
+void setStatusToReady(int index); 
+void setStatusToWaiting(int index);
+void setStatusToDead(int index);  
+void setStatusToRunning(int index);
+void setCurrentProcess(struct PCB* p);
+struct PCB* getCurrentProcess();
 
 #endif
