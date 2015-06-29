@@ -1,4 +1,4 @@
-all: floppya.img bootloader_in_floppy kernel_in_floppy message_in_floppy shell/shell.bin
+all: floppya.img bootloader_in_floppy kernel_in_floppy shell/shell.bin
 run: all
 	- bochs -f opsys.bxrc -q
 
@@ -17,7 +17,6 @@ kernel_asm.o: kernel.asm
 start.o: start.asm
 	as86 $< -o $@
 
-
 bootload.bin: bootload.asm
 	nasm $< -f bin -o $@
 
@@ -29,17 +28,13 @@ kernel_in_floppy: floppya.img kernel.bin
 	dd if=kernel.bin of=floppya.img bs=512 seek=3 conv=notrunc 
 	touch kernel_in_floppy
 
-message_in_floppy: floppya.img message.txt
-	dd if=message.txt of=floppya.img bs=512 count=1 seek=30 conv=notrunc
-	touch message_in_floppy
-
 floppya.img: 
 	dd if=/dev/zero of=floppya.img bs=512 count=2880
 	dd if=map.img of=floppya.img bs=512 count=1 seek=1 conv=notrunc
 	dd if=dir.img of=floppya.img bs=512 count=1 seek=2 conv=notrunc
 	
 clean:
-	rm -f *.o kernel_in_floppy bootloader_in_floppy message_in_floppy
+	rm -f *.o kernel_in_floppy bootloader_in_floppy 
 	rm -f *.bin
 	rm -f shell/*.o
 	rm -f shell/*.bin

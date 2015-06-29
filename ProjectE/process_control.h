@@ -23,7 +23,10 @@ struct regs {
 	unsigned int flags;
 };
 
+struct PCB process_queue[8];
+struct PCB *currentProcess;
 void Initialize();
 int getFreeSegment();
+void killProcess(int index);
 
 #endif

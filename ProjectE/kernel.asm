@@ -18,6 +18,7 @@
 	.extern _readStringColor
 	.extern _readFile
 	.extern _executeProgram
+	.extern _executeShell
 	.extern _pressReturn
 	.extern _terminate
 	.extern _deleteFile
@@ -26,6 +27,8 @@
 	.extern _printInt
 	.extern _isTextFile
 	.extern _handleTimer
+	.extern _Kill
+	.extern _scheduleProcess
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -63,7 +66,9 @@
 	.global _setKernelDataSegment
 	.global _restoreDataSegment
 	.global _timerISR
-	
+	.global _changeSegment
+	.global _printhex
+	.global _execute_Kill
 ;	.extern _handleInterrupt21
 
 
@@ -107,12 +112,16 @@ _putInMemory:
 _putInSegment:
 	push bp
 	mov bp,sp
+	push si
+	push di
 	mov si,[bp+4]
 	mov es,[bp+6]
 	mov di, #0
 	mov cx,[bp+8]
 	rep 
 	movsb
+	pop di
+	pop si
 	pop bp
 	ret
 	
@@ -445,7 +454,12 @@ try_printInt:
 	jmp ax
 try_isTextFile:
 	cmp ax,#18
+	jne try_Kill
 	mov ax,#_execute_isTextFile
+	jmp ax
+try_Kill:
+	cmp ax,#19
+	mov ax, #_execute_Kill
 	jmp ax
 	
 
@@ -507,7 +521,7 @@ _execute_Clr:
 _execute_executeProgram:
 	push cx
 	push bx
-	call _executeProgram
+	call _executeShell
 	add sp,#4
 	iret
 	
@@ -569,8 +583,15 @@ _execute_printInt:
 	iret
 	
 _execute_isTextFile:
+	push cx
 	push bx
 	call _isTextFile 
+	add sp,#4
+	iret
+	
+_execute_Kill:
+	push bx
+	call _Kill
 	add sp,#2
 	iret
 
@@ -732,7 +753,8 @@ _timerISR:
         mov ax,#0x1000
         mov ds,ax
        
-        call _handleTimer
+        call _scheduleProcess
+	
 	pop es
         pop ds
         pop ax
@@ -746,6 +768,100 @@ _timerISR:
         sti    ;enable interrupts and return
         iret
 	
+_changeSegment:
+	
+	push bp
+	mov bp,sp
+	
+	mov ax,[bp+6]
+	mov bx,[bp+4]
+
+	mov ds, bx
+	mov ss, bx
+	mov es, bx
+	
+	mov sp,ax
+
+	ret 
+
+_returnFromTimer:
+        ;pop off the local return address - don't need it
+        pop ax
+        ;get the segment and stack pointer
+        pop bx
+        pop cx
+        ;set up the stack
+        mov sp,cx
+        ;set up the stack segment
+        mov ss,bx
+
+        ;now we're back to the program's area
+        ;reload the registers (if this is it's first time running, these will be zeros)
+        pop es
+        pop ds
+        pop ax
+        pop bp
+        pop di
+        pop si
+        pop dx
+        pop cx
+        pop bx
+
+        ;enable interrupts and return
+        sti
+        iret
+
+_printhex:
+        push bx
+        push ax
+        push ax
+        push ax
+        push ax
+        mov al,ah
+        mov ah,#0xe
+        mov bx,#7
+        shr al,#4
+        and al,#0xf
+        cmp al,#0xa
+        jb ph1
+        add al,#0x7
+ph1:    add al,#0x30
+        int 0x10
+
+        pop ax
+        mov al,ah
+        mov ah,#0xe
+        and al,#0xf
+        cmp al,#0xa
+        jb ph2
+        add al,#0x7
+ph2:    add al,#0x30
+        int 0x10
+
+        pop ax
+        mov ah,#0xe
+        shr al,#4
+        and al,#0xf
+        cmp al,#0xa
+        jb ph3
+        add al,#0x7
+ph3:    add al,#0x30
+        int 0x10
+
+        pop ax
+        mov ah,#0xe
+        and al,#0xf
+        cmp al,#0xa
+        jb ph4
+        add al,#0x7
+ph4:    add al,#0x30
+        int 0x10
+
+        pop ax
+        pop bx
+        ret
+
+
 
 
 

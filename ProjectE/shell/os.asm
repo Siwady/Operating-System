@@ -17,6 +17,7 @@
 .global _syscall_getBufferSize
 .global _syscall_printInt
 .global _syscall_isTextFile
+.global _syscall_Kill
 
 _syscall_printString:
 	push bp
@@ -189,8 +190,19 @@ _syscall_isTextFile:
 	mov bp,sp
 	mov ax,#18
 	mov bx,[bp+4]
+	mov cx,[bp+6]
 	int #0x21
 	pop bp
 	ret
+	
+_syscall_Kill:
+	push bp
+	mov bp,sp
+	mov ax,#19
+	mov bx,[bp+4]
+	int #0x21
+	pop bp
+	ret
+
 
 

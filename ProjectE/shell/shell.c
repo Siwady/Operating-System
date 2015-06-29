@@ -181,9 +181,11 @@ void ls(char character)
 	for(x=0;x<96;x++)
 		fil[x]=0x0;
 	syscall_readSector(buff, 2);
-	syscall_printStringColor("   File   ",70);
-	syscall_printStringColor("   Size   ",40);
-	syscall_printStringColor(" #Sectors ",20);
+	syscall_printStringColor("   File   ",0x6F);
+	syscall_printStringColor("   Size   ",0x4F);
+	syscall_printStringColor(" #Sectors ",0x1F);
+	syscall_printStringColor("   Type   ",0x2F);
+	
 	syscall_printStringColor("",0);
 	for(i=0;i< 16;i++)
 	{
@@ -200,18 +202,28 @@ void ls(char character)
 				{
 					if(buff[(i*32)+j]!='\0'){
 						syscall_printCharColor(buff[(i*32)+j],15);
-						
 					}	
 					name[j]=buff[(i*32)+j];	
 				}
 				syscall_printStringColor("      ",0x3);
+				for(x=0;x<13312;x++)
+					temp[x]=0;
 				syscall_readFile(name,temp);
 				syscall_printInt(getSectorsNumber(name)*512,7);
-				if(getSectorsNumber(name)>1)
+				if(getSectorsNumber(name)>1){
+					syscall_printStringColor("       ",0x3);
+				}else{
+					syscall_printStringColor("        ",0x3);
+				}
+				syscall_printInt(getSectorsNumber(name),7);
+				if(getSectorsNumber(name)<10)
 					syscall_printStringColor("       ",0x3);
 				else
-					syscall_printStringColor("        ",0x3);
-				syscall_printInt(getSectorsNumber(name),7);
+					syscall_printStringColor("      ",0x3);
+				if(syscall_isTextFile(temp,13312)==1)
+					syscall_printStringColor("Program",7);
+				else
+					syscall_printStringColor("TextFile",7);
 			}	
 		}else
 		{
@@ -227,6 +239,8 @@ void ls(char character)
 					name[j]=buff[(i*32)+j];	
 				}	
 				syscall_printStringColor("      ",0x3);
+				for(x=0;x<13312;x++)
+					temp[x]=0;
 				syscall_readFile(name,temp);
 				syscall_printInt(getSectorsNumber(name)*512,7);
 				if(getSectorsNumber(name)>1)
@@ -234,6 +248,14 @@ void ls(char character)
 				else
 					syscall_printStringColor("        ",0x3);
 				syscall_printInt(getSectorsNumber(name),7);
+				if(getSectorsNumber(name)<10)
+					syscall_printStringColor("       ",0x3);
+				else
+					syscall_printStringColor("      ",0x3);
+				if(syscall_isTextFile(temp,13312)==1)
+					syscall_printStringColor("Program",7);
+				else
+					syscall_printStringColor("TextFile",7);
 			}
 		}
 	}

@@ -29,13 +29,14 @@ void handleTimer();
 void initializeProgram(int segment);
 void executeShell(char fileName[]);
 void scheduleProcess();
+void Kill(int index);
+
 
 void main()
 {
 	Clr();
+	
 	Initialize();
-	//moveCursor(2,2,0);
-	//PrintBorder();
 	
 	makeInterrupt21();
 	irqInstallHandler(0x8,&timerISR);
@@ -332,7 +333,7 @@ int writeFile(char name[], char buffer[], int size)
 		
 		for(j=0;j<getSectorsCount(size);j++)
 		{
-			for(sector=0;sector<26;sector++)
+			for(sector=0;sector<512;sector++)
 			{
 				if(map[sector]=='\0')
 				{
@@ -340,7 +341,7 @@ int writeFile(char name[], char buffer[], int size)
 					break;
 				}		
 			}
-			if(mapfree==1 && sector<26)
+			if(mapfree==1 && sector<512)
 			{
 				map[sector]=0xFF;
 				dir[(dirIndex*32)+6+j]=sector;
@@ -382,7 +383,6 @@ int getBufferSize(char buffer[])
 		i++;
 		size++;
 	}
-	
 	return size;
 }
 
@@ -412,13 +412,13 @@ int isTextFile(char buffer[],int size)
 			for(j=i+1;j<size;j++)
 			{
 				if(buffer[j]!=0x0)
-					return 0;      // its a program
+					return 1;      // its a program
 			}
 			break;
 		}
 	}
 	
-	return 1;    //its a textfile
+	return 0;    //its a textfile
 }
 
 void handleTimer()
@@ -429,8 +429,18 @@ void handleTimer()
 		putInMemory(Base2, Base+i,0);
 		putInMemory(Base2, Base+i+1,0);
 	}
-	putInMemory(Base2, Base+1114, 'T');
-	putInMemory(Base2, Base+1115, 143);
+	for(i=1114;i<2394;i+=160){
+		if(process_queue[(i-1114)/160].status!=4){
+			putInMemory(Base2, Base+i, 'T');
+			putInMemory(Base2, Base+i+1, 143);
+		}else
+		{
+			putInMemory(Base2, Base+i, 'T');
+			putInMemory(Base2, Base+i+1, 15);
+		}
+	}
+	
+	scheduleProcess();
 }
 void initializeProgram(int segment)
 {
@@ -459,13 +469,17 @@ void executeProgram(char fileName[])
 	{
 		setKernelDataSegment();
 		segment=getFreeSegment();
-		restoreDataSegment();
+		
 		if(segment !=-1)
 		{
 			putInSegment(buffer,segment,13312);
 			initializeProgram(segment);
+			printString("Entre");
 		}
+		restoreDataSegment();
 	}
+	currentProcess->segment=segment;
+	currentProcess->sp=0xff00;
 }
 void executeShell(char fileName[])
 {
@@ -475,11 +489,12 @@ void executeShell(char fileName[])
 	{
 		setKernelDataSegment();
 		segment=getFreeSegment();
+		
 		restoreDataSegment();
 		if(segment !=-1)
 		{
+			printString("entre");
 			putInSegment(buffer,segment,13312);
-
 			launchProgram(segment);
 		}
 	}
@@ -487,16 +502,43 @@ void executeShell(char fileName[])
 
 void scheduleProcess()
 {
-
+    //  Ready=1 , Waiting=2  , running=3, dead=4
+	int i;
+	for(i=154;i<1110;i+=160)
+	{
+		putInMemory(Base2, Base+i,0);
+		putInMemory(Base2, Base+i+1,0);
+	}
+	for(i=1114;i<2394;i+=160){
+		if(process_queue[(i-1114)/160].status!=4){
+			putInMemory(Base2, Base+i, 'T');
+			putInMemory(Base2, Base+i+1, 143);
+		}else
+		{
+			putInMemory(Base2, Base+i, 'T');
+			putInMemory(Base2, Base+i+1, 15);
+		}
+	}
+	setKernelDataSegment();
+	//changeSegment(currentProcess->segment,currentProcess->sp);
+	restoreDataSegment();
 }
 
 void terminate()
 {
-	char s[6]; s[0]='s'; s[1]='h'; s[2]='e'; s[3]='l'; s[4]='l'; s[5]='\0';
+	/*char s[6]; s[0]='s'; s[1]='h'; s[2]='e'; s[3]='l'; s[4]='l'; s[5]='\0';
 	readChar();
-	executeProgram(s,0x2000);
+	executeProgram(s,0x2000);*/
+	currentProcess->status=4;
+	while(1==1);
 }
 
+void Kill(int index)
+{
+	setKernelDataSegment();
+	killProcess(index);
+	restoreDataSegment();		
+}
 
 
 
