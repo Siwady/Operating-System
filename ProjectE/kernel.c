@@ -598,11 +598,8 @@ void executeProgram(char fileName[])
 		
 		if(segment !=-1)
 		{
-			
 			CopyToSegment(segment,0,buffer,13312);
-			
 			initializeProgram(segment);
-			
 		}
 	}
 	
@@ -738,7 +735,10 @@ void terminate()
 	}
 	
 	restoreDataSegment();
-	//while(1==1);
+	#asm
+	sti
+	#endasm 
+	while(1==1);
 }
 
 void Kill(int index)
