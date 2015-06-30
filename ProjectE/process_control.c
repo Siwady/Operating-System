@@ -1,6 +1,7 @@
 #include "process_control.h"
 struct PCB process_queue[8];
 struct PCB *currentProcess=0;
+
 void Initialize()
 {
 	int i;
@@ -8,7 +9,7 @@ void Initialize()
 	for(i=0;i<8;i++)
 	{
 		process_queue[i].status=4;
-		process_queue[i].sp=0xff00;
+		process_queue[i].sp=0xff0;
 		process_queue[i].segment=segment;
 		segment+=4096;
 	}	
@@ -37,7 +38,7 @@ void killProcess(int index)
 
 struct PCB* getProcess(int index)
 {
-	return &process_queue[index];
+	return process_queue[index];
 }
 
 void setStatusToReady(int index)

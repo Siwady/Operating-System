@@ -3,7 +3,6 @@
 ;Edward Siwady,2015
 .data
 	.extern _currentProcess
-
 ;kernel.asm contains assembly functions that you can use in your kernel
 .text
 	.global _putInMemory
@@ -72,6 +71,7 @@
 	.global _changeContext
 	.global _printhex
 	.global _execute_Kill
+	.global _CopyToSegment
 ;	.extern _handleInterrupt21
 
 
@@ -101,6 +101,7 @@ _nextLine:
 _putInMemory:
 	push bp
 	mov bp,sp
+	push si
 	push ds
 	mov ax,[bp+4]
 	mov si,[bp+6]
@@ -108,6 +109,23 @@ _putInMemory:
 	mov ds,ax
 	mov [si],cl
 	pop ds
+	pop si
+	pop bp
+	ret
+	
+_CopyToSegment:
+	push bp
+	mov bp,sp
+	push si
+	push di
+	mov es,[bp+4]
+	mov si,[bp+8]
+	mov di, [bp+6]
+	mov cx,[bp+10]
+	rep
+	movsb
+	pop di
+	pop si
 	pop bp
 	ret
 
@@ -665,16 +683,16 @@ _ScrollDown:
 ; Install an IRQ handler
 _irqInstallHandler:
 	cli 
-	push bp
-	mov bp,sp
+	;push bp
+	;mov bp,sp
 	
 	push si
 	push ds
 	
-	mov dx, [bp+6];function pointer
+	mov dx, #_timerISR; [bp+6];function pointer
 	xor ax,ax
 	mov ds,ax             ;Interrupt vextor is at lowest
-	mov si,[bp+4]
+	mov si,#0x8;[bp+4]
 	shl si, #2               ;ax=irq_handler *4
 	
 	mov ax, cs
@@ -683,7 +701,7 @@ _irqInstallHandler:
 	
 	pop ds
 	pop si
-	pop bp
+	;pop bp
 	
 	sti
 	ret
@@ -737,7 +755,6 @@ _restoreDataSegment:
 _timerISR:
         ;disable interrupts
         cli
-        ;save all regs for the old process on the old process's stack
         push bx
         push cx
         push dx
@@ -747,24 +764,25 @@ _timerISR:
         push ax
         push ds
         push es
-
-	mov bx,sp
-        ;reset interrupt controller so it performs more interrupts
-        mov al,#0x20
-        out #0x20,al
-
-        ;set all segments to the kernel
-        mov ax,#0x1000
-        mov ds,ax
+        mov al, #0x20
+        out #0x20, al
+	mov cx , sp
+        mov ax, #0x1000
+        mov ds, ax
+	mov es, ax
+	mov ss, ax
+	mov sp, #0xff00
 	
+	mov bx, [_currentProcess]
+	test bx, bx
+	jz Try_Schedule_Process
+	mov [bx+2], cx
 	
-	mov [_currentProcess+4],bx
-	
-        call _scheduleProcess
-	
-	mov sp,[_currentProcess+4]
-	mov ss,[_currentProcess+6]
-	
+Try_Schedule_Process:
+	call _scheduleProcess
+	mov bx, [_currentProcess]
+	mov sp, [bx+2]
+	mov ss, [bx+4]
 	pop es
         pop ds
         pop ax
@@ -774,9 +792,10 @@ _timerISR:
         pop dx
         pop cx
         pop bx
+	sti
+	iret
 
-        sti    ;enable interrupts and return
-        iret
+
 	
 _changeContext:
 	
@@ -792,34 +811,6 @@ _changeContext:
 	
 	mov sp,ax
 
-	
-
-_returnFromTimer:
-        ;pop off the local return address - don't need it
-        pop ax
-        ;get the segment and stack pointer
-        pop bx
-        pop cx
-        ;set up the stack
-        mov sp,cx
-        ;set up the stack segment
-        mov ss,bx
-
-        ;now we're back to the program's area
-        ;reload the registers (if this is it's first time running, these will be zeros)
-        pop es
-        pop ds
-        pop ax
-        pop bp
-        pop di
-        pop si
-        pop dx
-        pop cx
-        pop bx
-
-        ;enable interrupts and return
-        sti
-        iret
 
 _printhex:
         push bx

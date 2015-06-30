@@ -2,7 +2,7 @@ all: floppya.img bootloader_in_floppy kernel_in_floppy shell/shell.bin
 run: all
 	- bochs -f opsys.bxrc -q
 
-kernel.bin: start.o kernel.o kernel_asm.o process_control.o
+kernel.bin: start.o kernel.o kernel_asm.o 
 	ld86 -o $@ -d $^
 
 kernel.o: kernel.c
