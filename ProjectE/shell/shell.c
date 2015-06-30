@@ -337,7 +337,22 @@ void PrintCommands()
 	syscall_printStringColor("create\0",0x3);
 	syscall_printStringColor(" (file) \0",0x8);
 	syscall_printStringColor("|\0",0x1);
-	syscall_printStringColor("Creates a file and its content.",0x7);		
+	syscall_printStringColor("Creates a file and its content.",0x7);
+	syscall_printString("\n\r");
+	syscall_printStringColor("execw \0",0x3);
+	syscall_printStringColor(" (file) \0",0x8);
+	syscall_printStringColor("|\0",0x1);
+	syscall_printStringColor("execute a file and set in wait the others.",0x7);		
+	syscall_printString("\n\r");
+	syscall_printStringColor("ps   \0",0x3);
+	syscall_printStringColor("        \0",0x8);
+	syscall_printStringColor(" |\0",0x1);
+	syscall_printStringColor("List all processes with their status",0x7);	
+	syscall_printString("\n\r");
+	syscall_printStringColor("kill\0",0x3);
+	syscall_printStringColor(" (index)\0",0x8);
+	syscall_printStringColor("  |\0",0x1);
+	syscall_printStringColor("kill a process.",0x7);		
 
 	syscall_printString("\n\r");
 	syscall_printStringColor("------------------------------------------------------------------------------\n",0x1);

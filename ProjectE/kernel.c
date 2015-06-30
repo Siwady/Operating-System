@@ -563,7 +563,6 @@ void handleTimer()
 void initializeProgram(int segment)
 {
 	struct regs r;
-	printInt(segment);
 	r.es=segment;
 	r.ds=segment;
 	r.ax=0;
@@ -576,9 +575,7 @@ void initializeProgram(int segment)
 	r.ip=0;
 	r.cs=segment;
 	r.flags=0x0200;
-	printInt(segment);
 	CopyToSegment(segment,0xff00,&r,2*12);
-	printInt(segment);
 }
 
 void executeProgram(char fileName[])
@@ -771,7 +768,6 @@ int getProcessList()
 			printStringColor("       ",15);
 			printInt(process_queue[i].status,15);
 			nextLine(0);
-		
 	}
 	nextLine(0);
 	restoreDataSegment();
