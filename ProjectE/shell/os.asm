@@ -19,6 +19,7 @@
 .global _syscall_isTextFile
 .global _syscall_Kill
 .global _syscall_getProcessList
+.global _syscall_executeBlocking
 
 _syscall_printString:
 	push bp
@@ -206,9 +207,14 @@ _syscall_Kill:
 	ret
 
 _syscall_getProcessList:
+	mov ax,#20
+	int #0x21
+	ret
+
+_syscall_executeBlocking:
 	push bp
 	mov bp,sp
-	mov ax,#20
+	mov ax,#21
 	mov bx,[bp+4]
 	int #0x21
 	pop bp

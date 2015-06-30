@@ -79,6 +79,10 @@ int getToken(char string[], char file[], char file2[])
 	}else if(string[i]=='p' && string[i+1]=='s' && (string[i+2]==' ' ||string[i+2]=='\0')){
 		i+=2;
 		token=9;
+	}else if(string[i]=='e' && string[i+1]=='x' && string[i+2]=='e' && string[i+3]=='c' && string[i+4]=='w' 
+		&& string[i+5]==' '){
+		i+=5;
+		token=10;
 	}else if(string[i]!=0x0)
 		token=-1;
 	
@@ -115,8 +119,7 @@ int getToken(char string[], char file[], char file2[])
 void executeToken(int token,char file[],char file2[])
 {	
 	char buffer[13312];
-	int i,size=0;
-	char table[512];	
+	int i,size=0;	
 	for(i=0;i<13312;i++)
 	{
 		buffer[i]=0x0;
@@ -144,7 +147,7 @@ void executeToken(int token,char file[],char file2[])
 				syscall_printString("\n\r");
 				break;
 		
-		case 2:	syscall_executeProgram(file,0x3000);
+		case 2:	syscall_executeProgram(file);
 			break;
 
 		case 3:	PrintCommands();
@@ -175,15 +178,14 @@ void executeToken(int token,char file[],char file2[])
 		case 8:	syscall_Kill(file[0]);
 			break;
 			
-		case 9: for(i=0;i<512;i++)
-				{
-					table[i]=0x0;
-				}
+		case 9: 
+				size=syscall_getProcessList();
 				syscall_printStringColor("Number of processes: ",15);
-				size=syscall_getProcessList(table);
-				syscall_printStringColor(table,11);
 				syscall_printInt(size,15);
-				
+				syscall_printString("\n\r");
+				//syscall_nextLine();
+			break;
+		case 10:syscall_executeBlocking(file);
 			break;
 		
 	}

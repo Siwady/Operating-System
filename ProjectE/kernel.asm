@@ -32,6 +32,7 @@
 	.extern _scheduleProcess
 	.extern _ChangeContext
 	.extern _getProcessList
+	.extern _executeBlocking
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -53,6 +54,7 @@
 	.global _execute_printInt
 	.global _execute_isTextFile
 	.global _execute_getProcessList
+	.global _execute_executeBlocking
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
@@ -487,7 +489,12 @@ try_Kill:
 	jmp ax
 try_getProcessList:
 	cmp ax,#20
+	jne try_executeBlocking
 	mov ax,#_execute_getProcessList
+	jmp ax
+try_executeBlocking:
+	cmp ax,#21
+	mov ax,#_execute_executeBlocking
 	jmp ax
 	
 
@@ -624,8 +631,12 @@ _execute_Kill:
 	iret
 	
 _execute_getProcessList:
-	push bx
 	call _getProcessList
+	iret
+	
+_execute_executeBlocking:
+	push bx
+	call _executeBlocking
 	add sp,#2
 	iret
 

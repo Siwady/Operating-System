@@ -31,6 +31,8 @@ void executeShell(char fileName[]);
 void scheduleProcess();
 void Kill(int index);
 void ChangeContext(int sp,int ss);
+void executeBlocking(char fileName[]);
+void next();
 
 
 struct PCB {
@@ -58,8 +60,8 @@ void Initialize();
 int getFreeSegment();
 void killProcess(int index);
 int getCurrentIndex();
-int getProcessList(char buffer[]);
-
+int getProcessList();
+void setToReady(int segment);
 struct PCB process_queue[8];
 struct PCB *currentProcess=0;
 
@@ -75,10 +77,8 @@ void main()
 	s[5]=0x0;
 	Clr();
 	
-
 	Initialize();
-	
-	
+
 	makeInterrupt21();
 	executeProgram(s);
 	
@@ -87,7 +87,10 @@ void main()
 	//executeShell(s);
 	
 }
-
+void next()
+{
+	nextLine(0);
+}
 void Initialize()
 {
 	int i;
@@ -102,6 +105,11 @@ void Initialize()
 	}	
 	currentProcess=0;
 }
+void setToReady(int segment)
+{
+	int i=((segment-8192)/4096);
+	process_queue[i].status=1;
+}
 
 int getFreeSegment()
 {
@@ -115,7 +123,7 @@ int getFreeSegment()
 		
 		if(status==4) {
 			
-			process_queue[i].status=1;
+			//process_queue[i].status=1;
 			segment=process_queue[i].segment;
 			
 			return segment;
@@ -490,9 +498,8 @@ int getBufferSize(char buffer[])
 void printInt(int integer,int color)
 {
 	int digits=1;
-	if(integer+48==0){
-		printCharC(integer+48,color);
-	}else{	
+	if(integer>0)
+	{	
 		while(integer>=digits)
 			digits=digits*10;
 		
@@ -503,10 +510,9 @@ void printInt(int integer,int color)
 			integer=integer-(integer/digits)*digits;
 			digits=digits/10;
 		}
-	
-		printCharC((integer/digits)+48,color);
 	}
-	nextLine(0);
+	printCharC((integer/digits)+48,color);
+	
 }
 
 int isTextFile(char buffer[],int size)
@@ -589,6 +595,7 @@ void executeProgram(char fileName[])
 		setKernelDataSegment();
 		
 		segment=getFreeSegment();
+		setToReady(segment);
 		restoreDataSegment();
 		// aca hay problemas
 		
@@ -618,6 +625,39 @@ void executeShell(char fileName[])
 			putInSegment(buffer,segment,13312);
 			launchProgram(segment);
 		}
+	}
+}
+
+void executeBlocking(char fileName[])
+{
+	
+	char buffer [13312];
+	int i,j;
+	int segment=-1;
+	for(i=0;i<13312;i++)
+		buffer[i]=0x0;
+	
+	if(readFile(fileName,buffer)==1)
+	{
+		setKernelDataSegment();
+		segment=getFreeSegment();
+		
+		// aca hay problemas
+		if(segment !=-1)
+		{
+			for(j=0;j<8;j++)
+			{
+				if((process_queue[j].status==1 || process_queue[j].status==3)){
+					process_queue[j].waiter=&process_queue[j];
+					process_queue[j].status=2;
+				}
+			}
+			CopyToSegment(segment,0,buffer,13312);	
+			initializeProgram(segment);
+		}
+		setToReady(segment);
+		restoreDataSegment();
+		
 	}
 }
 
@@ -673,9 +713,7 @@ void scheduleProcess()
 			currentProcess->status =3;	
 			break;
 		}
-		
 	}
-	
 	restoreDataSegment();
 }
 
@@ -689,9 +727,19 @@ void terminate()
 	/*char s[6]; s[0]='s'; s[1]='h'; s[2]='e'; s[3]='l'; s[4]='l'; s[5]='\0';
 	readChar();
 	executeProgram(s,0x2000);*/
-
+	int i;
 	setKernelDataSegment();
 	currentProcess->status=4;
+	
+	for(i=0;i<8;i++)
+	{
+		if(process_queue[i].status==2)
+		{
+			process_queue[i].status=1;
+			process_queue[i].waiter=0;
+		}
+	}
+	
 	restoreDataSegment();
 	//while(1==1);
 }
@@ -702,24 +750,30 @@ void Kill(int index)
 	killProcess(index-48);
 	restoreDataSegment();		
 }
-int getProcessList(char* buffer)
+int getProcessList()
 {
 	int i,cont=0;
-	int c=0;
 	setKernelDataSegment();
+	printStringColor("   Id    ",0x1F);
+	printStringColor(" Segment ",0x6F);
+	printStringColor("  Status ",0x4F);
+	nextLine(0);
 	for(i=0;i<8;i++)
 	{
 		if(process_queue[i].status!=4)
 		{
 			cont++;
-			buffer[c]=process_queue[i].status;
-			c++;
-			buffer[c]=process_queue[i].sp;
-			c++;
-			buffer[c]=process_queue[i].segment;
-			c++;
 		}
+			printInt(i,15);
+			printStringColor("          ",15);
+			printhex(process_queue[i].segment);
+			
+			printStringColor("       ",15);
+			printInt(process_queue[i].status,15);
+			nextLine(0);
+		
 	}
+	nextLine(0);
 	restoreDataSegment();
 	return cont;
 }
