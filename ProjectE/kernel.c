@@ -58,7 +58,7 @@ void Initialize();
 int getFreeSegment();
 void killProcess(int index);
 int getCurrentIndex();
-
+int getProcessList(char buffer[]);
 
 struct PCB process_queue[8];
 struct PCB *currentProcess=0;
@@ -127,13 +127,11 @@ int getFreeSegment()
 
 void killProcess(int index)
 {
-	
 	if(index>1 && index<=8){
 		setKernelDataSegment();
 		process_queue[index-1].status=4;
 		restoreDataSegment();
-	}
-	
+	}	
 }
 
 int getCurrentIndex()
@@ -492,20 +490,23 @@ int getBufferSize(char buffer[])
 void printInt(int integer,int color)
 {
 	int digits=1;
-	if(integer+48==0)
+	if(integer+48==0){
 		printCharC(integer+48,color);
-			
-	while(integer>=digits)
-		digits=digits*10;
+	}else{	
+		while(integer>=digits)
+			digits=digits*10;
 		
-	digits=digits/10;
-	while(digits!=1)
-	{
-		printCharC((integer/digits)+48,color);
-		integer=integer-(integer/digits)*digits;
 		digits=digits/10;
+		while(digits!=1)
+		{
+			printCharC((integer/digits)+48,color);
+			integer=integer-(integer/digits)*digits;
+			digits=digits/10;
+		}
+	
+		printCharC((integer/digits)+48,color);
 	}
-	printCharC((integer/digits)+48,color);
+	nextLine(0);
 }
 
 int isTextFile(char buffer[],int size)
@@ -692,7 +693,7 @@ void terminate()
 	setKernelDataSegment();
 	currentProcess->status=4;
 	restoreDataSegment();
-	while(1==1);
+	//while(1==1);
 }
 
 void Kill(int index)
@@ -701,6 +702,28 @@ void Kill(int index)
 	killProcess(index-48);
 	restoreDataSegment();		
 }
+int getProcessList(char* buffer)
+{
+	int i,cont=0;
+	int c=0;
+	setKernelDataSegment();
+	for(i=0;i<8;i++)
+	{
+		if(process_queue[i].status!=4)
+		{
+			cont++;
+			buffer[c]=process_queue[i].status;
+			c++;
+			buffer[c]=process_queue[i].sp;
+			c++;
+			buffer[c]=process_queue[i].segment;
+			c++;
+		}
+	}
+	restoreDataSegment();
+	return cont;
+}
+
 
 
 

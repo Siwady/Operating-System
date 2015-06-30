@@ -31,6 +31,7 @@
 	.extern _Kill
 	.extern _scheduleProcess
 	.extern _ChangeContext
+	.extern _getProcessList
 	.global _interrupt21ServiceRoutine
 	.global _execute_readString
 	.global _execute_readStringColor
@@ -51,6 +52,7 @@
 	.global _execute_getBufferSize
 	.global _execute_printInt
 	.global _execute_isTextFile
+	.global _execute_getProcessList
 	.global _loadProgram
 	.global _changeBackgroundColor
 	.global _Clr
@@ -480,7 +482,12 @@ try_isTextFile:
 	jmp ax
 try_Kill:
 	cmp ax,#19
+	jne try_getProcessList
 	mov ax, #_execute_Kill
+	jmp ax
+try_getProcessList:
+	cmp ax,#20
+	mov ax,#_execute_getProcessList
 	jmp ax
 	
 
@@ -613,6 +620,12 @@ _execute_isTextFile:
 _execute_Kill:
 	push bx
 	call _Kill
+	add sp,#2
+	iret
+	
+_execute_getProcessList:
+	push bx
+	call _getProcessList
 	add sp,#2
 	iret
 
@@ -769,7 +782,7 @@ _timerISR:
 	mov cx , sp
         mov ax, #0x1000
         mov ds, ax
-	mov es, ax
+	;mov es, ax
 	mov ss, ax
 	mov sp, #0xff00
 	
@@ -783,6 +796,7 @@ Try_Schedule_Process:
 	mov bx, [_currentProcess]
 	mov sp, [bx+2]
 	mov ss, [bx+4]
+
 	pop es
         pop ds
         pop ax
